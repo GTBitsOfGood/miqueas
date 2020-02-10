@@ -1,7 +1,14 @@
 import React from 'react';
 import SmartForm from './SmartForm';
 
+/**
+ * Class to create a form for entering items
+ */
 class ItemForm extends React.Component {
+  /**
+   * Renders the ItemForm
+   * @return {jsx} the jsx rendering of the ItemForm
+   */
   render() {
     return <SmartForm target = "/inventory" components = {
       [{
