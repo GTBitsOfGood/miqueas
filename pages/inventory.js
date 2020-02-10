@@ -1,11 +1,11 @@
 import InventoryHeader from '../components/InventoryHeader'
-import SmartForm from '../components/SmartForm';
+import ItemForm from '../components/ItemForm.js';
 
 export default function Inventory() {
   return (
     <div>
       <InventoryHeader />
-      <SmartForm/>
+      <ItemForm/>
     </div>
   );
 }

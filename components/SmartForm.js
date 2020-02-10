@@ -19,18 +19,45 @@ class SmartForm extends React.Component {
    * @return {jsx} JSX Rendering of the SmartForm
    */
   render() {
-    const now = new Date();
-    return <form method={'get'} action={'/inventory'}>
-      <Dropdown name={'Dropdown'}
-        options={['test1', 'test2']} required = {true}/>
-      <TextInput name={'Text'} required = {true} />
-      <DateInput name={'Date'} required = {true} def={now}/>
-      <TimeInput name={'Time'} required = {true} def = {now}/>
-      <TextAreaInput name={'Notes'} required = {true}/>
-      <NumberInput name={'Qty Change'} required = {true}/>
+    const items = [];
+    this.props.components.forEach((comp) => {
+      switch (comp.type) {
+        case 'dropdown': {
+          items.push(<Dropdown name={comp.name} options={comp.options}
+            required={comp.required}/>);
+        } break;
+        case 'text': {
+          items.push(<TextInput name={comp.name} required={comp.required}/>);
+        } break;
+        case 'date': {
+          items.push(<DateInput name={comp.name} required={comp.required}/>);
+        } break;
+        case 'time': {
+          items.push(<TimeInput name={comp.name} required={comp.required}/>);
+        } break;
+        case 'number': {
+          items.push(<NumberInput name={comp.name} required={comp.required}/>);
+        } break;
+        case 'textarea': {
+          items.push(<TextAreaInput name={comp.name}
+            required={comp.required}/>);
+        } break;
+        default: {
+          items.push(<p>INVALID COMPONENT TYPE: {comp.type}</p>);
+        }
+      }
+      items.push(<br/>);
+    });
+    return <form method={'get'} action={this.props.target}>
+      {items}
       <input type={'submit'} value={'Submit'}/>
     </form>;
   }
+}
+
+SmartForm.propTypes = {
+  components: PropTypes.arrayOf(PropTypes.object).isRequired,
+  target: PropTypes.string.isRequired,
 }
 
 /**
