@@ -6,7 +6,7 @@ dotEnv.config();
 
 const nextConfig = {
   env: {
-    DB_PASS = process.env.DB_PASS
+    DB_PASS : process.env.DB_PASS
   },
   target: 'serverless',
   transformManifest: manifest => ['/'].concat(manifest), // add the homepage to the cache
