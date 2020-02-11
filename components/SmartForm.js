@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 /**
  * SmartForm allows easy construction of forms from JSON
@@ -40,18 +42,18 @@ class SmartForm extends React.Component {
         } break;
         case 'textarea': {
           items.push(<TextAreaInput name={comp.name}
+            placeholder={comp.placeholder}
             required={comp.required}/>);
         } break;
         default: {
           items.push(<p>INVALID COMPONENT TYPE: {comp.type}</p>);
         }
       }
-      items.push(<br/>);
     });
-    return <form method={'get'} action={this.props.target}>
+    return <Form>
       {items}
-      <input type={'submit'} value={'Submit'}/>
-    </form>;
+      <Button variant = "primary" type="submit">Submit</Button>
+    </Form>;
   }
 }
 
@@ -72,14 +74,14 @@ function Dropdown(props) {
   props.options.forEach((option) => options.push(<option
     value={option} key={option}>{option}</option>));
   return (
-    <div>
-      <label htmlFor={id}>{props.name}</label>
+    <Form.Group controlId={id}>
+      <Form.Label>{props.name}</Form.Label>
       <br/>
-      <select id={id} name={props.name}
+      <Form.Control as={'select'} name={props.name}
         required={props.required}>
         {options}
-      </select>
-    </div>
+      </Form.Control>
+    </Form.Group>
   );
 }
 
@@ -99,12 +101,11 @@ Dropdown.propTypes = {
 function TextInput(props) {
   const id = props.name.replace(' ', '-') + '-txtinput';
   return (
-    <div>
-      <label htmlFor={id}>{props.name}</label>
-      <br/>
-      <input id={id} type={'text'} name={props.name}
+    <Form.Group controlId = {id}>
+      <Form.Label>{props.name}</Form.Label>
+      <Form.Control type={'text'} name={props.name}
         required={props.required}/>
-    </div>
+    </Form.Group>
   );
 }
 
@@ -157,14 +158,13 @@ class DateInput extends React.Component {
     const id = this.props.name.replace(' ', '-') + '-date';
 
     return (
-      <div>
-        <label htmlFor={id}>{this.props.name}</label>
-        <br/>
-        <input id={id} type={'date'} name={this.props.name}
+      <Form.Group controlId={id}>
+        <label>{this.props.name}</label>
+        <Form.Control type={'date'} name={this.props.name}
           value={this.state.date}
           required={this.props.required}
           onChange={(i) => this.onChange(i)}/>
-      </div>
+      </Form.Group>
     );
   }
 }
@@ -219,15 +219,14 @@ class TimeInput extends React.Component {
   render() {
     const id = this.props.name.replace(' ', '-') + '-time';
     return (
-      <div>
-        <label htmlFor={id}>{this.props.name}</label>
-        <br/>
-        <input id={id} type={'time'} name={this.props.name}
+      <Form.Group controlId={id}>
+        <Form.Label>{this.props.name}</Form.Label>
+        <Form.Control type={'time'} name={this.props.name}
           value={this.state.time}
           required={this.props.required}
           onChange={(i) => this.onChange(i)}
         />
-      </div>
+      </Form.Group>
     );
   }
 }
@@ -246,14 +245,13 @@ TimeInput.propTypes = {
  */
 function TextAreaInput(props) {
   const id = props.name.replace(' ', '-') + '-text-area';
-  const placeholder = props.placeholder | '';
+  const placeholder = props.placeholder ? props.placeholder : '';
   return (
-    <div>
-      <label htmlFor={id}>{props.name}</label>
-      <br/>
-      <textarea id={id} name={props.name} required={props.required}
+    <Form.Group>
+      <Form.Label htmlFor={id}>{props.name}</Form.Label>
+      <Form.Control as={'textarea'} name={props.name} required={props.required}
         style={{resize: 'none'}} placeholder = {placeholder}/>
-    </div>
+    </Form.Group>
   );
 }
 
@@ -298,14 +296,14 @@ class NumberInput extends React.Component {
   render() {
     const id = this.props.name.replace(' ', '-') + '-number';
     return (
-      <div>
-        <label htmlFor ={id}>{this.props.name}</label>
-        <br/>
-        <input type={'number'} name={this.props.name} value={this.state.val}
+      <Form.Group controlId={id}>
+        <Form.Label>{this.props.name}</Form.Label>
+        <Form.Control type={'number'} name={this.props.name}
+          value={this.state.val}
           required={this.props.required}
           onChange = {(i) => this.onChange(i)}
         />
-      </div>
+      </Form.Group>
     );
   }
 }

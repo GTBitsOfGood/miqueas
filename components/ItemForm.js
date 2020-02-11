@@ -52,6 +52,7 @@ class ItemForm extends React.Component {
         'type': 'textarea',
         'name': 'Note(Nota)',
         'required': false,
+        'placeholder': 'Test Text Area'
       }]
     }/>;
   }
