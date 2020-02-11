@@ -246,12 +246,13 @@ TimeInput.propTypes = {
  */
 function TextAreaInput(props) {
   const id = props.name.replace(' ', '-') + '-text-area';
+  const placeholder = props.placeholder | '';
   return (
     <div>
       <label htmlFor={id}>{props.name}</label>
       <br/>
       <textarea id={id} name={props.name} required={props.required}
-        style={{resize: 'none'}}/>
+        style={{resize: 'none'}} placeholder = {placeholder}/>
     </div>
   );
 }
@@ -259,6 +260,7 @@ function TextAreaInput(props) {
 TextAreaInput.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
+  placeholder: PropTypes.string,
 };
 
 /**
