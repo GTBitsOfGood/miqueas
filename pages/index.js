@@ -8,6 +8,9 @@ export default function Index() {
       <Link href="/inventory">
         <a title="Inventory"> Inventory </a>
       </Link>
+      <Link href="/qrcode">
+        <a title="qrcode"> QRCode </a>
+      </Link>
     </div>
   );
 }
