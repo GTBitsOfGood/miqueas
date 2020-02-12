@@ -1,6 +1,7 @@
 // next.config.js
 const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
+const withStyledIcons = require('next-plugin-styled-icons')
 
 const nextConfig = {
   target: 'serverless',
@@ -30,4 +31,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withCSS(withOffline({nextConfig}))
+module.exports = withStyledIcons(withCSS(withOffline({nextConfig})))

@@ -1,0 +1,12 @@
+.btn-primary {
+    color: #fff;
+    background-color: gray !important;
+    border-color: gray !important;
+
+}
+.btn-secondary {
+    color: #fff;
+    background-color: teal !important;
+    border-color: teal !important;
+
+}
