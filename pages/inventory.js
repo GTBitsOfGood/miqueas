@@ -4,9 +4,9 @@ import '../public/school_inventory.css';
 
 export default function Inventory() {
   return (
-    <div class="Clean">
+    <div className="Clean">
       <InventoryHeader />
-      <div class="Footer"><NavigationBar/></div>
+      <div className="Footer"><NavigationBar/></div>
     </div>
   );
 }

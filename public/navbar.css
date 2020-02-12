@@ -2,11 +2,21 @@
     color: #fff;
     background-color: gray !important;
     border-color: gray !important;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
 
 }
 .btn-secondary {
     color: #fff;
     background-color: teal !important;
     border-color: teal !important;
-
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+.caption {
+    display: block;
 }
