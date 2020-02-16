@@ -1,0 +1,202 @@
+import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+
+class TransactionForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gender: 'none',
+      quantity: 0,
+    };
+  }
+
+  handleGenderSwap(i) {
+    let gender = 'none';
+    switch (i) {
+      case 0:
+        gender = 'male';
+        break;
+      case 1:
+        gender = 'female';
+        break;
+      case 2:
+        gender = 'unisex';
+        break;
+    }
+    this.setState({
+      gender: gender,
+    });
+  }
+
+  changeQuantity(i) {
+    this.setState({
+      quantity: i,
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <ItemHeader name={'Backpack'}></ItemHeader>
+        <hr style={{'marginTop': 0}}></hr>
+        <GenderSelector onClick={(i) => this.handleGenderSwap(i)}
+          includeUnisex>
+        </GenderSelector>
+        <hr></hr>
+        <QuantitySelector quantity={this.state.quantity}
+          onChange={(i) => this.changeQuantity(i)}></QuantitySelector>
+        <hr></hr>
+      </div>
+    );
+  }
+}
+
+class ItemHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: props.name,
+    };
+  }
+
+  render() {
+    return (
+      <Navbar bg={'light'} >
+        <Navbar.Brand href={'/'}>
+          <img
+            alt={'Back'}
+            src={'../resources/arrow-back.png'}
+            width={30}
+            height={30}>
+          </img>
+        </Navbar.Brand>
+        <Navbar.Collapse className={'justify-content-start'}>
+          <Navbar.Brand>
+            {this.state.name}
+          </Navbar.Brand>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
+}
+
+class GenderSelector extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: -1,
+    };
+  }
+
+  changeGender(i) {
+    this.setState({
+      selected: i,
+    });
+    this.props.onClick(i);
+  }
+
+  render() {
+    let unisexOption;
+    if(this.props.includeUnisex){
+      unisexOption = (
+        <Col>
+          <Container>
+            <Row className="justify-content-center">
+              <Button
+                variant={'outline-secondary'} size={'lg'} block
+                active = {this.state.selected == 2}
+                onClick={() => this.changeGender(2)}>NA</Button>
+            </Row>
+          </Container>
+        </Col>
+      );
+    } else {
+      unisexOption = (<div></div>);
+    }
+    return (
+      <Container>
+        <p className = "text-muted">Gender</p>
+        <Row className="justify-content-center">
+          <Col>
+            <Container>
+              <Row className="justify-content-center">
+                <Button variant={'outline-secondary'} size={'lg'} block
+                  active = {this.state.selected == 0}
+                  onClick={() => this.changeGender(0)}>
+                  <img alt={'Male'}
+                    src={'../resources/male.png'}
+                    width={10}>
+                  </img></Button>
+              </Row>
+            </Container>
+          </Col>
+          <Col>
+            <Container>
+              <Row className="justify-content-center">
+                <Button variant={'outline-secondary'} size={'lg'} block
+                  active = {this.state.selected == 1}
+                  onClick={() => this.changeGender(1)}>
+                  <img alt={'Female'}
+                    src={'../resources/female.png'}
+                    width={13}>
+                  </img>
+                </Button>
+              </Row>
+            </Container>
+          </Col>
+          {unisexOption}
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class QuantitySelector extends React.Component {
+
+  render() {
+    let pHolder = '0';
+    if (this.props.quantity == '') {
+      pHolder = '';
+    }
+    return (
+      <Container>
+        <Row>
+          <Col>
+            <p className = "text-muted">Quantity</p>
+          </Col>
+          <Col>
+            <InputGroup>
+              <InputGroup.Prepend>
+                <Button variant="outline-secondary"
+                  onClick={() => this.props.onChange(parseInt(this.props.quantity) - 1)}>-
+                </Button>
+              </InputGroup.Prepend>
+              <FormControl style={{'textAlign': 'center'}}
+                type={'number'}
+                placeholder={pHolder}
+                value = {this.props.quantity}
+                onChange = {(e) => {
+                  this.props.onChange(e.target.value)
+                }}
+              ></FormControl>
+              <InputGroup.Append>
+                <Button variant="outline-secondary"
+                  onClick={() => this.props.onChange(parseInt(this.props.quantity) + 1)}>+
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+
+}
+
+export default TransactionForm;

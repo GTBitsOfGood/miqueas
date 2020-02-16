@@ -9,6 +9,9 @@ export default function Index() {
       <Link href="/inventory">
         <a title="Inventory"> Inventory </a>
       </Link>
+      <Link href="/transaction">
+        <a title="Transaction"> Transaction </a>
+      </Link>
     </div>
   );
 }
