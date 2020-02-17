@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 
 class TransactionForm extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class TransactionForm extends React.Component {
   render() {
     return (
       <div>
-        <ItemHeader name={'Backpack'}></ItemHeader>
+        <ItemHeader name={'Backpack [School]'}></ItemHeader>
         <hr style={{'marginTop': 0}}></hr>
         <GenderSelector onClick={(i) => this.handleGenderSwap(i)}
           includeUnisex>
@@ -52,6 +53,14 @@ class TransactionForm extends React.Component {
         <QuantitySelector quantity={this.state.quantity}
           onChange={(i) => this.changeQuantity(i)}></QuantitySelector>
         <hr></hr>
+        <VerticalRadio name={'Type/Color'} options = {['brown',
+          'blue', 'orange', 'green', 'purple', 'white', 'yellow',
+          'black', 'pink', 'red', 'glitter']} />
+        <hr/>
+        <HorizontalRadio name={'Location'}
+          options = {['bodega', 'downstairs']}/>
+        <hr/>
+        <NextButtons/>
       </div>
     );
   }
@@ -158,7 +167,6 @@ class GenderSelector extends React.Component {
 }
 
 class QuantitySelector extends React.Component {
-
   render() {
     let pHolder = '0';
     if (this.props.quantity == '') {
@@ -174,7 +182,8 @@ class QuantitySelector extends React.Component {
             <InputGroup>
               <InputGroup.Prepend>
                 <Button variant="outline-secondary"
-                  onClick={() => this.props.onChange(parseInt(this.props.quantity) - 1)}>-
+                  onClick={() =>
+                    this.props.onChange(parseInt(this.props.quantity) - 1)}>-
                 </Button>
               </InputGroup.Prepend>
               <FormControl style={{'textAlign': 'center'}}
@@ -182,12 +191,13 @@ class QuantitySelector extends React.Component {
                 placeholder={pHolder}
                 value = {this.props.quantity}
                 onChange = {(e) => {
-                  this.props.onChange(e.target.value)
+                  this.props.onChange(e.target.value);
                 }}
-              ></FormControl>
+              />
               <InputGroup.Append>
                 <Button variant="outline-secondary"
-                  onClick={() => this.props.onChange(parseInt(this.props.quantity) + 1)}>+
+                  onClick={() =>
+                    this.props.onChange(parseInt(this.props.quantity) + 1)}>+
                 </Button>
               </InputGroup.Append>
             </InputGroup>
@@ -196,7 +206,105 @@ class QuantitySelector extends React.Component {
       </Container>
     );
   }
+}
 
+class VerticalRadio extends React.Component {
+  render() {
+    const options = [];
+    let i = 0;
+    this.props.options.forEach((option) => {
+      options.push(
+          <Form.Check
+            custom
+            type={'radio'}
+            label = {option}
+            name = {this.props.name + 'Radio'}
+            id = {option + i.toString()}
+          />);
+      i++;
+    });
+    return (
+      <Container>
+        <p className = {'text-muted'}>{this.props.name}</p>
+        <Form>
+          <Col>
+            {options}
+          </Col>
+        </Form>
+      </Container>
+    );
+  }
+}
+
+class HorizontalRadio extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: -1,
+    }
+  }
+
+  updateSelected(i) {
+    this.setState({
+      selected: i,
+    });
+  }
+
+  render() {
+    const options = [];
+    this.props.options.forEach((option, i) => {
+      options.push(
+          <Col>
+            <Container>
+              <Row className="justify-content-center">
+                <Button
+                  variant={'outline-secondary'} size={'md'} block
+                  active = {this.state.selected == i}
+                  onClick={() => this.updateSelected(i)}>{option}</Button>
+              </Row>
+            </Container>
+          </Col>,
+      );
+    });
+    return (
+      <Container>
+        <p className = "text-muted">{this.props.name}</p>
+        <Row className="justify-content-center">
+          {options}
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class NextButtons extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Row className={'justify-content-center'}>
+          <Col xs = {4} sm = {4} md = {4} lg = {4} xl = {4}>
+            <Container>
+              <Row className = 'justify-content-center'>
+                <Button
+                  variant={'outline-secondary'} size={'md'} block>
+                  add same item
+                </Button>
+              </Row>
+            </Container>
+          </Col>
+          <Col xs = {8} sm = {8} md = {8} lg = {8} xl = {8}>
+            <Container>
+              <Row className = 'justify-content-center'>
+                <Button
+                  size={'md'} block>
+                  next
+                </Button>
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      </Container>);
+  }
 }
 
 export default TransactionForm;
