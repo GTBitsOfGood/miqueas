@@ -45,13 +45,13 @@ class TransactionForm extends React.Component {
   render() {
     return (
       <div>
-        <ItemHeader name={'Backpack [School]'}></ItemHeader>
-        <hr style={{'marginTop': 0}}></hr>
+        <ItemHeader name={'Backpack [School]'}/>
+        <hr style={{'marginTop': 0}}/>
         <GenderSelector onClick={(i) => this.handleGenderSwap(i)}>
         </GenderSelector>
         <hr></hr>
         <QuantitySelector quantity={this.state.quantity}
-          onChange={(i) => this.changeQuantity(i)}></QuantitySelector>
+          onChange={(i) => this.changeQuantity(i)}/>
         <hr></hr>
         <VerticalRadio name={'Type/Color'} options = {['brown',
           'blue', 'orange', 'green', 'purple', 'white', 'yellow',
