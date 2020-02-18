@@ -1,11 +1,12 @@
 import InventoryHeader from '../components/InventoryHeader'
-import ItemForm from '../components/ItemForm.js';
-import Card from 'react-bootstrap/Card';
+import NavigationBar from '../components/NavigationBar';
+import '../public/school_inventory.css';
 
 export default function Inventory() {
   return (
-    <div>
+    <div className="Clean">
       <InventoryHeader />
+      <div className="Footer"><NavigationBar/></div>
     </div>
   );
 }
