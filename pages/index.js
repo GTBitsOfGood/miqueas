@@ -16,6 +16,9 @@ export default function Index() {
         <a title="Transaction"> Transaction </a>
       </Link>
       <div className='Footer'><NavigationBar/></div>
+      <Link href="/qrcode">
+        <a title="qrcode"> QRCode </a>
+      </Link>
     </div>
   );
 }
