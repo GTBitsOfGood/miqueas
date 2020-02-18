@@ -1,0 +1,26 @@
+.btn-primary {
+    color: #fff;
+    margin:-4px;
+    background-color: gray !important;
+    border-color: gray !important;
+    display: inline-block;
+    text-align: center;
+    width: 18%;
+    padding: 0px;
+}
+.btn-secondary {
+    color: #fff;
+    margin:-4px;
+    background-color: teal !important;
+    border-color: teal !important;
+    display: inline-block;
+    text-align: center;
+    width: 18%;
+    padding: 0px;
+    
+}
+.caption {
+    display:block;
+    text-size-adjust:auto;
+    font-size: 1.5vw;
+}
