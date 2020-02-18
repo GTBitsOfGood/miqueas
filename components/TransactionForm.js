@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 class TransactionForm extends React.Component {
   constructor(props) {
@@ -71,26 +72,59 @@ class ItemHeader extends React.Component {
     super(props);
     this.state = {
       name: props.name,
+      showPopup: false,
     };
   }
 
+
+  handleClose() {
+    this.setState({
+      showPopup: false,
+    });
+  }
+
   render() {
+    const show = this.state.showPopup;
+
     return (
-      <Navbar bg={'light'} >
-        <Navbar.Brand href={'/'}>
-          <img
-            alt={'Back'}
-            src={'../resources/arrow-back.png'}
-            width={30}
-            height={30}>
-          </img>
-        </Navbar.Brand>
-        <Navbar.Collapse className={'justify-content-start'}>
+      <>
+        <Navbar bg={'light'} >
           <Navbar.Brand>
-            {this.state.name}
+            <img
+              alt={'Back'}
+              src={'../resources/arrow-back.png'}
+              width={30}
+              height={30}
+              onClick={() => {
+                this.setState({showPopup: true});
+              }}>
+            </img>
           </Navbar.Brand>
-        </Navbar.Collapse>
-      </Navbar>
+          <Navbar.Collapse className={'justify-content-start'}>
+            <Navbar.Brand>
+              {this.state.name}
+            </Navbar.Brand>
+          </Navbar.Collapse>
+        </Navbar>
+        <Modal show={show} onHide={() => {
+          this.setState({showPopup: false});
+        }}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to go back?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Any edits will be lost.</Modal.Body>
+          <Modal.Footer>
+            <Button variant="link" href={'/'}>
+              Go Back
+            </Button>
+            <Button variant="link" onClick={() => {
+              this.setState({showPopup: false});
+            }}>
+              Cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   }
 }
@@ -286,7 +320,8 @@ class NextButtons extends React.Component {
             <Container>
               <Row className = 'justify-content-center'>
                 <Button
-                  variant={'outline-secondary'} size={'md'} block>
+                  variant={'outline-secondary'} block
+                  style={{'min-height': '62px'}}>
                   add same item
                 </Button>
               </Row>
@@ -295,8 +330,7 @@ class NextButtons extends React.Component {
           <Col xs = {8} sm = {8} md = {8} lg = {8} xl = {8}>
             <Container>
               <Row className = 'justify-content-center'>
-                <Button
-                  size={'md'} block>
+                <Button block style={{'min-height': '62px'}}>
                   next
                 </Button>
               </Row>
