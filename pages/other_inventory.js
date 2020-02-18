@@ -1,9 +1,10 @@
 import NavigationBar from '../components/NavigationBar';
-import '../public/log.css';
-export default function Log() {
+import '../public/other_inventory.css';
+
+export default function OtherInventory() {
   return (
     <div class="Clean">
-        <h1>Log</h1>
+        <h1>Other Inventory</h1>
         <div class="Footer"><NavigationBar/></div>
     </div>
   );
