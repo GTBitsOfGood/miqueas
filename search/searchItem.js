@@ -1,4 +1,4 @@
-const Item = require("../models/ItemModel");
+const Item = require("../models/Item");
 
 module.exports = {
     /**
@@ -11,15 +11,13 @@ module.exports = {
         obj = {}
         obj[key] = value
         console.log(obj)
-        Item.find(obj)
-                .then(docs => {
-                    console.log(docs);
-                    res.send(docs);
-                })
-                .catch(err => {
-                    console.log(err)
-                    res.send(err);
-                });
+        Item.find(obj).then(docs => {
+          console.log(docs);
+          res.send(docs);
+        }).catch(err => {
+          console.log(err)
+          res.send(err);
+        });
     },
     /**
      *  search by name
@@ -28,15 +26,13 @@ module.exports = {
         const value = String(req.qeury.nameVal);
         obj = {}
         obj["name"] = value;
-        Item.find(obj)
-                .then(docs => {
-                    console.log(docs);
-                    res.send(docs);
-                })
-                .catch(err => {
-                    console.log(err)
-                    res.send(err);
-                });
+        Item.find(obj).then(docs => {
+          console.log(docs);
+          res.send(docs);
+        }).catch(err => {
+          console.log(err)
+          res.send(err);
+        });
     }
     /**
      *  More search utility to be added
