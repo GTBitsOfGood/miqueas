@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     },
-    quantity: {
+    quantityChanged: {
         type: Number,
         required: true,
     },
@@ -18,7 +18,7 @@ const ItemSchema = new Schema({
         type: String,
         required: false,
     },
-    variation: { //type/color
+    typeColor: { //type/color
         type: String,
         required: false,
     },
@@ -41,6 +41,10 @@ const ItemSchema = new Schema({
     original_stock: {
         type: Number,
         required: true
+    },
+    recipient: {
+      type: [String],
+      required: true
     }
 });
 
