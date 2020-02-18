@@ -1,9 +1,14 @@
 // next.config.js
 const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
+const dotEnv = require("dotenv");
+dotEnv.config();
 const withStyledIcons = require('next-plugin-styled-icons')
 
 const nextConfig = {
+  env: {
+    DB_PASS : process.env.DB_PASS
+  },
   target: 'serverless',
   transformManifest: manifest => ['/'].concat(manifest), // add the homepage to the cache
   // Trying to set NODE_ENV=production when running yarn dev causes a build-time error so we
