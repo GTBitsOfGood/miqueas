@@ -47,8 +47,7 @@ class TransactionForm extends React.Component {
       <div>
         <ItemHeader name={'Backpack [School]'}></ItemHeader>
         <hr style={{'marginTop': 0}}></hr>
-        <GenderSelector onClick={(i) => this.handleGenderSwap(i)}
-          includeUnisex>
+        <GenderSelector onClick={(i) => this.handleGenderSwap(i)}>
         </GenderSelector>
         <hr></hr>
         <QuantitySelector quantity={this.state.quantity}
