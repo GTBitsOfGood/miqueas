@@ -1,9 +1,9 @@
 import NavigationBar from '../components/NavigationBar';
-import '../public/log.css';
-export default function Log() {
+import '../public/profile.css';
+export default function Profile() {
   return (
     <div className="Clean">
-        <h1>Log</h1>
+        <h1>Profile</h1>
         <div className="Footer"><NavigationBar/></div>
     </div>
   );

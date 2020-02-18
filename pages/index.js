@@ -5,12 +5,6 @@ import {isMobile} from 'react-device-detect';
 
 export default function Index() {
 
-  const spanStyles = {
-  position: "fixed",
-  left: 0,
-  bottom: 0,
-  width: 100,
-  };
   return (
     <div className = 'Introduction'>
       <h1> Miqueas Inventory Management Solution </h1>

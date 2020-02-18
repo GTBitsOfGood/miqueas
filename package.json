@@ -14,12 +14,17 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "dotenv": "^8.2.0",
+    "bootstrap": "^4.4.1",
     "mongoose": "^5.8.11",
     "next": "^9.2.1",
     "next-offline": "^5.0.0",
+    "next-plugin-styled-icons": "^8.0.0",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-device-detect": "^1.11.14",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1",
+    "styled-icons": "^9.3.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

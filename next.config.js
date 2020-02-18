@@ -3,6 +3,7 @@ const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
 const dotEnv = require("dotenv");
 dotEnv.config();
+const withStyledIcons = require('next-plugin-styled-icons')
 
 const nextConfig = {
   env: {
@@ -35,4 +36,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withCSS(withOffline({nextConfig}))
+module.exports = withStyledIcons(withCSS(withOffline({nextConfig})))
