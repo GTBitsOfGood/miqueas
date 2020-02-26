@@ -1,8 +1,12 @@
 import Link from 'next/link';
+import Table from './Table.js'
 
 class InventoryHeader extends React.Component {
   render() {
-    return <h1> Welcome to the Miqueas Inventory</h1>;
+    return <div>
+      <h1> Welcome to the Miqueas Inventory</h1>
+      <Table></Table>
+    </div>
   }
 }
 
