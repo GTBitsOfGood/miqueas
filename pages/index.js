@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import '../public/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../frontend/components/NavigationBar';
 import {isMobile} from 'react-device-detect';
 
 export default function Index() {

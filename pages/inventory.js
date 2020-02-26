@@ -1,5 +1,5 @@
-import InventoryHeader from '../components/InventoryHeader'
-import NavigationBar from '../components/NavigationBar';
+import InventoryHeader from '../frontend/components/InventoryHeader'
+import NavigationBar from '../frontend/components/NavigationBar';
 import '../public/school_inventory.css';
 
 

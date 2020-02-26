@@ -1,4 +1,4 @@
-import TransactionForm from '../components/TransactionForm.js';
+import TransactionForm from '../frontend/components/TransactionForm.js';
 
 export default function Transaction() {
   return (

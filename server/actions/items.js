@@ -1,5 +1,5 @@
 import mongoDB from '../index';
-import Item from '../models/Item';
+import Item from '../../models/Item';
 
 export async function getItems() {
   await mongoDB();
@@ -11,8 +11,7 @@ export async function getItems() {
 
 export async function addItem(item) {
   await mongoDB();
-
-  return Item.create({item})
+  return Item.create(item)
 }
 
 export async function deleteItem(id) {
