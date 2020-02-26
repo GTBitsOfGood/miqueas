@@ -16,7 +16,6 @@ This app was made with [NextJS](https://nextjs.org/learn/basics/getting-started)
 # Running the Backend
 1. Navigate to [MongoDB] (https://docs.mongodb.com/manual/administration/install-community/) and follow the directions to install mongodb. Make sure to run the command 'mongod --config /usr/local/etc/mongod.conf --fork' stated at the end of the instructions.
 2. Install [MongoDB Compass] (https://www.mongodb.com/download-center/compass)
-3. In a terminal window run 'mongo'
-4. Open MongoDB Compass and create a new connection.
+3. Open MongoDB Compass and create a new connection.
 
 

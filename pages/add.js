@@ -11,6 +11,8 @@ export default function Add() {
     <div className="Clean">
         <h1>This will be the add screen!</h1>
         <h2>Where you land if you press the '+' on the footer (unless we use a modal)</h2>
+        {/*For this button it goes to: frontend action -> api call -> backend action. 
+        The frontend/backend actions are for reusability. */}
         <Button onClick={()=>addItem(exampleItem)}>Example Add Item</Button>
         <div className="Footer"><NavigationBar/></div>
     </div>
