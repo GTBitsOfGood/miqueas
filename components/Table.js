@@ -1,35 +1,19 @@
 import Link from 'next/link';
 import { useTable } from 'react-table'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
+import React from 'react';
 
-var products = [{
-    id: 1,
-    name: "Product1",
-    date: 'today',
-    price: 120
-}, {
-    id: 2,
-    name: "Product2",
-    date: 'today',
-    price: 80
-}, {
-    id: 3,
-    name: "Product3",
-    date: 'today',
-    price: 90
-}];
-
-class Table extends React.Component {
-    render() {
-        return <div>
-            <BootstrapTable data={products} striped hover>
-                <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
-                <TableHeaderColumn dataField='date'>Date</TableHeaderColumn>
-                <TableHeaderColumn isKey dataField='id'>Product ID</TableHeaderColumn>
-                <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
-            </BootstrapTable>,
-        </div>
-    }
+function Table (props) {
+    const products = props.products
+    const columns = props.columns
+    let items = columns.map(column => {
+        return <TableHeaderColumn key={column} dataField={column}>{column}</TableHeaderColumn>
+    })
+    return <div>
+        <BootstrapTable bordered={false} keyField='key' data={products} hover condensed>
+            {items}
+        </BootstrapTable>,
+    </div>
 }
 
 export default Table;
