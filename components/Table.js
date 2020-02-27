@@ -5,20 +5,27 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 var products = [{
     id: 1,
     name: "Product1",
+    date: 'today',
     price: 120
 }, {
     id: 2,
     name: "Product2",
+    date: 'today',
     price: 80
+}, {
+    id: 3,
+    name: "Product3",
+    date: 'today',
+    price: 90
 }];
 
 class Table extends React.Component {
     render() {
         return <div>
-            <h1> This is a table </h1>
             <BootstrapTable data={products} striped hover>
+                <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+                <TableHeaderColumn dataField='date'>Date</TableHeaderColumn>
                 <TableHeaderColumn isKey dataField='id'>Product ID</TableHeaderColumn>
-                <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
             </BootstrapTable>,
         </div>
