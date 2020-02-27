@@ -1,4 +1,5 @@
 import ReviewForm from '../components/ReviewForm.js';
+import '../public/review-form.css';
 
 export default function Review() {
   return (
