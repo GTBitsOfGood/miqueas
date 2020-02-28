@@ -7,10 +7,11 @@ function Table (props) {
     const products = props.products
     const columns = props.columns
     let items = columns.map(column => {
-        return <TableHeaderColumn key={column} dataField={column}>{column}</TableHeaderColumn>
+        return <TableHeaderColumn key={column} dataSort dataField={column}>{column}</TableHeaderColumn>
     })
     return <div>
-        <BootstrapTable bordered={false} keyField='key' data={products} hover condensed>
+        <BootstrapTable bordered={false} data={products} hover condensed>
+            <TableHeaderColumn dataField='key' isKey hidden>Product ID</TableHeaderColumn>
             {items}
         </BootstrapTable>,
     </div>
