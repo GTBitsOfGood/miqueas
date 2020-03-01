@@ -1,4 +1,4 @@
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../frontend/components/NavigationBar';
 import '../public/profile.css';
 export default function Profile() {
   return (
