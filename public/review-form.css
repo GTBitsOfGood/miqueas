@@ -62,3 +62,9 @@ html {
 
     margin-top:35vh;
 }
+
+.btn-outline-secondary-miqueas {
+    border-color: #51ADA9 !important;
+    color: #51ADA9 !important;
+    font-weight: bold !important;
+}

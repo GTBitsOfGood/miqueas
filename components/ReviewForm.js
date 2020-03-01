@@ -41,6 +41,12 @@ class ReviewForm extends React.Component {
     });
   }
 
+  deleteItem(i) {
+    this.setState({
+      showPopup: true,
+    });
+  }
+
   render() {
     return (
       <>
@@ -58,11 +64,20 @@ class ReviewForm extends React.Component {
         <Container className={'item-block'}>
           <br/>
           <h3 className = {'mini-header'}>Added Items</h3>
-          <ReviewItem item={testItem}/>
-          <ReviewItem item={testItem2}/>
-          <ReviewItem item={testItem3}/>
+          <ReviewItem item={testItem} onDelete={() => {
+            this.deleteItem(0);
+          }}/>
+          <ReviewItem item={testItem2} onDelete={() => {
+            this.deleteItem(1);
+          }}/>
+          <ReviewItem item={testItem3} onDelete={() => {
+            this.deleteItem(2);
+          }}/>
           <h3 className = {'mini-header'}>Removed Items</h3>
-          <ReviewItem item={testItem4}></ReviewItem>
+          <ReviewItem item={testItem4} onDelete={() => {
+            this.deleteItem(3);
+          }}/>
+          <NavButtons></NavButtons>
         </Container>
       </>
     );
@@ -114,10 +129,7 @@ class ReviewItem extends React.Component {
               <Col xs = {1} sm={1} md={1} lg={1} xl={1}
                 style={{'paddingLeft': '0.5rem', 'paddingRight': '0.5rem',
                   'marginTop': '5px'}}>
-                <img
-                  alt={'Delete'}
-                  src={'../resources/trashcan.png'}
-                  height={15}/>
+                <Trash onClick={this.props.onDelete}/>
               </Col>
               <Col xs = {4} sm={4} md={4} lg={4} xl={4}
                 style={{'paddingLeft': '0.5rem', 'paddingRight': '0rem',
@@ -165,7 +177,8 @@ class Trash extends React.Component {
     return (<img
       alt={'Delete'}
       src={'../resources/trashcan.png'}
-      height={15}/>);
+      height={15}
+      onClick={this.props.onClick}/>);
   }
 }
 
@@ -187,6 +200,43 @@ class Popup extends React.Component {
           </Button>
         </Modal.Footer>
       </Modal>
+    );
+  }
+}
+
+class NavButtons extends React.Component {
+  render() {
+    return (
+      <Container style={{'position': 'absolute',
+        'bottom': '10px',
+        'left': '0px'}}>
+        <Row>
+          <Col>
+            <Container>
+              <Row className = 'justify-content-center'>
+                <Button
+                  variant={'outline-secondary'} block
+                  style={{'min-height': '54px'}}
+                  className={'btn-outline-secondary-miqueas'}>
+                  add item
+                </Button>
+              </Row>
+            </Container>
+          </Col>
+          <Col>
+            <Container style={{'marginTop': '3px'}}>
+              <Row className = 'justify-content-center'>
+                <Button
+                  variant={'secondary'} block
+                  style={{'min-height': '54px',
+                    'fontWeight' : 'bold'}}>
+                  next
+                </Button>
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
