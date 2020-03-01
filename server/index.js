@@ -12,9 +12,10 @@ export default async () => {
       useCreateIndex: true,
       dbName: config.dbName
     })
-    .catch(e => {
+    .catch(error => {
       console.error('Error connecting to database.');
+      console.error(' > ' + error);
 
-      throw e;
+      throw error;
     });
 };

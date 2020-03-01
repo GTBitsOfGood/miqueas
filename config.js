@@ -1,6 +1,6 @@
 export default {
   baseUrl:'http://localhost:3000',
-  dbUrl: 'mongodb://localhost:27017',
+  dbUrl: 'mongodb+srv://miqueas-dev:' + process.env.DB_PASS + '@cluster0-9lk2k.mongodb.net/test?retryWrites=true&w=majority',
   dbName: 'miqueas',
   apis: {
     getItems: '/api/getItems',
