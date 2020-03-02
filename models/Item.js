@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const ItemSchema = new Schema({
     name: {
         type: String,
         required: true
     },
-    quantity: {
+    quantityChanged: {
         type: Number,
         required: true,
     },
@@ -18,7 +19,7 @@ const ItemSchema = new Schema({
         type: String,
         required: false,
     },
-    variation: { //type/color
+    typeColor: { //type/color
         type: String,
         required: false,
     },
@@ -41,9 +42,11 @@ const ItemSchema = new Schema({
     original_stock: {
         type: Number,
         required: true
+    },
+    recipient: {
+      type: [String],
+      required: true
     }
 });
 
-const Item = mongoose.model('Item', ItemSchema);
-
-module.exports = Item;
+export default mongoose.models.Item || mongoose.model('Item', ItemSchema);

@@ -22,7 +22,7 @@ module.exports = {
     /**
      *  search by name
      */
-    searchByName: (res, res) => {
+    searchByName: (req, res) => {
         const value = String(req.qeury.nameVal);
         obj = {}
         obj["name"] = value;

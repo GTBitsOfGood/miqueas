@@ -1,13 +1,46 @@
-import InventoryHeader from '../components/InventoryHeader'
-import NavigationBar from '../components/NavigationBar';
+import InventoryHeader from '../frontend/components/InventoryHeader'
+import NavigationBar from '../frontend/components/NavigationBar';
 import '../public/school_inventory.css';
+import translate from '../frontend/components/translate.js';
+import React from 'react';
+import {get1000Items} from '../frontend/actions/items.js';
 
+const sortItems = items => {
+  items = items.sort(function(a, b) {
+    return a.title <= b.title ? -1 : 1;
+  });
 
-export default function Inventory() {
-  return (
-    <div className="Clean">
-      <InventoryHeader />
-      <div className="Footer"><NavigationBar/></div>
-    </div>
-  );
+  return items;
+};
+
+class Inventory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allItems: [],
+      isLoading: true,
+    };
+  }
+  async componentDidMount() {
+    const allItems = await get1000Items();
+    this.setState({
+      allItems: sortItems(allItems),
+      isLoading: false
+    });
+    console.log(allItems);
+
+  }
+  render() {
+    ///This can eventually be some loading icon but for now its just an empty div
+    if (this.state.isLoading) return <div />;
+    return (
+      <div className="Clean">
+        <InventoryHeader />
+        <div className="Footer"><NavigationBar/></div>
+      </div>
+    );
+  }
+
 }
+
+export default Inventory 
