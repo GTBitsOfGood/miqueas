@@ -9,6 +9,14 @@ export async function getItems() {
     .sort({ submitted: -1 });
 }
 
+export async function get1000Items() {
+  await mongoDB();
+
+  return Item
+    .find()
+    .sort({ submitted: -1 }).limit(1000);
+}
+
 export async function addItem(item) {
   await mongoDB();
   return Item.create(item)

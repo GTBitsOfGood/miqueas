@@ -4,6 +4,7 @@ export default {
   dbName: 'miqueas',
   apis: {
     getItems: '/api/getItems',
+    get1000Items: '/api/get1000Items',
     addItem: '/api/addItem',
     getItem: '/api/getItem',
     login: '/api/login',
