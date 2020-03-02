@@ -20,6 +20,9 @@ export default function Index({language}) {
       <Link href="/qrcode">
         <a title="qrcode"> QRCode </a>
       </Link>
+      <Link href="/search">
+        <a title="search">Search</a>
+      </Link>
     </div>
   );
 }
