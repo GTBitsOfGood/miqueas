@@ -1,6 +1,7 @@
 import TransactionForm from '../frontend/components/TransactionForm.js';
+import translate from '../frontend/components/translate.js';
 
-export default function Transaction() {
+export default function Transaction({language}) {
   return (
     <div>
 
