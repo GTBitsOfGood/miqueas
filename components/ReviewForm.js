@@ -207,36 +207,38 @@ class Popup extends React.Component {
 class NavButtons extends React.Component {
   render() {
     return (
-      <Container style={{'position': 'absolute',
-        'bottom': '10px',
-        'left': '0px'}}>
-        <Row>
-          <Col>
-            <Container>
-              <Row className = 'justify-content-center'>
-                <Button
-                  variant={'outline-secondary'} block
-                  style={{'min-height': '54px'}}
-                  className={'btn-outline-secondary-miqueas'}>
-                  add item
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-          <Col>
-            <Container style={{'marginTop': '3px'}}>
-              <Row className = 'justify-content-center'>
-                <Button
-                  variant={'secondary'} block
-                  style={{'min-height': '54px',
-                    'fontWeight' : 'bold'}}>
-                  next
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-        </Row>
-      </Container>
+      <Navbar sticky={'bottom'}>
+        <Container>
+          <Row style={{'width': '100%', 'marginLeft': '0px'}}>
+            <Col>
+              <Container>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'outline-secondary'} block
+                    style={{'min-height': '54px'}}
+                    className={'btn-outline-secondary-miqueas'}>
+                    add item
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+            <Col>
+              <Container style={{'marginTop': '3px'}}>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'secondary'} block
+                    style={{'min-height': '54px',
+                      'fontWeight': 'bold',
+                      'background': '#51ADA9',
+                      'borderColor': '#51ADA9'}}>
+                    next
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
+      </Navbar>
     );
   }
 }

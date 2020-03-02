@@ -45,7 +45,9 @@ class TransactionForm extends React.Component {
   render() {
     return (
       <div>
-        <ItemHeader name={'Backpack [School]'}/>
+        <TransactionHeader name={'Transaction Form'}/>
+        <hr style={{'marginTop': 0}}/>
+        <ItemHeader name={'Foam Paper'} category={'School'}/>
         <hr style={{'marginTop': 0}}/>
         <GenderSelector onClick={(i) => this.handleGenderSwap(i)}>
         </GenderSelector>
@@ -60,13 +62,13 @@ class TransactionForm extends React.Component {
         <HorizontalRadio name={'Location'}
           options = {['bodega', 'downstairs']}/>
         <hr/>
-        <NextButtons/>
+        <NavButtons/>
       </div>
     );
   }
 }
 
-class ItemHeader extends React.Component {
+class TransactionHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -126,6 +128,27 @@ class ItemHeader extends React.Component {
       </>
     );
   }
+}
+
+class ItemHeader extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Container style={{'width':'100%'}}>
+        <Row className="justify-content-center">
+          <strong>{this.props.name}</strong>
+        </Row>
+        <Row className="justify-content-center">
+          <p>{this.props.category}</p>
+        </Row>
+      </Container>
+    );
+  }
+
 }
 
 class GenderSelector extends React.Component {
@@ -209,7 +232,7 @@ class QuantitySelector extends React.Component {
       <Container>
         <Row>
           <Col>
-            <p className = "text-muted">Quantity</p>
+            <p className = "text-muted">Quantity Changed</p>
           </Col>
           <Col>
             <InputGroup>
@@ -310,33 +333,43 @@ class HorizontalRadio extends React.Component {
   }
 }
 
-class NextButtons extends React.Component {
+class NavButtons extends React.Component {
   render() {
     return (
-      <Container>
-        <Row className={'justify-content-center'}>
-          <Col xs = {4} sm = {4} md = {4} lg = {4} xl = {4}>
-            <Container>
-              <Row className = 'justify-content-center'>
-                <Button
-                  variant={'outline-secondary'} block
-                  style={{'min-height': '62px'}}>
-                  add same item
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-          <Col xs = {8} sm = {8} md = {8} lg = {8} xl = {8}>
-            <Container>
-              <Row className = 'justify-content-center'>
-                <Button block style={{'min-height': '62px'}}>
-                  next
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-        </Row>
-      </Container>);
+      <Navbar sticky={'bottom'}>
+        <Container>
+          <Row style={{'width': '100%', 'marginLeft': '0px'}}>
+            <Col>
+              <Container>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'outline-secondary'} block
+                    style={{'min-height': '54px', 'border-color': '#51ADA9',
+                      'color': '#51ADA9', 'font-weight': 'bold'}}
+                    className={'btn-outline-secondary-miqueas'}>
+                    add item
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+            <Col>
+              <Container>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'secondary'} block
+                    style={{'min-height': '54px',
+                      'fontWeight': 'bold',
+                      'background': '#51ADA9',
+                      'borderColor': '#51ADA9'}}>
+                    next
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
+      </Navbar>
+    );
   }
 }
 
