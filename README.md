@@ -13,9 +13,9 @@ This app was made with [NextJS](https://nextjs.org/learn/basics/getting-started)
 2. Then run `npm run dev` to start the app.
 3. Navigate to [localhost:3000](localhost:3000) to see the app.
 
-# Running the Backend
-1. Navigate to [MongoDB] (https://docs.mongodb.com/manual/administration/install-community/) and follow the directions to install mongodb. Make sure to run the command 'mongod --config /usr/local/etc/mongod.conf --fork' stated at the end of the instructions.
-2. Install [MongoDB Compass] (https://www.mongodb.com/download-center/compass)
+# Running the Backend Locally
+1. Navigate to [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) and follow the directions to install mongodb. Make sure to run the command 'mongod --config /usr/local/etc/mongod.conf --fork' stated at the end of the instructions.
+2. Install [MongoDB Compass](https://www.mongodb.com/download-center/compass)
 3. Open MongoDB Compass and create a new connection.
 
 
