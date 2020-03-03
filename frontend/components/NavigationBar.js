@@ -4,7 +4,7 @@ import {ShoppingCart, Person} from 'styled-icons/material'
 import {Plus} from 'styled-icons/boxicons-regular'
 import {Clipboard} from 'styled-icons/boxicons-regular'
 import {Clock} from 'styled-icons/feather'
-import '../public/navbar.css';
+import '../../public/navbar.css';
 
 export default () => (
   <div>
