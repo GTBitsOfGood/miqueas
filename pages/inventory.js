@@ -1,5 +1,6 @@
 import InventoryHeader from '../frontend/components/InventoryHeader'
 import NavigationBar from '../frontend/components/NavigationBar';
+import LocationToggle from '../frontend/components/LocationToggle.js';
 import '../public/school_inventory.css';
 import translate from '../frontend/components/translate.js';
 import React from 'react';
@@ -40,7 +41,6 @@ class Inventory extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Inventory 
