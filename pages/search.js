@@ -4,7 +4,7 @@ import {searchQuery} from '../frontend/actions/searchQuery';
 import {Button} from 'react-bootstrap';
 
 async function handler() {
-  const text = "asdf";
+  const text = document.getElementById("searchText").value;
   const docs = await searchQuery(text);
   document.getElementById("result").textContent = JSON.stringify(docs);
   console.log(docs);

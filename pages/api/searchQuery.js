@@ -9,8 +9,8 @@ export default (req, res) => {
         payload: docs,
       });
     })
-      .catch((error) => res.status(400).json({
-        success: false,
-        message: error.message,
-      }));
+    .catch((error) => res.status(400).json({
+      success: false,
+      message: error.message,
+    }));
 }

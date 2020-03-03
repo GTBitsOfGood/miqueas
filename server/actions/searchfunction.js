@@ -9,10 +9,10 @@ export default async function searchFunction(textInput) {
 
     console.log(textInput);
     //Item.index({'$**': 'text'});
-    return Item.find({$text: {$search: textInput}})
+    /*return Item.find({$text: {$search: textInput}})
         .skip(20)
         .limit(10)
-        .exec((err, docs) => {
+        .then(docs) => {
             console.log(err, docs);
             if (err) {
                 return Promise.reject(new Error("An error occurred."));
@@ -21,7 +21,10 @@ export default async function searchFunction(textInput) {
                 return Promise.resolve(docs);
             }
             return Promise.reject(new Error("Nothing found."));
-        });
+        });*/
+    return Item
+        .find({$text: {$search: textInput}})
+        .limit(10);
     //This tells us how many example documents are in our database
 }
 
