@@ -1,4 +1,5 @@
 import TransactionForm from '../components/TransactionForm.js';
+import '../public/transaction-form.css';
 
 export default function Transaction() {
   return (

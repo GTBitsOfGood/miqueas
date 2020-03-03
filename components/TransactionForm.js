@@ -247,20 +247,26 @@ class QuantitySelector extends React.Component {
             <InputGroup>
               <InputGroup.Prepend>
                 <Button variant="outline-secondary"
+                  style={{'color': '#51ADA9',
+                    'borderRight': 'none'}}
                   onClick={() =>
                     this.props.onChange(parseInt(this.props.quantity) - 1)}>-
                 </Button>
               </InputGroup.Prepend>
-              <FormControl style={{'textAlign': 'center'}}
-                type={'number'}
-                placeholder={pHolder}
-                value = {this.props.quantity}
-                onChange = {(e) => {
-                  this.props.onChange(e.target.value);
-                }}
+              <FormControl style={{'textAlign': 'center',
+                'borderRight': 'none', 'borderLeft': 'none',
+                'borderColor': 'rgb(108, 117, 125)'}}
+              type={'number'}
+              placeholder={pHolder}
+              value = {this.props.quantity}
+              onChange = {(e) => {
+                this.props.onChange(e.target.value);
+              }}
               />
               <InputGroup.Append>
                 <Button variant="outline-secondary"
+                  style={{'color': '#51ADA9',
+                    'borderLeft': 'none'}}
                   onClick={() =>
                     this.props.onChange(parseInt(this.props.quantity) + 1)}>+
                 </Button>
@@ -290,12 +296,18 @@ class VerticalRadio extends React.Component {
     });
     return (
       <Container>
-        <p className = {'text-muted'}>{this.props.name}</p>
-        <Form>
+        <Row>
           <Col>
-            {options}
+            <p className = {'text-muted'}>{this.props.name}</p>
           </Col>
-        </Form>
+          <Col>
+            <Form>
+              <Container>
+                {options}
+              </Container>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     );
   }
