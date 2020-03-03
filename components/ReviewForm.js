@@ -117,7 +117,7 @@ class ReviewItem extends React.Component {
       />;
     }
     return (
-      <Card style={{'marginBottom': '13px'}}>
+      <Card style={{'marginBottom': '13px', 'borderColor': '#C4C4C4'}}>
         <Card.Body style={{
           'paddingLeft': '0.5rem',
           'paddingRight': '0.5rem',

@@ -37,18 +37,6 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 
-html {
-    background: #DFDFDF;
-}
-
-.item-block {
-    background: #DFDFDF;
-}
-
-#__next {
-    background: #DFDFDF;
-}
-
 .card {
     border-radius: 0.75rem !important;
 }
