@@ -223,7 +223,7 @@ class NavButtons extends React.Component {
               </Container>
             </Col>
             <Col>
-              <Container style={{'marginTop': '3px'}}>
+              <Container>
                 <Row className = 'justify-content-center'>
                   <Button
                     variant={'secondary'} block

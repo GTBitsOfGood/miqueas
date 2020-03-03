@@ -347,7 +347,7 @@ class NavButtons extends React.Component {
                     style={{'min-height': '54px', 'border-color': '#51ADA9',
                       'color': '#51ADA9', 'font-weight': 'bold'}}
                     className={'btn-outline-secondary-miqueas'}>
-                    add item
+                    add same item
                   </Button>
                 </Row>
               </Container>
