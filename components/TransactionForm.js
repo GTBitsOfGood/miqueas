@@ -39,7 +39,7 @@ class TransactionForm extends React.Component {
   changeQuantity(i) {
     this.setState({
       quantity: i,
-    })
+    });
   }
 
   render() {
@@ -131,14 +131,13 @@ class TransactionHeader extends React.Component {
 }
 
 class ItemHeader extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <Container style={{'width':'100%'}}>
+      <Container style={{'width': '100%'}}>
         <Row className="justify-content-center">
           <strong>{this.props.name}</strong>
         </Row>
@@ -148,7 +147,6 @@ class ItemHeader extends React.Component {
       </Container>
     );
   }
-
 }
 
 class GenderSelector extends React.Component {
@@ -167,55 +165,66 @@ class GenderSelector extends React.Component {
   }
 
   render() {
-    let unisexOption;
-    if(this.props.includeUnisex){
-      unisexOption = (
-        <Col>
-          <Container>
-            <Row className="justify-content-center">
-              <Button
-                variant={'outline-secondary'} size={'lg'} block
-                active = {this.state.selected == 2}
-                onClick={() => this.changeGender(2)}>NA</Button>
-            </Row>
-          </Container>
-        </Col>
-      );
-    } else {
-      unisexOption = (<div></div>);
+    const maleSrc = (this.state.selected == 0) ?
+      '../resources/male-selected.png' : '../resources/male.png';
+    const maleStyle = {'height': '64px'};
+    if (this.state.selected == 0) {
+      maleStyle['background-color'] = '#4690FF';
     }
+    const maleBtn = (
+      <Col style = {{'paddingLeft': '0px', 'paddingRight': '5px'}}>
+        <Container>
+          <Row className="justify-content-center">
+            <Button variant={'outline-secondary'} size={'lg'} block
+              active = {this.state.selected == 0}
+              onClick={() => this.changeGender(0)}
+              style={maleStyle}>
+              <img alt={'Male'}
+                src={maleSrc}
+                width={10}>
+              </img></Button>
+          </Row>
+        </Container>
+      </Col>);
+
+    const femaleSrc = (this.state.selected == 1) ?
+      '../resources/female-selected.png' : '../resources/female.png';
+    const femaleStyle = {'height': '64px'};
+    if (this.state.selected == 1) {
+      femaleStyle['background-color'] = '#E93CAC';
+    }
+    const femaleBtn = (
+      <Col style = {{'paddingLeft': '5px', 'paddingRight': '0px'}}>
+        <Container>
+          <Row className="justify-content-center">
+            <Button variant={'outline-secondary'} size={'lg'} block
+              active = {this.state.selected == 1}
+              onClick={() => this.changeGender(1)}
+              style={femaleStyle}>
+              <img alt={'Female'}
+                src={femaleSrc}
+                width={13}>
+              </img>
+            </Button>
+          </Row>
+        </Container>
+      </Col>
+    );
+
     return (
       <Container>
-        <p className = "text-muted">Gender</p>
         <Row className="justify-content-center">
           <Col>
-            <Container>
-              <Row className="justify-content-center">
-                <Button variant={'outline-secondary'} size={'lg'} block
-                  active = {this.state.selected == 0}
-                  onClick={() => this.changeGender(0)}>
-                  <img alt={'Male'}
-                    src={'../resources/male.png'}
-                    width={10}>
-                  </img></Button>
-              </Row>
-            </Container>
+            <p className = "text-muted">Gender</p>
           </Col>
           <Col>
             <Container>
               <Row className="justify-content-center">
-                <Button variant={'outline-secondary'} size={'lg'} block
-                  active = {this.state.selected == 1}
-                  onClick={() => this.changeGender(1)}>
-                  <img alt={'Female'}
-                    src={'../resources/female.png'}
-                    width={13}>
-                  </img>
-                </Button>
+                {maleBtn}
+                {femaleBtn}
               </Row>
             </Container>
           </Col>
-          {unisexOption}
         </Row>
       </Container>
     );
@@ -297,7 +306,7 @@ class HorizontalRadio extends React.Component {
     super(props);
     this.state = {
       selected: -1,
-    }
+    };
   }
 
   updateSelected(i) {
