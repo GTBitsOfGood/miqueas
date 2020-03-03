@@ -1,8 +1,8 @@
   
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import mongoDB from './index';
-import User from '../models/User';
+import mongoDB from '../index';
+import User from '../../models/User';
 
 export async function login(email, password) {
   await mongoDB();
