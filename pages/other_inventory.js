@@ -1,5 +1,5 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import '../public/other_inventory.css';
+import '../public/school_inventory.css';
 import translate from '../frontend/components/translate.js';
 
 export default function OtherInventory({language}) {
