@@ -13,6 +13,8 @@ export default async () => {
       dbName: config.dbName
     })
     .catch(error => {
+      console.log(process.env.DB_PASS)
+
       console.error('Error connecting to database.');
       console.error(' > ' + error);
 

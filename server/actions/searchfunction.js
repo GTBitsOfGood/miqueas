@@ -1,5 +1,5 @@
-import mongoDB from './index';
-import Item from "../models/Item";
+import mongoDB from '../index';
+import Item from "../../models/Item";
 
 //This demonstrates how we add our mongoose cocnnection to a function
 //We just await the function we created to connect to the database
@@ -7,11 +7,13 @@ import Item from "../models/Item";
 export default async function searchFunction(textInput) {
     await mongoDB();
 
-    Item.index({'$**': 'text'});
-    return Item.find({$text: {$search: myText}})
+    console.log(textInput);
+    //Item.index({'$**': 'text'});
+    return Item.find({$text: {$search: textInput}})
         .skip(20)
         .limit(10)
         .exec((err, docs) => {
+            console.log(err, docs);
             if (err) {
                 return Promise.reject(new Error("An error occurred."));
             }
