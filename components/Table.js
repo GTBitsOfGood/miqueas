@@ -1,19 +1,35 @@
 import Link from 'next/link';
 import { useTable } from 'react-table'
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import React from 'react';
+import TableComponent from "./TableComponent";
+import TableHeader from "./TableHeader";
 
 function Table (props) {
     const products = props.products
-    const columns = props.columns
-    let items = columns.map(column => {
-        return <TableHeaderColumn key={column} dataSort dataField={column}>{column}</TableHeaderColumn>
+    let headerColumns = props.headerColumns.map(header => {
+        if (typeof(header) === 'string') {
+            return header.toLowerCase()
+        } else {
+            return header
+        }
+    })
+
+    let tableComponents = products.map(product => {
+        if (!product.gender) {
+            product.gender = ''
+        }
+        return <TableComponent
+            key={product.key}
+            gender={product.gender}
+            col0={product[headerColumns[0]]}
+            col1={product[headerColumns[1]]}
+            col2={product[headerColumns[2]]}
+            col3={product[headerColumns[3]]}
+        />
     })
     return <div>
-        <BootstrapTable bordered={false} data={products} hover condensed>
-            <TableHeaderColumn dataField='key' isKey hidden>Product ID</TableHeaderColumn>
-            {items}
-        </BootstrapTable>,
+        <TableHeader headerColumns={headerColumns}/>
+        {tableComponents}
     </div>
 }
 
