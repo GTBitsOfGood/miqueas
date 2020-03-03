@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import '../public/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../frontend/components/NavigationBar';
 import {isMobile} from 'react-device-detect';
+import translate from '../frontend/components/translate.js';
 
-export default function Index() {
+export default function Index({language}) {
 
   return (
     <div className = 'Introduction'>
       <h1> Miqueas Inventory Management Solution </h1>
       <Link href="/inventory">
-        <a title="Inventory"> Inventory </a>
+        <a title="Inventory"> {translate("Inventory", {language})} </a>
       </Link>
       <Link href="/transaction">
         <a title="Transaction"> Transaction </a>
