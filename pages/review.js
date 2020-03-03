@@ -1,4 +1,4 @@
-import ReviewForm from '../components/ReviewForm.js';
+import ReviewForm from '../frontend/components/ReviewForm.js';
 import '../public/review-form.css';
 
 export default function Review() {

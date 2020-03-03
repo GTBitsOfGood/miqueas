@@ -133,7 +133,7 @@ class ReviewItem extends React.Component {
               </Col>
               <Col xs = {4} sm={4} md={4} lg={4} xl={4}
                 style={{'paddingLeft': '0.5rem', 'paddingRight': '0rem',
-                  'maxWidth': '40%', 'flex-basis': '40%', 'marginTop': '5px'}}>
+                  'maxWidth': '40%', 'flexBasis': '40%', 'marginTop': '5px'}}>
                 <Card.Text className={'shrink-text'}>
                   {this.props.item.name}
                 </Card.Text>
@@ -215,7 +215,7 @@ class NavButtons extends React.Component {
                 <Row className = 'justify-content-center'>
                   <Button
                     variant={'outline-secondary'} block
-                    style={{'min-height': '54px'}}
+                    style={{'minHeight': '54px'}}
                     className={'btn-outline-secondary-miqueas'}>
                     add item
                   </Button>
