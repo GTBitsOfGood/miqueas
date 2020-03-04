@@ -32,7 +32,7 @@ const ItemSchema = new Schema({
         required: true,
     },
     reorder_level: {
-        type: Integer,
+        type: Number,
         required: true
     }
 });
