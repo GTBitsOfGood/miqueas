@@ -7,7 +7,7 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     },
-    quantityChanged: {
+    stock: { //amount of item currently in the inventory
         type: Number,
         required: true,
     },
@@ -23,10 +23,6 @@ const ItemSchema = new Schema({
         type: String,
         required: false,
     },
-    expiration_date: {
-        type: Date,
-        required: false,
-    },
     size: { //small, large, etc.
         type: String,
         required: false,
@@ -35,17 +31,9 @@ const ItemSchema = new Schema({
         type: String,
         required: true,
     },
-    date_checked: {
-        type: Date,
-        required: true,
-    },
-    original_stock: {
-        type: Number,
+    reorder_level: {
+        type: Integer,
         required: true
-    },
-    recipient: {
-      type: [String],
-      required: true
     }
 });
 
