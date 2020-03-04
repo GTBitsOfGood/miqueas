@@ -32,8 +32,12 @@ const ItemSchema = new Schema({
         required: true,
     },
     reorder_level: {
-        type: Integer,
-        required: true
+        type: Number,
+        required: true,
+        validate : {
+            validator : Number.isInteger,
+            message   : '{VALUE} is not an integer value'
+          }
     }
 });
 ItemSchema.index({'$**': 'text'});
