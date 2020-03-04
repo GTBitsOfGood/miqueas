@@ -54,7 +54,7 @@ class ReviewForm extends React.Component {
           this.hidePopup();
         }}/>
         <Navbar bg={'light'} >
-          <Navbar.Collapse className={'justify-content-start'}>
+          <Navbar.Collapse className={'justify-content-center'}>
             <Navbar.Brand>
               {'Review and Submit'}
             </Navbar.Brand>
@@ -77,7 +77,7 @@ class ReviewForm extends React.Component {
           <ReviewItem item={testItem4} onDelete={() => {
             this.deleteItem(3);
           }}/>
-          <NavButtons></NavButtons>
+          <NavButtons/>
         </Container>
       </>
     );
