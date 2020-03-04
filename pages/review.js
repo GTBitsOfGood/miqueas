@@ -1,12 +1,10 @@
-import TransactionForm from '../frontend/components/TransactionForm.js';
-import '../public/transaction-form.css';
-import translate from '../frontend/components/translate.js';
+import ReviewForm from '../frontend/components/ReviewForm.js';
+import '../public/review-form.css';
 
-export default function Transaction({language}) {
+export default function Review() {
   return (
     <div>
-
-      <TransactionForm></TransactionForm>
+      <ReviewForm></ReviewForm>
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

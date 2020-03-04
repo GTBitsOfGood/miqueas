@@ -7,7 +7,16 @@ One of the main challenges for this project is that the webapp needs to work off
 # NextJS
 This app was made with [NextJS](https://nextjs.org/learn/basics/getting-started), which allows for a more intuitive routing system and other optimizations. NextJS also seamlessly incorporates React into its framework. NextJS also has package that has support for Progressive Web Apps, called [next-offline](https://github.com/hanford/next-offline). This package automatically deploys service workers to production builds, and takes care of a lot of the offline capabilities for us.
 
+
 # How to Run
 1. Run `npm install` in the root directory.
 2. Then run `npm run dev` to start the app.
 3. Navigate to [localhost:3000](localhost:3000) to see the app.
+
+# Running the Backend Locally
+1. Navigate to [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) and follow the directions to install mongodb. Make sure to run the command 'mongod --config /usr/local/etc/mongod.conf --fork' stated at the end of the instructions.
+2. Install [MongoDB Compass](https://www.mongodb.com/download-center/compass)
+3. Open MongoDB Compass and create a new connection.
+4. Go to config.js and change dbUrl to http://localhost:27017
+
+

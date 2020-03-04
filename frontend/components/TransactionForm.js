@@ -39,13 +39,15 @@ class TransactionForm extends React.Component {
   changeQuantity(i) {
     this.setState({
       quantity: i,
-    })
+    });
   }
 
   render() {
     return (
       <div>
-        <ItemHeader name={'Backpack [School]'}/>
+        <TransactionHeader name={'Transaction Form'}/>
+        <hr style={{'marginTop': 0}}/>
+        <ItemHeader name={'Foam Paper'} category={'School'}/>
         <hr style={{'marginTop': 0}}/>
         <GenderSelector onClick={(i) => this.handleGenderSwap(i)}>
         </GenderSelector>
@@ -60,13 +62,13 @@ class TransactionForm extends React.Component {
         <HorizontalRadio name={'Location'}
           options = {['bodega', 'downstairs']}/>
         <hr/>
-        <NextButtons/>
+        <NavButtons/>
       </div>
     );
   }
 }
 
-class ItemHeader extends React.Component {
+class TransactionHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -128,6 +130,25 @@ class ItemHeader extends React.Component {
   }
 }
 
+class ItemHeader extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Container style={{'width': '100%'}}>
+        <Row className="justify-content-center">
+          <strong>{this.props.name}</strong>
+        </Row>
+        <Row className="justify-content-center">
+          <p>{this.props.category}</p>
+        </Row>
+      </Container>
+    );
+  }
+}
+
 class GenderSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -144,55 +165,66 @@ class GenderSelector extends React.Component {
   }
 
   render() {
-    let unisexOption;
-    if(this.props.includeUnisex){
-      unisexOption = (
-        <Col>
-          <Container>
-            <Row className="justify-content-center">
-              <Button
-                variant={'outline-secondary'} size={'lg'} block
-                active = {this.state.selected == 2}
-                onClick={() => this.changeGender(2)}>NA</Button>
-            </Row>
-          </Container>
-        </Col>
-      );
-    } else {
-      unisexOption = (<div></div>);
+    const maleSrc = (this.state.selected == 0) ?
+      '../resources/male-selected.png' : '../resources/male.png';
+    const maleStyle = {'height': '64px'};
+    if (this.state.selected == 0) {
+      maleStyle['background-color'] = '#4690FF';
     }
+    const maleBtn = (
+      <Col style = {{'paddingLeft': '0px', 'paddingRight': '5px'}}>
+        <Container>
+          <Row className="justify-content-center">
+            <Button variant={'outline-secondary'} size={'lg'} block
+              active = {this.state.selected == 0}
+              onClick={() => this.changeGender(0)}
+              style={maleStyle}>
+              <img alt={'Male'}
+                src={maleSrc}
+                width={10}>
+              </img></Button>
+          </Row>
+        </Container>
+      </Col>);
+
+    const femaleSrc = (this.state.selected == 1) ?
+      '../resources/female-selected.png' : '../resources/female.png';
+    const femaleStyle = {'height': '64px'};
+    if (this.state.selected == 1) {
+      femaleStyle['background-color'] = '#E93CAC';
+    }
+    const femaleBtn = (
+      <Col style = {{'paddingLeft': '5px', 'paddingRight': '0px'}}>
+        <Container>
+          <Row className="justify-content-center">
+            <Button variant={'outline-secondary'} size={'lg'} block
+              active = {this.state.selected == 1}
+              onClick={() => this.changeGender(1)}
+              style={femaleStyle}>
+              <img alt={'Female'}
+                src={femaleSrc}
+                width={13}>
+              </img>
+            </Button>
+          </Row>
+        </Container>
+      </Col>
+    );
+
     return (
       <Container>
-        <p className = "text-muted">Gender</p>
         <Row className="justify-content-center">
           <Col>
-            <Container>
-              <Row className="justify-content-center">
-                <Button variant={'outline-secondary'} size={'lg'} block
-                  active = {this.state.selected == 0}
-                  onClick={() => this.changeGender(0)}>
-                  <img alt={'Male'}
-                    src={'../resources/male.png'}
-                    width={10}>
-                  </img></Button>
-              </Row>
-            </Container>
+            <p className = "text-muted">Gender</p>
           </Col>
           <Col>
             <Container>
               <Row className="justify-content-center">
-                <Button variant={'outline-secondary'} size={'lg'} block
-                  active = {this.state.selected == 1}
-                  onClick={() => this.changeGender(1)}>
-                  <img alt={'Female'}
-                    src={'../resources/female.png'}
-                    width={13}>
-                  </img>
-                </Button>
+                {maleBtn}
+                {femaleBtn}
               </Row>
             </Container>
           </Col>
-          {unisexOption}
         </Row>
       </Container>
     );
@@ -209,26 +241,32 @@ class QuantitySelector extends React.Component {
       <Container>
         <Row>
           <Col>
-            <p className = "text-muted">Quantity</p>
+            <p className = "text-muted">Quantity Changed</p>
           </Col>
           <Col>
             <InputGroup>
               <InputGroup.Prepend>
                 <Button variant="outline-secondary"
+                  style={{'color': '#51ADA9',
+                    'borderRight': 'none'}}
                   onClick={() =>
                     this.props.onChange(parseInt(this.props.quantity) - 1)}>-
                 </Button>
               </InputGroup.Prepend>
-              <FormControl style={{'textAlign': 'center'}}
-                type={'number'}
-                placeholder={pHolder}
-                value = {this.props.quantity}
-                onChange = {(e) => {
-                  this.props.onChange(e.target.value);
-                }}
+              <FormControl style={{'textAlign': 'center',
+                'borderRight': 'none', 'borderLeft': 'none',
+                'borderColor': 'rgb(108, 117, 125)'}}
+              type={'number'}
+              placeholder={pHolder}
+              value = {this.props.quantity}
+              onChange = {(e) => {
+                this.props.onChange(e.target.value);
+              }}
               />
               <InputGroup.Append>
                 <Button variant="outline-secondary"
+                  style={{'color': '#51ADA9',
+                    'borderLeft': 'none'}}
                   onClick={() =>
                     this.props.onChange(parseInt(this.props.quantity) + 1)}>+
                 </Button>
@@ -258,12 +296,18 @@ class VerticalRadio extends React.Component {
     });
     return (
       <Container>
-        <p className = {'text-muted'}>{this.props.name}</p>
-        <Form>
+        <Row>
           <Col>
-            {options}
+            <p className = {'text-muted'}>{this.props.name}</p>
           </Col>
-        </Form>
+          <Col>
+            <Form>
+              <Container>
+                {options}
+              </Container>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     );
   }
@@ -274,7 +318,7 @@ class HorizontalRadio extends React.Component {
     super(props);
     this.state = {
       selected: -1,
-    }
+    };
   }
 
   updateSelected(i) {
@@ -310,33 +354,43 @@ class HorizontalRadio extends React.Component {
   }
 }
 
-class NextButtons extends React.Component {
+class NavButtons extends React.Component {
   render() {
     return (
-      <Container>
-        <Row className={'justify-content-center'}>
-          <Col xs = {4} sm = {4} md = {4} lg = {4} xl = {4}>
-            <Container>
-              <Row className = 'justify-content-center'>
-                <Button
-                  variant={'outline-secondary'} block
-                  style={{'min-height': '62px'}}>
-                  add same item
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-          <Col xs = {8} sm = {8} md = {8} lg = {8} xl = {8}>
-            <Container>
-              <Row className = 'justify-content-center'>
-                <Button block style={{'min-height': '62px'}}>
-                  next
-                </Button>
-              </Row>
-            </Container>
-          </Col>
-        </Row>
-      </Container>);
+      <Navbar sticky={'bottom'}>
+        <Container>
+          <Row style={{'width': '100%', 'marginLeft': '0px'}}>
+            <Col>
+              <Container>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'outline-secondary'} block
+                    style={{'minHeight': '54px', 'borderColor': '#51ADA9',
+                      'color': '#51ADA9', 'fontWeight': 'bold'}}
+                    className={'btn-outline-secondary-miqueas'}>
+                    add same item
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+            <Col>
+              <Container>
+                <Row className = 'justify-content-center'>
+                  <Button
+                    variant={'secondary'} block
+                    style={{'minHeight': '54px',
+                      'fontWeight': 'bold',
+                      'background': '#51ADA9',
+                      'borderColor': '#51ADA9'}}>
+                    next
+                  </Button>
+                </Row>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
+      </Navbar>
+    );
   }
 }
 

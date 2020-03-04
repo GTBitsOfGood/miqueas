@@ -1,11 +1,12 @@
-import NavigationBar from '../components/NavigationBar';
-import '../public/other_inventory.css';
+import NavigationBar from '../frontend/components/NavigationBar';
+import '../public/school_inventory.css';
+import translate from '../frontend/components/translate.js';
 
-export default function OtherInventory() {
+export default function OtherInventory({language}) {
   return (
-    <div class="Clean">
+    <div className="Clean">
         <h1>Other Inventory</h1>
-        <div class="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar/></div>
     </div>
   );
 }

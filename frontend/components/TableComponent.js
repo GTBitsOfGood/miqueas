@@ -4,7 +4,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faFemale } from '@fortawesome/free-solid-svg-icons'
 import { faMale } from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
-import '../public/table_component.css';
+import '../../public/table_component.css';
 
 function TableComponent (props) {
     const gender = props.gender.toLowerCase()[0]

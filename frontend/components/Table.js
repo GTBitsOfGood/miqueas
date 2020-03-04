@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useTable } from 'react-table'
 import React from 'react';
 import TableComponent from "./TableComponent";
 import TableHeader from "./TableHeader";
