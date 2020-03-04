@@ -33,9 +33,11 @@ const ItemSchema = new Schema({
     },
     reorder_level: {
         type: Number,
-        required: true
+        validate : {
+            validator : Number.isInteger,
+            message   : '{VALUE} is not an integer value'
+          }
     }
 });
-ItemSchema.index({'$**': 'text'});
 
 export default mongoose.models.Item || mongoose.model('Item', ItemSchema);
