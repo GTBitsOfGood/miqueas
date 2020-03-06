@@ -89,7 +89,7 @@ class TransactionHeader extends React.Component {
 
     return (
       <>
-        <Navbar bg={'light'} >
+        <Navbar bg={'light'}>
           <Navbar.Brand>
             <img
               alt={'Back'}
@@ -101,7 +101,8 @@ class TransactionHeader extends React.Component {
               }}>
             </img>
           </Navbar.Brand>
-          <Navbar.Collapse className={'justify-content-start'}>
+          <Navbar.Collapse className={'justify-content-center'}
+            style={{'marginLeft': '-30px'}}>
             <Navbar.Brand>
               {this.state.name}
             </Navbar.Brand>
@@ -291,6 +292,7 @@ class VerticalRadio extends React.Component {
             label = {option}
             name = {this.props.name + 'Radio'}
             id = {option + i.toString()}
+            key = {option + i.toString()}
           />);
       i++;
     });
@@ -331,7 +333,7 @@ class HorizontalRadio extends React.Component {
     const options = [];
     this.props.options.forEach((option, i) => {
       options.push(
-          <Col>
+          <Col key = {option + i.toString()}>
             <Container>
               <Row className="justify-content-center">
                 <Button
