@@ -15,13 +15,15 @@ function Table (props) {
     })
     /*Once the database has proper data in it we should remove the two conditionals
     in the for loop */
+    let tableHeaderCols = headerColumns.slice();
+    headerColumns[1] = "typeColor"
     for (var i = 0; i<products.length;i++) {
         products[i].key = i;
-        if (!products[i].staff) {
-            products[i].staff = "Staff 1"
+        if (!products[i].size) {
+            products[i].size = "N/A"
         }
-        if (!products[i].child) {
-            products[i].child = "Child 1"
+        if (!products[i].typeColor) {
+            products[i].typeColor = "N/A"
         }
     }
 
@@ -39,7 +41,7 @@ function Table (props) {
         />
     })
     return <div>
-        <TableHeader headerColumns={headerColumns}/>
+        <TableHeader headerColumns={tableHeaderCols}/>
         {tableComponents}
     </div>
 }
