@@ -12,7 +12,7 @@ export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemVariation: [],
+      itemVariation: {},
       gender: 'none',
       quantity: 0,
       typeColor: 'none',
@@ -25,7 +25,13 @@ export default class TransactionForm extends React.Component {
 
   async componentDidMount() {
     const itemVar = await getItemVariation(this.state.name);
-    this.initStateFromVariation(itemVar);
+    if (itemVar) {
+      this.initStateFromVariation(itemVar);
+    } else {
+      this.setState({
+        isLoading: false,
+      });
+    }
   }
 
   checkOneOption(itemProperty) {
@@ -94,7 +100,8 @@ export default class TransactionForm extends React.Component {
       <ItemHeader name={this.props.name} category={this.props.category}/>
       <hr style={{'marginTop': 0}}/></div>;
 
-    if (this.state.itemVariation == null) {
+    if (this.state.itemVariation == null ||
+      this.state.itemVariation.name == undefined) {
       if (this.state.isLoading) {
         return <div style = {{'textAlign': 'center'}}>
           {header}
