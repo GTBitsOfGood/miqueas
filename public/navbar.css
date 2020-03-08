@@ -1,21 +1,22 @@
-.btn-primary {
-    color: #fff;
-    margin:-4px;
-    border-color: gray;
+.footer-btn {
+    color: grey;
+    border-color: white;
+    border-top-color: grey;
     display: inline-block;
     text-align: center;
-    width: 18%;
+    width: 20%;
     padding: 4px;
+    margin: -6px;
 }
-.btn-secondary {
-    color: #fff;
-    margin:-4px;
-    border-color: gray;
+.add-btn {
+    color: grey;    
+    border-color: white;
+    border-top-color: grey;
     display: inline-block;
     text-align: center;
-    width: 18%;
+    width: 20%;
     padding: 0px;
-    
+    margin: -6px;
 }
 .caption {
     display:block;

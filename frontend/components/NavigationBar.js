@@ -26,25 +26,25 @@ function NavigationBar(props) {
       break;
   }
   return(
-  <div>
+  <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
     <ActiveLink href="/profile">
-      <Button style={isProfile ? {backgroundColor:'#51ADA9'} : {backgroundColor:'gray'}}>
+      <Button className="footer-btn" style={isProfile ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <Person size="40%"/><span className="caption">profile</span></Button>
       </ActiveLink>
     <ActiveLink href="/">
-      <Button style={isShopping ? {backgroundColor:'#51ADA9'} : {backgroundColor:'gray'}}>
+      <Button className="footer-btn" style={isShopping ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <ShoppingCart size="40%"/><span className="caption">shopping list</span></Button>
       </ActiveLink>
     <ActiveLink href="/add">
-      <Button variant="secondary" style={isAdd ? {backgroundColor:'#51ADA9'} : {backgroundColor:'gray'}}>
+      <Button className="add-btn" variant="secondary" style={isAdd ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
       <Plus size="55%" /><div className="caption"></div></Button>
       </ActiveLink>
     <ActiveLink href="/log">
-      <Button style={isLog ? {backgroundColor:'#51ADA9'} : {backgroundColor:'gray'}}>
+      <Button className="footer-btn" style={isLog ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <Clipboard size="40%"/><span className="caption">log</span></Button>
       </ActiveLink>
     <ActiveLink href="/inventory">
-      <Button style={isInventory ? {backgroundColor:'#51ADA9'} : {backgroundColor:'gray'}}>
+      <Button className="footer-btn" style={isInventory ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <Menu size="40%"/><span className="caption">inventory</span></Button>
       </ActiveLink>
   </div>)
