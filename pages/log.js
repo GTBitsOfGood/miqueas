@@ -5,7 +5,7 @@ export default function Log({language}) {
   return (
     <div className="Clean">
         <h1>Log</h1>
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={3}/></div>
     </div>
   );
 }

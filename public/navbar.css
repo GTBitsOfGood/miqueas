@@ -1,18 +1,16 @@
 .btn-primary {
     color: #fff;
     margin:-4px;
-    background-color: gray !important;
-    border-color: gray !important;
+    border-color: gray;
     display: inline-block;
     text-align: center;
     width: 18%;
-    padding: 0px;
+    padding: 4px;
 }
 .btn-secondary {
     color: #fff;
     margin:-4px;
-    background-color: teal !important;
-    border-color: teal !important;
+    border-color: gray;
     display: inline-block;
     text-align: center;
     width: 18%;
