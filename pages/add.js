@@ -1,6 +1,6 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import '../public/add.css';
-import {addItem} from '../frontend/actions/items.js';
+import {addItem} from '../frontend/actions/Items.js';
 import {Button} from 'react-bootstrap';
 
 export default function Add() {
