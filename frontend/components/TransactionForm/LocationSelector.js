@@ -31,7 +31,7 @@ export default class LocationSelector extends React.Component {
       <Col style = {{'paddingLeft': '0px', 'paddingRight': '5px'}}>
         <Container>
           <Row className="justify-content-center">
-            <Button variant={'outline-secondary'} size={'sm'} block
+            <Button id="bodegaBtn" variant={'outline-secondary'} size={'sm'} block
               active = {this.state.selected == 0}
               onClick={() => this.changeLocation(0, 'bodega')}
               style={bodegaBtnStyle}>bodega
@@ -42,7 +42,9 @@ export default class LocationSelector extends React.Component {
 
     const downBtnStyle = {'height': '64px',
       'fontSize': '14px',
-      'textAlign': 'center'};
+      'textAlign': 'center',
+      'white-space': 'normal',
+      'word-wrap': 'break-word'}
     if (this.state.selected == 1) {
       downBtnStyle['backgroundColor'] = '#51ADA9';
       downBtnStyle['color'] = 'white';
@@ -51,10 +53,11 @@ export default class LocationSelector extends React.Component {
       <Col style = {{'paddingLeft': '5px', 'paddingRight': '0px'}}>
         <Container>
           <Row className="justify-content-center">
-            <Button variant={'outline-secondary'} size={'sm'} block
+            <Button id="downBtn" variant={'outline-secondary'} size={'sm'} block
               active = {this.state.selected == 1}
               onClick={() => this.changeLocation(1, 'downstairs')}
-              style={downBtnStyle}>downstairs
+              style={downBtnStyle}>
+                down<br />stairs
             </Button>
           </Row>
         </Container>
