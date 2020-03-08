@@ -8,6 +8,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import QrReader from 'react-qr-reader'
+import { useMediaQuery } from 'react-responsive'
 
 class TransactionForm extends React.Component {
   constructor(props) {
@@ -64,68 +66,6 @@ class TransactionForm extends React.Component {
         <hr/>
         <NavButtons/>
       </div>
-    );
-  }
-}
-
-class TransactionHeader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: props.name,
-      showPopup: false,
-    };
-  }
-
-
-  handleClose() {
-    this.setState({
-      showPopup: false,
-    });
-  }
-
-  render() {
-    const show = this.state.showPopup;
-
-    return (
-      <>
-        <Navbar bg={'light'} >
-          <Navbar.Brand>
-            <img
-              alt={'Back'}
-              src={'../resources/arrow-back.png'}
-              width={30}
-              height={30}
-              onClick={() => {
-                this.setState({showPopup: true});
-              }}>
-            </img>
-          </Navbar.Brand>
-          <Navbar.Collapse className={'justify-content-start'}>
-            <Navbar.Brand>
-              {this.state.name}
-            </Navbar.Brand>
-          </Navbar.Collapse>
-        </Navbar>
-        <Modal show={show} onHide={() => {
-          this.setState({showPopup: false});
-        }}>
-          <Modal.Header closeButton>
-            <Modal.Title>Are you sure you want to go back?</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Any edits will be lost.</Modal.Body>
-          <Modal.Footer>
-            <Button variant="link" href={'/'}>
-              Go Back
-            </Button>
-            <Button variant="link" onClick={() => {
-              this.setState({showPopup: false});
-            }}>
-              Cancel
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
     );
   }
 }

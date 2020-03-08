@@ -1,5 +1,5 @@
 import searchFunction from '../../server/actions/searchfunction';
-export default (req, res) => {
+export default async function(req, res) {
     const searchText = req.query.text;
     return searchFunction(searchText)
     .then((docs) => {
