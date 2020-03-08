@@ -4,7 +4,6 @@ import TransactionHeader from '../frontend/components/TransactionForm/Transactio
 import ItemHeader from '../frontend/components/TransactionForm/ItemHeader';
 import QuantitySelector from '../frontend/components/TransactionForm/QuantitySelector';
 import VerticalRadio from '../frontend/components/TransactionForm/VerticalRadio';
-import HorizontalRadio from '../frontend/components/TransactionForm/HorizontalRadio';
 import NavButtons from '../frontend/components/TransactionForm/NavButtons';
 import GenderSelector from '../frontend/components/TransactionForm/GenderSelector';
 import LocationSelector from '../frontend/components/TransactionForm/LocationSelector';
@@ -99,6 +98,13 @@ class TransactionForm extends React.Component {
     });
   }
 
+  changeLocation(newLocation) {
+    console.log(newLocation);
+    this.setState({
+      location: newLocation,
+    });
+  }
+
   render() {
     const header = <div><TransactionHeader name={'Transaction Form'}/>
       <hr style={{'marginTop': 0}}/>
@@ -149,7 +155,9 @@ class TransactionForm extends React.Component {
         <hr/>
         {typeColorSelector}
         {sizeSelector}
-        <LocationSelector/>
+        <LocationSelector onUpdate={(name) => {
+          this.changeLocation(name)
+        }}/>
         <hr/>
         <NavButtons/>
       </div>

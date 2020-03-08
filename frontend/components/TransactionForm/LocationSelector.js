@@ -12,11 +12,11 @@ export default class LocationSelector extends React.Component {
     };
   }
 
-  changeLocation(i) {
+  changeLocation(i, name) {
     this.setState({
       selected: i,
     });
-    // this.props.onClick(i);
+    this.props.onUpdate(name);
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class LocationSelector extends React.Component {
       'fontSize': '14px',
       'textAlign': 'center'};
     if (this.state.selected == 0) {
-      bodegaBtnStyle['background-color'] = '#51ADA9';
+      bodegaBtnStyle['backgroundColor'] = '#51ADA9';
       bodegaBtnStyle['color'] = 'white';
     }
     const bodegaBtn = (
@@ -32,9 +32,9 @@ export default class LocationSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button variant={'outline-secondary'} size={'sm'} block
-                    active = {this.state.selected == 0}
-                    onClick={() => this.changeLocation(0)}
-                    style={bodegaBtnStyle}>bodega
+              active = {this.state.selected == 0}
+              onClick={() => this.changeLocation(0, 'bodega')}
+              style={bodegaBtnStyle}>bodega
             </Button>
           </Row>
         </Container>
@@ -44,7 +44,7 @@ export default class LocationSelector extends React.Component {
       'fontSize': '14px',
       'textAlign': 'center'};
     if (this.state.selected == 1) {
-      downBtnStyle['background-color'] = '#51ADA9';
+      downBtnStyle['backgroundColor'] = '#51ADA9';
       downBtnStyle['color'] = 'white';
     }
     const downstairsBtn = (
@@ -52,9 +52,9 @@ export default class LocationSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button variant={'outline-secondary'} size={'sm'} block
-                    active = {this.state.selected == 1}
-                    onClick={() => this.changeLocation(1)}
-                    style={downBtnStyle}>downstairs
+              active = {this.state.selected == 1}
+              onClick={() => this.changeLocation(1, 'downstairs')}
+              style={downBtnStyle}>downstairs
             </Button>
           </Row>
         </Container>
