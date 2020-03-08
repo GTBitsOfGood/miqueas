@@ -5,7 +5,7 @@ export default function Profile({language, setLanguage}) {
   return (
     <div className="Clean">
         <h1>{translate("Profile", {language})}</h1>
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={0}/></div>
         <button onClick={() => {setLanguage("Spanish")}}> Switch to Spanish </button>
     </div>
   );

@@ -1,23 +1,22 @@
-.btn-primary {
-    color: #fff;
-    margin:-4px;
-    background-color: gray !important;
-    border-color: gray !important;
+.footer-btn {
+    color: grey;
+    border-color: white;
+    border-top-color: grey;
     display: inline-block;
     text-align: center;
-    width: 18%;
-    padding: 0px;
+    width: 20%;
+    padding: 4px;
+    margin: -6px;
 }
-.btn-secondary {
-    color: #fff;
-    margin:-4px;
-    background-color: teal !important;
-    border-color: teal !important;
+.add-btn {
+    color: grey;    
+    border-color: white;
+    border-top-color: grey;
     display: inline-block;
     text-align: center;
-    width: 18%;
+    width: 20%;
     padding: 0px;
-    
+    margin: -6px;
 }
 .caption {
     display:block;

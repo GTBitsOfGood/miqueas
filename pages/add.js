@@ -14,7 +14,7 @@ export default function Add() {
         {/*For this button it goes to: frontend action -> api call -> backend action.
         The frontend/backend actions are for reusability. */}
         <Button onClick={()=>addItem(exampleItem)}>Example Add Item</Button>
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={2}/></div>
     </div>
   );
 }
