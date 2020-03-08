@@ -1,10 +1,19 @@
 import TransactionForm from '../frontend/components/TransactionForm.js';
+import LocationToggle from '../frontend/components/LocationToggle';
 import translate from '../frontend/components/translate.js';
 
 export default function Transaction({language}) {
   return (
     <div>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <LocationToggle locations={["bodega","store"]}/>
+      </div>
       <TransactionForm></TransactionForm>
       <link
         rel="stylesheet"
