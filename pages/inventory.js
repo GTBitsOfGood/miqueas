@@ -36,7 +36,7 @@ class Inventory extends React.Component {
     if (this.state.isLoading) return <div />;
     return (
       <div className="Clean">
-        <InventoryHeader />
+        <InventoryHeader items={this.state.allItems} />
         <div className="Footer"><NavigationBar/></div>
       </div>
     );

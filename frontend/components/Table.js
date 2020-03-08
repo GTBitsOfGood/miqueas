@@ -4,7 +4,8 @@ import TableComponent from "./TableComponent";
 import TableHeader from "./TableHeader";
 
 function Table (props) {
-    const products = props.products
+    const products = props.items
+
     let headerColumns = props.headerColumns.map(header => {
         if (typeof(header) === 'string') {
             return header.toLowerCase()
@@ -12,10 +13,21 @@ function Table (props) {
             return header
         }
     })
+    /*Once the database has proper data in it we should remove the two conditionals
+    in the for loop */
+    for (var i = 0; i<products.length;i++) {
+        products[i].key = i;
+        if (!products[i].staff) {
+            products[i].staff = "Staff 1"
+        }
+        if (!products[i].child) {
+            products[i].child = "Child 1"
+        }
+    }
 
     let tableComponents = products.map(product => {
         if (!product.gender) {
-            product.gender = ''
+            product.gender = 'f'
         }
         return <TableComponent
             key={product.key}
