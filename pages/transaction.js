@@ -7,6 +7,7 @@ import VerticalRadio from '../frontend/components/TransactionForm/VerticalRadio'
 import HorizontalRadio from '../frontend/components/TransactionForm/HorizontalRadio';
 import NavButtons from '../frontend/components/TransactionForm/NavButtons';
 import GenderSelector from '../frontend/components/TransactionForm/GenderSelector';
+import LocationSelector from '../frontend/components/TransactionForm/LocationSelector';
 import {getItemVariation} from '../frontend/actions/items.js';
 
 export default function Transaction({language}) {
@@ -148,8 +149,7 @@ class TransactionForm extends React.Component {
         <hr/>
         {typeColorSelector}
         {sizeSelector}
-        <HorizontalRadio name={'Location'}
-          options = {['bodega', 'downstairs']}/>
+        <LocationSelector/>
         <hr/>
         <NavButtons/>
       </div>
