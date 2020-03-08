@@ -9,7 +9,8 @@ export default {
     getItem: '/api/getItem',
     login: '/api/login',
     verifyToken: '/api/verifyToken',
-    searchQuery: '/api/searchQuery'
+    searchQuery: '/api/searchQuery',
+    getItemVariation: '/api/getItemVariation',
   },
   pages: {
     Index: '/',

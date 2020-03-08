@@ -1,10 +1,10 @@
-import { get1000Items } from '../../server/actions/items';
+import { getItemVariation } from '../../server/actions/items';
 
-// @route   GET api/getItems
-// @desc    Get All Items
+// @route   GET api/getItemVariation
+// @desc    Get Item Variation from name and category
 // @access  Public
 export default async function (req, res) {
-  return get1000Items()
+  return getItemVariation(req.query.name)
     .then((items) => res.status(200).json({
       success: true,
       payload: items,

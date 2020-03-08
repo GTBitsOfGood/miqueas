@@ -40,4 +40,5 @@ const ItemSchema = new Schema({
     }
 });
 
-export default mongoose.models.Item || mongoose.model('Item', ItemSchema);
+export default (mongoose.models && mongoose.models.Item) ?
+  mongoose.models.Item : mongoose.model('Item', ItemSchema);

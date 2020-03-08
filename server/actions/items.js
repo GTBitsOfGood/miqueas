@@ -1,5 +1,6 @@
 import mongoDB from '../index';
 import Item from '../../models/Item';
+import ItemVariation from '../../models/ItemVariation.js';
 
 export async function getItems() {
   await mongoDB();
@@ -45,6 +46,12 @@ export async function updateItemState(id, state) {
       }
       return result;
     });
+}
+
+export async function getItemVariation(name) {
+  await mongoDB();
+
+  return ItemVariation.findOne({name: name});
 }
 
 // export async function getItem(id) {
