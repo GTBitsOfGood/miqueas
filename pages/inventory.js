@@ -37,7 +37,7 @@ class Inventory extends React.Component {
     return (
       <div className="Clean">
         <InventoryHeader items={this.state.allItems} />
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={4}/></div>
       </div>
     );
   }

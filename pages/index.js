@@ -23,6 +23,9 @@ export default function Index({language}) {
       <Link href="/search">
         <a title="search">Search</a>
       </Link>
+      <Link href="/itemVariationTest">
+        <a title="itemVariationTest">ItemVariationTest</a>
+      </Link>
     </div>
   );
 }

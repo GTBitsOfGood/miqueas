@@ -1,20 +1,12 @@
-import TransactionForm from '../frontend/components/TransactionForm.js';
-import LocationToggle from '../frontend/components/LocationToggle';
-import translate from '../frontend/components/translate.js';
+import React from 'react';
+import TransactionForm
+  from '../frontend/components/TransactionForm/TransactionForm';
 
 export default function Transaction({language}) {
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <LocationToggle locations={["bodega","store"]}/>
-      </div>
-      <TransactionForm></TransactionForm>
+
+      <TransactionForm name={'pants'} category={'clothing'}/>
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

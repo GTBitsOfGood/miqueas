@@ -54,7 +54,7 @@ class ReviewForm extends React.Component {
           this.hidePopup();
         }}/>
         <Navbar bg={'light'} >
-          <Navbar.Collapse className={'justify-content-start'}>
+          <Navbar.Collapse className={'justify-content-center'}>
             <Navbar.Brand>
               {'Review and Submit'}
             </Navbar.Brand>
@@ -77,7 +77,7 @@ class ReviewForm extends React.Component {
           <ReviewItem item={testItem4} onDelete={() => {
             this.deleteItem(3);
           }}/>
-          <NavButtons></NavButtons>
+          <NavButtons/>
         </Container>
       </>
     );
@@ -100,7 +100,8 @@ class ReviewItem extends React.Component {
     const additionalAttributes = [];
     this.props.item.attributes.forEach((attr) => {
       additionalAttributes.push(<p className={'super-shrink-text'}
-        style={{'marginBottom': '0px', 'marginLeft': '12px'}}>
+        style={{'marginBottom': '0px', 'marginLeft': '12px'}}
+        key={attr}>
         {attr}</p>);
     });
     let genderIcon = <></>;
@@ -227,7 +228,7 @@ class NavButtons extends React.Component {
                 <Row className = 'justify-content-center'>
                   <Button
                     variant={'secondary'} block
-                    style={{'min-height': '54px',
+                    style={{'minHeight': '54px',
                       'fontWeight': 'bold',
                       'background': '#51ADA9',
                       'borderColor': '#51ADA9'}}>
