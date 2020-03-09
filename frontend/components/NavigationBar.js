@@ -37,7 +37,7 @@ function NavigationBar(props) {
       </ActiveLink>
     <ActiveLink href="/add">
       <Button className="add-btn" variant="secondary" style={isAdd ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
-      <Plus size="55%" /><div className="caption"></div></Button>
+      <Plus size="65%" /><div className="caption"></div></Button>
       </ActiveLink>
     <ActiveLink href="/log">
       <Button className="footer-btn" style={isLog ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
