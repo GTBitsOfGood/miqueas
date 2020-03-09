@@ -16,7 +16,8 @@ export default class QuantitySelector extends React.Component {
             <p className = "text-muted">Quantity Changed</p>
           </Col>
           <QuantityButtons onChange={this.props.onChange}
-            quantity={this.props.quantity}/>
+            quantity={this.props.quantity}
+            negativeAllowed={true}/>
         </Row>
       </Container>
     );

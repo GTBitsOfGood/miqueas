@@ -14,7 +14,7 @@ class SingleItemStock extends React.Component {
     let dataView = (
       <Row>
         <Col style={{'paddingLeft': '0px'}}>
-          <p>this.props.stock</p>
+          <p>{this.props.stock}</p>
         </Col>
         <Col>
           <img
@@ -22,7 +22,10 @@ class SingleItemStock extends React.Component {
             src={'../resources/pencil.svg'}
             width={15}
             height={15}
-            style={{'marginLeft':'75%'}}/>
+            style={{'marginLeft':'75%'}}
+            onClick={(i) => {
+              this.props.onEdit();
+            }}/>
         </Col>
       </Row>
     );
@@ -31,9 +34,10 @@ class SingleItemStock extends React.Component {
       dataView = (
         <Row>
           <Col style={{'paddingLeft': '0px', 'marginTop':'-8px',
-            'margin-bottom':'8px'}}>
+            'margin-bottom':'8px', 'margin-left':'-15px'}}>
             <QuantityButtons quantity={this.props.stock}
-              onChange={this.props.onUpdate}/>
+              onChange={this.props.onUpdate}
+              negativeAllowed = {false}/>
           </Col>
         </Row>
       );

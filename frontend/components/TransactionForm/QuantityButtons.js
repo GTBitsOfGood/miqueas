@@ -15,9 +15,14 @@ export default function QuantityButtons(props) {
         <InputGroup.Prepend>
           <Button variant="outline-secondary"
             style={{'color': '#51ADA9',
-              'borderRight': 'none'}}
+              'borderRight': 'none',
+              'opacity': '1'}}
+            disabled={
+              (props.negativeAllowed) ? false : parseInt(props.quantity) <= 0
+            }
             onClick={() =>
-              props.onChange(parseInt(props.quantity) - 1)}>-
+              props.onChange(parseInt(props.quantity) - 1)
+            }>-
           </Button>
         </InputGroup.Prepend>
         <FormControl style={{'textAlign': 'center',

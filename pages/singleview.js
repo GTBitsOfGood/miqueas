@@ -1,6 +1,5 @@
 import React from 'react';
 import SingleItemView from '../frontend/components/SingleItemView/SingleItemView';
-import Navbar from 'react-bootstrap/Navbar';
 
 export default function SingleView({language}) {
   return (
