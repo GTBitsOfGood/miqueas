@@ -1,5 +1,0 @@
-.custom-control-input:checked~.custom-control-label::after {
-    background-color: #51ADA9 !important;
-    border-radius: 15px !important;
-    background-image: none !important;
-}

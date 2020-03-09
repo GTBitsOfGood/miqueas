@@ -1,12 +1,12 @@
-import TransactionForm from '../frontend/components/TransactionForm.js';
-import '../public/transaction-form.css';
-import translate from '../frontend/components/translate.js';
+import React from 'react';
+import TransactionForm
+  from '../frontend/components/TransactionForm/TransactionForm';
 
 export default function Transaction({language}) {
   return (
     <div>
 
-      <TransactionForm></TransactionForm>
+      <TransactionForm name={'pants'} category={'clothing'}/>
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

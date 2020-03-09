@@ -14,11 +14,6 @@ async function updateHandler(content) {
   console.log(docs);
 }
 
-async function getHandler(name) {
-  const docs = await getItemVariation(name);
-  document.getElementById("result").textContent = JSON.stringify(docs);
-}
-
 export default function ItemVariationTest() {
   // name gender size typeColor
   const exampleVariation = [{
@@ -45,7 +40,6 @@ export default function ItemVariationTest() {
         <h1>Item Variation API tests</h1>
         <Button onClick={() => addHandler(exampleVariation)}> testAdd </Button>
         <Button onClick={() => updateHandler(updateVariation)}> testUpdate </Button>
-        <Button onClick={() => getHandler("asdf")}> testGet </Button>
         <p id="result"> View get result </p>
         <div className="Footer"><NavigationBar/></div>
     </div>
