@@ -10,6 +10,8 @@ export default {
     login: '/api/login',
     verifyToken: '/api/verifyToken',
     searchQuery: '/api/searchQuery',
+    addItemVariation: '/api/addItemVariation',
+    updateItemVariation: '/api/updateItemVariation',
     getItemVariation: '/api/getItemVariation',
   },
   pages: {
