@@ -42,9 +42,7 @@ export default class LocationSelector extends React.Component {
 
     const downBtnStyle = {'height': '64px',
       'fontSize': '14px',
-      'textAlign': 'center',
-      'white-space': 'normal',
-      'word-wrap': 'break-word'}
+      'textAlign': 'center'}
     if (this.state.selected == 1) {
       downBtnStyle['backgroundColor'] = '#51ADA9';
       downBtnStyle['color'] = 'white';

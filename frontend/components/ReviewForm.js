@@ -232,7 +232,7 @@ class NavButtons extends React.Component {
                       'fontWeight': 'bold',
                       'background': '#51ADA9',
                       'borderColor': '#51ADA9'}}>
-                    next
+                    submit
                   </Button>
                 </Row>
               </Container>
