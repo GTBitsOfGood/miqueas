@@ -8,3 +8,23 @@
     width: 100%;
     text-align: center;
 }
+.Location{
+    width:100%;
+    text-align: center;
+    height:10%;
+    font-size: 1.5vw;
+}
+.o1{
+    border-radius: 2px;
+    border-style:solid;
+    border-width: 1px;
+    border-color: #51ADA9;
+    color: #51ADA9;
+}
+input[type="radio"] {
+  position: fixed;
+  z-index: -10;
+  opacity: 0;
+  left: 0;
+  top: 0;
+}
