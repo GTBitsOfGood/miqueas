@@ -3,10 +3,12 @@ import dynamic from 'next/dynamic';
 const QrReader = dynamic(() => import('react-qr-reader'), { ssr: false });
 import { useMediaQuery } from 'react-responsive';
 import Button from 'react-bootstrap/Button';
+import translate from './translate.js';
+import {searchQuery} from '../actions/searchQuery';
 
- 
 
-const Test  = () => {
+
+const Test = ({language}) => {
     const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 1224 })
     const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 })
     const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -14,14 +16,16 @@ const Test  = () => {
     const [category, setCategory] = useState("Category");
     const [name, setName] = useState("Name");
 
-    const handleScan = (data) => {
+    const handleScan = async (data) => {
       if (data) {
-        console.log(data);
-        setName(data);
-        //window.location.assign('/');
+        let translations = data.split("(");
+        setName(translate(translations[0], {language}));
+        const item = await searchQuery(translations[0]);
+        // console.log(item);
+        setCategory(translate(item.category, {language}));
       }
     }
-      
+
     const handleError = err => {
         console.error(err)
     }
@@ -43,11 +47,11 @@ const Test  = () => {
               style={{ width: winWidth }}
             />
         <div style = {{'paddingTop': '25%'}}>
-          <Button variant={'outline-secondary'} size={'md'} block> 
-            {category} 
+          <Button variant={'outline-secondary'} size={'md'} block>
+            {category}
           </Button>
-          <Button variant={'outline-secondary'} size={'md'} block> 
-            {name} 
+          <Button variant={'outline-secondary'} size={'md'} block>
+            {name}
           </Button>
           <Button>
             Next
