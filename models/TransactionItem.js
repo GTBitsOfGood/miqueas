@@ -11,11 +11,11 @@ const TransactionItemSchema = new Schema({
       required: true
     },
     quantityChanged: {
-      type: Integer,
+      type: Number,
       required: true
     },
     expiration_date: {
-      type: Integer,
+      type: Number,
       required: false
     }
 });

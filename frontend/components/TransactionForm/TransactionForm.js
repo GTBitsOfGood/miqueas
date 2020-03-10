@@ -7,11 +7,13 @@ import VerticalRadio from './VerticalRadio';
 import QuantitySelector from './QuantitySelector';
 import LocationSelector from './LocationSelector';
 import NavButtons from './NavButtons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      category: this.props.category,
       itemVariation: {},
       gender: 'none',
       quantity: 0,
@@ -20,6 +22,8 @@ export default class TransactionForm extends React.Component {
       isLoading: true,
       location: 'none',
       name: this.props.name,
+      recipient: 'none',
+      formCompleted: false,
     };
   }
 
@@ -32,6 +36,10 @@ export default class TransactionForm extends React.Component {
         isLoading: false,
       });
     }
+  }
+
+  checkRequired(itemProperty) {
+    return (itemProperty != null && itemProperty.length > 1);
   }
 
   checkOneOption(itemProperty) {
@@ -51,14 +59,52 @@ export default class TransactionForm extends React.Component {
     });
   }
 
+  setFormInvalid() {
+    this.setState({
+      formCompleted: false,
+    });
+  }
+
+  validateForm(skipCheck) {
+    if (skipCheck != 'quantity' && this.state.quantity == 0) {
+      this.setFormInvalid();
+      return;
+    }
+    if (skipCheck != 'location' && this.state.location == 'none') {
+      this.setFormInvalid();
+      return;
+    }
+    if (skipCheck != 'gender' &&
+      this.checkRequired(this.state.itemVariation.gender) &&
+      this.state.gender == 'none') {
+      this.setFormInvalid();
+      return;
+    }
+    if (skipCheck != 'size' &&
+      this.checkRequired(this.state.itemVariation.size) &&
+      this.state.size == 'none') {
+      this.setFormInvalid();
+      return;
+    }
+    if (skipCheck != 'typeColor' &&
+      this.checkRequired(this.state.itemVariation.typeColor) &&
+      this.state.typeColor == 'none') {
+      this.setFormInvalid();
+      return;
+    }
+    this.setState({
+      formCompleted: true,
+    });
+  }
+
   handleGenderSwap(i) {
     let gender = 'none';
     switch (i) {
       case 0:
-        gender = 'boy';
+        gender = 'male';
         break;
       case 1:
-        gender = 'girl';
+        gender = 'female';
         break;
       case 2:
         gender = 'unisex';
@@ -67,31 +113,61 @@ export default class TransactionForm extends React.Component {
     this.setState({
       gender: gender,
     });
+    this.validateForm('gender');
   }
 
   changeQuantity(i) {
     this.setState({
       quantity: i,
     });
+    if (i == 0) {
+      this.setFormInvalid();
+    } else {
+      this.validateForm('quantity');
+    }
   }
 
   changeSize(newSize) {
     this.setState({
       size: newSize,
     });
+    this.validateForm('size');
   }
 
   changeTypeColor(newTypeColor) {
     this.setState({
       typeColor: newTypeColor,
     });
+    this.validateForm('typeColor');
   }
 
   changeLocation(newLocation) {
-    console.log(newLocation);
     this.setState({
       location: newLocation,
     });
+    this.validateForm('location');
+  }
+
+  //This updates the overall transactionState with form properties
+  handleAddItem() {
+    let transactionState = this.props.transactionState;
+    let items = transactionState.transactionItems;
+    items[items.length - 1].item = {
+      name: this.state.name,
+      category: this.state.category,
+      gender: this.state.gender,
+      typeColor: this.state.typeColor,
+      size: this.state.size,
+      location: this.state.location,
+    }
+    items[items.length - 1].quantityChanged = this.state.quantity;
+    items[items.length - 1].recipient = this.state.recipient;
+    this.props.setTransactionState(transactionState);
+  }
+
+  handleSameItem() {
+    this.handleAddItem();
+    //Todo: Do something to clear the form
   }
 
   render() {
@@ -149,7 +225,11 @@ export default class TransactionForm extends React.Component {
           this.changeLocation(name);
         }}/>
         <hr/>
-        <NavButtons/>
+        <NavButtons 
+          handleSameItem = {() => this.handleSameItem()}
+          handleAddItem = {() => this.handleAddItem()}
+          disabled = {!this.state.formCompleted}
+        />
       </div>
     );
   }

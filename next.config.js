@@ -34,6 +34,14 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    config.plugins.push(
+      new FilterWarningsPlugin({ 
+        exclude: /chunk styles [mini-css-extract-plugin][^]*Conflicting order between:/, 
+      })
+    );
+    return config;
+  }
 };
 
 module.exports = withStyledIcons(withCSS(withOffline({nextConfig})))

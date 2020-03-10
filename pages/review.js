@@ -1,16 +1,15 @@
 import ReviewForm from '../frontend/components/ReviewForm.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/review-form.css';
 
-export default function Review() {
+export default function Review({language, transactionState, setTransactionState}) {
   return (
     <div>
-      <ReviewForm></ReviewForm>
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
+      <ReviewForm
+        language={language}
+        transactionState={transactionState}
+        setTransactionState={setTransactionState}
+      ></ReviewForm>
     </div>
   );
 }
