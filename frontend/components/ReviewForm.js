@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import ActiveLink from './ActiveLink';
 
 class ReviewItemModel {
   constructor(name, gender, quantity, attributes) {
@@ -120,12 +121,15 @@ class ReviewItem extends React.Component {
     return (
       <Card style={{'marginBottom': '13px', 'borderColor': '#C4C4C4'}}>
         <Card.Body style={{
-          'paddingLeft': '0.5rem',
-          'paddingRight': '0.5rem',
-          'paddingBottom': '0.5rem',
-          'paddingTop': '0.8rem'}}>
+          'lineHeight': '100%',
+          'verticalAlign': 'middle',
+          'padding': '0.5rem'
+          // 'paddingRight': '0.5rem',
+          // 'paddingBottom': '0.5rem',
+          // 'paddingTop': '0.8rem'
+        }}>
           <Container width={'100%'} style={{'paddingLeft': '15px',
-            'paddingRight': '0px'}}>
+                                            'paddingRight': '0px'}}>
             <Row>
               <Col xs = {1} sm={1} md={1} lg={1} xl={1}
                 style={{'paddingLeft': '0.5rem', 'paddingRight': '0.5rem',
@@ -147,7 +151,7 @@ class ReviewItem extends React.Component {
               </Col>
               <Col xs={2} sm={2} md={2} lg={2} xl={2}
                 style={{'paddingLeft': '0rem', 'paddingRight': '0.5rem'}}>
-                <FormControl style={{'textAlign': 'center',
+                <FormControl style={{'fontSize': '0.7rem', 'textAlign': 'center',
                   'borderColor': '#51ADA9'}}
                 type={'number'}
                 placeholder={'0'}
@@ -208,34 +212,34 @@ class Popup extends React.Component {
 class NavButtons extends React.Component {
   render() {
     return (
-      <Navbar sticky={'bottom'}>
+      <Navbar sticky={'bottom'} style={{'paddingTop': '50px',
+                                        'paddingLeft': '0px',
+                                        'paddingRight': '0px'}}>
         <Container>
           <Row style={{'width': '100%', 'marginLeft': '0px'}}>
-            <Col>
-              <Container>
+            <Col style={{'marginRight': '10px'}}>
                 <Row className = 'justify-content-center'>
                   <Button
                     variant={'outline-secondary'} block
-                    style={{'minHeight': '54px'}}
+                    style={{'height': '54px'}}
                     className={'btn-outline-secondary-miqueas'}>
-                    add item
+                    add new item
                   </Button>
                 </Row>
-              </Container>
             </Col>
-            <Col>
-              <Container>
+            <Col style={{'marginLeft': '10px'}}>
                 <Row className = 'justify-content-center'>
-                  <Button
-                    variant={'secondary'} block
-                    style={{'minHeight': '54px',
-                      'fontWeight': 'bold',
-                      'background': '#51ADA9',
-                      'borderColor': '#51ADA9'}}>
-                    submit
-                  </Button>
+                  <ActiveLink href='/log'>
+                    <Button
+                      variant={'secondary'} block
+                      style={{'height': '54px',
+                        'fontWeight': 'bold',
+                        'background': '#51ADA9',
+                        'borderColor': '#51ADA9'}}>
+                      submit
+                    </Button>
+                  </ActiveLink>                  
                 </Row>
-              </Container>
             </Col>
           </Row>
         </Container>
