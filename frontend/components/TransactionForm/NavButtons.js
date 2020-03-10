@@ -16,26 +16,27 @@ export default class NavButtons extends React.Component {
                 <Row className = 'justify-content-center'>
                   <Button
                     variant={'outline-secondary'} block
-                    style={{'height': '54px', 'borderColor': '#51ADA9',
-                      'color': '#51ADA9', 'fontWeight': 'bold', 'lineHeight': '20px', 'textAlign': 'center'}}
-                    className={'btn-outline-secondary-miqueas'}>
+                    style={{'minHeight': '54px', 'borderColor': '#51ADA9',
+                      'color': '#51ADA9', 'fontWeight': 'bold'}}
+                    className={'btn-outline-secondary-miqueas'}
+                    disabled={this.props.disabled}>
                     add same item
                   </Button>
                 </Row>
             </Col>
             <Col style={{'marginLeft': '10px'}}>
                 <Row className = 'justify-content-center'>
-                  <ActiveLink href='/review'>
-                    <Button
-                      variant={'secondary'} block
-                      style={{'height': '54px',
-                        'fontWeight': 'bold',
-                        'background': '#51ADA9',
-                        'borderColor': '#51ADA9'}}>
-                      next
-                    </Button>
+                <ActiveLink href='/review'>
+                  <Button
+                    variant={'secondary'} block
+                    style={{'minHeight': '54px',
+                      'fontWeight': 'bold',
+                      'background': '#51ADA9',
+                      'borderColor': '#51ADA9'}}
+                    disabled={this.props.disabled}>
+                    next
+                  </Button>
                   </ActiveLink>
-                  
                 </Row>
             </Col>
           </Row>
