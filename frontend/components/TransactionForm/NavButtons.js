@@ -18,7 +18,8 @@ export default class NavButtons extends React.Component {
                     variant={'outline-secondary'} block
                     style={{'minHeight': '54px', 'borderColor': '#51ADA9',
                       'color': '#51ADA9', 'fontWeight': 'bold'}}
-                    className={'btn-outline-secondary-miqueas'}>
+                    className={'btn-outline-secondary-miqueas'}
+                    disabled={this.props.disabled}>
                     add same item
                   </Button>
                 </Row>
@@ -32,7 +33,8 @@ export default class NavButtons extends React.Component {
                     style={{'minHeight': '54px',
                       'fontWeight': 'bold',
                       'background': '#51ADA9',
-                      'borderColor': '#51ADA9'}}>
+                      'borderColor': '#51ADA9'}}
+                    disabled={this.props.disabled}>
                     next
                   </Button>
                 </Row>
