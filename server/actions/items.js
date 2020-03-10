@@ -46,9 +46,3 @@ export async function updateItemState(id, state) {
       return result;
     });
 }
-
-// export async function getItem(id) {
-//   await mongoDB();
-
-//   return Application.findOne({ id });
-// }
