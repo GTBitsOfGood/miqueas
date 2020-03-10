@@ -24,7 +24,7 @@ export default class GenderSelector extends React.Component {
       '../resources/male-selected.png' : '../resources/male.png';
     const maleStyle = {'height': '64px'};
     if (this.state.selected == 0) {
-      maleStyle['background-color'] = '#4690FF';
+      maleStyle['backgroundColor'] = '#4690FF';
     }
     const maleBtn = (
       <Col style = {{'paddingLeft': '0px', 'paddingRight': '5px'}}>
@@ -46,7 +46,7 @@ export default class GenderSelector extends React.Component {
       '../resources/female-selected.png' : '../resources/female.png';
     const femaleStyle = {'height': '64px'};
     if (this.state.selected == 1) {
-      femaleStyle['background-color'] = '#E93CAC';
+      femaleStyle['backgroundColor'] = '#E93CAC';
     }
     const femaleBtn = (
       <Col style = {{'paddingLeft': '5px', 'paddingRight': '0px'}}>
