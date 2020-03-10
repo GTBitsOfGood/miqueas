@@ -54,6 +54,11 @@ class ReviewForm extends React.Component {
   handleSubmit() {
     // console.log(this.props.transactionState);
     addTransaction(this.props.transactionState);
+    this.props.setTransactionState({
+      transactionItems: [],
+      transaction_date: new Date(),
+      staff_name: "Staff 1"
+    })
   }
 
   render() {
