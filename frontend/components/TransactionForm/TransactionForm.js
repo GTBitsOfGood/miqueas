@@ -1,5 +1,5 @@
 import React from 'react';
-import {getItemVariation} from '../../actions/Items';
+import {getItemVariation} from '../../actions/items';
 import TransactionHeader from './TransactionHeader';
 import ItemHeader from './ItemHeader';
 import GenderSelector from './GenderSelector';
