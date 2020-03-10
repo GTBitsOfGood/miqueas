@@ -12,8 +12,7 @@ export default class NavButtons extends React.Component {
         <Container>
           <Row style={{'width': '100%', 'marginLeft': '0px'}}>
             <Col>
-              <Container>
-                <Row className = 'justify-content-center'>
+                <Row className = 'justify-content-center' style={{'margin': '0px'}}>
                   <Button
                     variant={'outline-secondary'} block
                     style={{'height': '54px', 'borderColor': '#51ADA9',
@@ -22,11 +21,9 @@ export default class NavButtons extends React.Component {
                     add same item
                   </Button>
                 </Row>
-              </Container>
             </Col>
             <Col>
-              <Container>
-                <Row className = 'justify-content-center'>
+                <Row className = 'justify-content-center' style={{'margin': '0px'}}>
                   <Button
                     variant={'secondary'} block
                     style={{'height': '54px',
@@ -36,7 +33,6 @@ export default class NavButtons extends React.Component {
                     next
                   </Button>
                 </Row>
-              </Container>
             </Col>
           </Row>
         </Container>
