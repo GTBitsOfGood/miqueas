@@ -12,7 +12,8 @@ export default function InfoLine(props) {
       <Col>
         <Container>
           <Row className={'justify-content-end'}>
-            <strong>{props.title}</strong>
+            <span style={{'color': '#565656',
+                          'fontWeight': '600'}}>{props.title}</span>            
           </Row>
         </Container>
       </Col>
@@ -20,8 +21,9 @@ export default function InfoLine(props) {
         <Container>
           <Row>
             <Col style={{'paddingLeft': '0px'}}>
-              <p>
-                {props.data}</p>
+              <p style={{'color': '#565656'}}>
+                {props.data}
+              </p>
             </Col>
           </Row>
         </Container>
@@ -61,14 +63,17 @@ function GenderLine(props) {
       <Col>
         <Container>
           <Row className={'justify-content-end'}>
-            <strong>{'Gender'}</strong>
+            <span style={{'color': '#565656',
+                          'fontWeight': '600'}}>
+              {'Gender'}
+            </span>
           </Row>
         </Container>
       </Col>
       <Col>
         <Container>
           <Row>
-            <Col style={{'paddingLeft': '0px'}}>
+            <Col style={{'paddingLeft': '0px', 'color': '#565656'}}>
               {dataDisplay}
             </Col>
           </Row>

@@ -49,7 +49,8 @@ class SingleItemStock extends React.Component {
           <Col>
             <Container>
               <Row className={'justify-content-end'}>
-                <strong>Stock</strong>
+              <span style={{'color': '#565656',
+                          'fontWeight': '600'}}>Stock</span>
               </Row>
             </Container>
           </Col>
