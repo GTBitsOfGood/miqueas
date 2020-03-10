@@ -8,6 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ActiveLink from './ActiveLink';
+import { addTransaction } from '../actions/Transactions.js';
 
 class ReviewItemModel {
   constructor(name, gender, quantity, attributes) {
@@ -18,22 +19,24 @@ class ReviewItemModel {
   }
 }
 
-const testItem = new ReviewItemModel('Double Lined Notebook [School]',
-    'female', 13, []);
-const testItem2 = new ReviewItemModel('Foam Paper [School]',
-    'female', 20, []);
-const testItem3 = new ReviewItemModel('Foam Paper [School]',
-    'female', 25, ['orange', 'downstairs']);
-const testItem4 = new ReviewItemModel('Graph Notebook [School]',
-    'male', -5, ['normal', 'child1']);
 
 class ReviewForm extends React.Component {
 
   constructor(props) {
     super(props);
+    let items = [];
+
+    let transItems = this.props.transactionState.transactionItems;
+    for(var i = 0; i < transItems.length; i++) {
+      items.push(new ReviewItemModel(transItems[i].item.name, transItems[i].item.gender,
+        transItems[i].quantityChanged, [transItems[i].item.size, transItems[i].item.typeColor]));
+    }
+
     this.state = {
       showPopup: false,
+      items: items
     };
+    
   }
 
   hidePopup() {
@@ -48,7 +51,24 @@ class ReviewForm extends React.Component {
     });
   }
 
+  handleSubmit() {
+    // console.log(this.props.transactionState);
+    addTransaction(this.props.transactionState);
+    this.props.setTransactionState({
+      transactionItems: [],
+      transaction_date: new Date(),
+      staff_name: "Staff 1"
+    })
+  }
+
   render() {
+    let reviewItems = []
+
+    for (let i = 0; i < this.state.items.length; i++) {
+      reviewItems.push(<ReviewItem item={this.state.items[i]} onDelete={() => {
+        this.deleteItem(0);
+      }} />)
+    }
     return (
       <>
         <Popup show={this.state.showPopup} onHide={() => {
@@ -65,20 +85,10 @@ class ReviewForm extends React.Component {
         <Container className={'item-block'}>
           <br/>
           <h3 className = {'mini-header'}>Added Items</h3>
-          <ReviewItem item={testItem} onDelete={() => {
-            this.deleteItem(0);
-          }}/>
-          <ReviewItem item={testItem2} onDelete={() => {
-            this.deleteItem(1);
-          }}/>
-          <ReviewItem item={testItem3} onDelete={() => {
-            this.deleteItem(2);
-          }}/>
-          <h3 className = {'mini-header'}>Removed Items</h3>
-          <ReviewItem item={testItem4} onDelete={() => {
-            this.deleteItem(3);
-          }}/>
-          <NavButtons/>
+          {reviewItems}
+          <NavButtons
+            handleSubmit = {() => this.handleSubmit()}
+          />
         </Container>
       </>
     );
@@ -231,6 +241,7 @@ class NavButtons extends React.Component {
                 <Row className = 'justify-content-center'>
                   <ActiveLink href='/log'>
                     <Button
+                      onClick={this.props.handleSubmit} 
                       variant={'secondary'} block
                       style={{'height': '54px',
                         'fontWeight': 'bold',

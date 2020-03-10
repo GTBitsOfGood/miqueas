@@ -7,11 +7,13 @@ import VerticalRadio from './VerticalRadio';
 import QuantitySelector from './QuantitySelector';
 import LocationSelector from './LocationSelector';
 import NavButtons from './NavButtons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      category: this.props.category,
       itemVariation: {},
       gender: 'none',
       quantity: 0,
@@ -20,6 +22,7 @@ export default class TransactionForm extends React.Component {
       isLoading: true,
       location: 'none',
       name: this.props.name,
+      recipient: 'none',
       formCompleted: false,
     };
   }
@@ -98,10 +101,10 @@ export default class TransactionForm extends React.Component {
     let gender = 'none';
     switch (i) {
       case 0:
-        gender = 'boy';
+        gender = 'male';
         break;
       case 1:
-        gender = 'girl';
+        gender = 'female';
         break;
       case 2:
         gender = 'unisex';
@@ -143,6 +146,28 @@ export default class TransactionForm extends React.Component {
       location: newLocation,
     });
     this.validateForm('location');
+  }
+
+  //This updates the overall transactionState with form properties
+  handleAddItem() {
+    let transactionState = this.props.transactionState;
+    let items = transactionState.transactionItems;
+    items[items.length - 1].item = {
+      name: this.state.name,
+      category: this.state.category,
+      gender: this.state.gender,
+      typeColor: this.state.typeColor,
+      size: this.state.size,
+      location: this.state.location,
+    }
+    items[items.length - 1].quantityChanged = this.state.quantity;
+    items[items.length - 1].recipient = this.state.recipient;
+    this.props.setTransactionState(transactionState);
+  }
+
+  handleSameItem() {
+    this.handleAddItem();
+    //Todo: Do something to clear the form
   }
 
   render() {
@@ -200,7 +225,11 @@ export default class TransactionForm extends React.Component {
           this.changeLocation(name);
         }}/>
         <hr/>
-        <NavButtons disabled = {!this.state.formCompleted}/>
+        <NavButtons 
+          handleSameItem = {() => this.handleSameItem()}
+          handleAddItem = {() => this.handleAddItem()}
+          disabled = {!this.state.formCompleted}
+        />
       </div>
     );
   }

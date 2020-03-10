@@ -13,6 +13,7 @@ export default {
     addItemVariation: '/api/addItemVariation',
     updateItemVariation: '/api/updateItemVariation',
     getItemVariation: '/api/getItemVariation',
+    addTransaction: '/api/addTransaction'
   },
   pages: {
     Index: '/',

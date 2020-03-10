@@ -4,7 +4,7 @@ import LocationToggle from '../frontend/components/LocationToggle.js';
 import '../public/school_inventory.css';
 import translate from '../frontend/components/translate.js';
 import React from 'react';
-import {get1000Items} from '../frontend/actions/items.js';
+import {get1000Items} from '../frontend/actions/Items.js';
 
 const sortItems = items => {
   items = items.sort(function(a, b) {
