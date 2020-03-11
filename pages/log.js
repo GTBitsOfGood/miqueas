@@ -1,10 +1,12 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
 import Router from 'next/router'
-import { ToggleButtonGroup, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
+import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import '../public/log.css';
 import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js'
+import { get1000Items } from '../frontend/actions/items.js'
+import Table from '../frontend/components/Table.js'
 
 class Log extends React.Component {
   constructor(props) {
@@ -16,25 +18,28 @@ class Log extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   async componentDidMount() {
-    let itemArray = [];
-    try {
-      const transactions = await getTransactions();
-      console.log(JSON.stringify(transactions));
-      for (let transaction of transactions) {
-        console.log('transaction: ' + transaction)
-        console.log('transactionItems: ' + transaction.items)
-         for (let item of transaction.items) {
-           console.log('item: ' + item);
-           const result = await getTransactionItem(item);
-           console.log('result: ' + result);
-           itemArray.push(result);
-         }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    this.setState({allItems: itemArray})
-    console.log(itemArray);
+    //this is going to be a fake log screen just for demo purposes:
+    const tempItems = await get1000Items(); 
+    this.setState({allItems: tempItems});
+    // let itemArray = [];
+    // try {
+    //   const transactions = await getTransactions();
+    //   console.log(JSON.stringify(transactions));
+    //   for (let transaction of transactions) {
+    //     console.log('transaction: ' + transaction)
+    //     console.log('transactionItems: ' + transaction.items)
+    //      for (let item of transaction.items) {
+    //        console.log('item: ' + item);
+    //        const result = await getTransactionItem(item);
+    //        console.log('result: ' + result);
+    //        itemArray.push(result);
+    //      }
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
+    // this.setState({allItems: itemArray})
+    // console.log(itemArray);
   }
 
   handleChange(value) {
@@ -54,7 +59,6 @@ class Log extends React.Component {
     return (
       <div className="Clean">
         <h1>Log</h1>
-        <Row></Row>
         <ToggleButtonGroup className="Location" name="Radio" value={this.state.value} onChange={this.handleChange}>
           <ToggleButton
             className={this.state.isAll ? 'selected': 'o1'} value={1}>all</ToggleButton>
@@ -65,19 +69,13 @@ class Log extends React.Component {
           {this.state.isAdmin && <ToggleButton
             className={this.state.isCloset ? 'selected':'o1'} value={4}>closet</ToggleButton>}
         </ToggleButtonGroup>
+        <div style={{height: '70vh', overflowY:'auto'}}>
+        <Table items={this.state.allItems} headerColumns={['name', 'type', 'size', 'stock']}></Table>
+        </div>
+
         <div className="Footer"><NavigationBar/></div>
       </div>
     );
   }
-}
-export const Row = ({transItem, props}) => {
-  const onRowPressed = () => {
-    Router.push('/[tid]', '/'+transItem._id)
-  }
-  return (
-    <div onClick={onRowPressed}>
-      Hi
-    </div>
-  )
 }
 export default Log;
