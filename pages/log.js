@@ -5,7 +5,6 @@ import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import '../public/log.css';
 import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js'
-import { get1000Items } from '../frontend/actions/items.js'
 import Table from '../frontend/components/Table.js'
 
 class Log extends React.Component {
@@ -18,29 +17,41 @@ class Log extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   async componentDidMount() {
-    //this is going to be a fake log screen just for demo purposes:
-    const tempItems = await get1000Items(); 
-    this.setState({allItems: tempItems});
-    // let itemArray = [];
-    // try {
-    //   const transactions = await getTransactions();
-    //   console.log(JSON.stringify(transactions));
-    //   for (let transaction of transactions) {
-    //     console.log('transaction: ' + transaction)
-    //     console.log('transactionItems: ' + transaction.items)
-    //      for (let item of transaction.items) {
-    //        console.log('item: ' + item);
-    //        const result = await getTransactionItem(item);
-    //        console.log('result: ' + result);
-    //        itemArray.push(result);
-    //      }
-    //   }
-    // } catch (e) {
-    //   console.error(e);
-    // }
-    // this.setState({allItems: itemArray})
-    // console.log(itemArray);
+    let transactionArray = [];
+    try {
+      let transactions = await getTransactions();
+      for (let transaction of transactions) {
+        let finalItems = transaction.transactionItems.map((id) => {
+          return { 
+            date: transaction.transaction_date,
+            staff: transaction.staff_name,
+            ...getTransactionItem(id),
+            a:1
+          }
+        })
+        transactionArray.push(await Promise.all(finalItems));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    Promise.all(transactionArray).then(values => {
+      this.setState({allItems: values})
+      console.log("values: ",values);
+    })
+    console.log("transaction: ",transactionArray)
   }
+
+  // getTransactionItem() {
+  //   return new Promise((resolve, reject) =>{
+  //     getTransactionItem.subscribe(function(result) {
+  //       if (result['err']) {
+  //         reject(result['err']);
+  //       } else {
+  //         resolve(result);
+  //       }
+  //     }) 
+  //   })
+  // } 
 
   handleChange(value) {
     this.setState({selectedValue: value});
