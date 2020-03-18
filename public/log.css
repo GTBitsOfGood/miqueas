@@ -37,3 +37,4 @@ input[type="radio"] {
 .btn-primary:not(:disabled):not(.disabled).active{
     background-color: #51ADA9;
 }
+

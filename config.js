@@ -7,6 +7,7 @@ export default {
     get1000Items: '/api/get1000Items',
     addItem: '/api/addItem',
     getItem: '/api/getItem',
+    getItemName: '/api/getItemName',
     getTransactions: '/api/getTransactions',
     getTransactionItem: '/api/getTransactionItem',
     login: '/api/login',
