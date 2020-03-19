@@ -1,7 +1,7 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
 import Router from 'next/router'
-import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import '../public/log.css';
 import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js'
@@ -13,13 +13,13 @@ const getItem = (id, staff, date) => {
     getTransactionItem(id).then(function (response) {
       response.staff = staff;
       response.date = date;
+      response.transactionId = id;
       resolve(response);
     }, function (error) {
       reject(error);
     })
   })
 }
-
 const getName = (transactionItem) => {
   return new Promise((resolve, reject) => {
     getItemName(transactionItem.item).then(function (response) {
@@ -45,26 +45,19 @@ class Log extends React.Component {
     try {
       let transactions = await getTransactions();
       for (let transaction of transactions) {
-        let items = transaction.transactionItems.map((id) => {
-          return getItem(id, transaction.staff_name, transaction.transaction_date)
+        transaction.transactionItems.map((id) => {
+          transactionArray.push(getItem(id, transaction.staff_name, transaction.transaction_date))
         })
-        transactionArray.push(await Promise.all(items));
       }
     } catch (e) {
       console.error(e);
     }
     Promise.all(transactionArray).then(values => {
       let promiseArray = [];
-      for (let itemSet of values) {
-        //Some transactions don't have items apparently
-        if (itemSet.length != 0) {
-          for (let item of itemSet) {
-            promiseArray.push(getName(item));
-          }
-        }
+      for (let item of values) {
+        promiseArray.push(getName(item));
       }
       Promise.all(promiseArray).then(results => {
-        // console.log("FINAL RESULTS: ", results);
         for (let finalItem of results) {
           this.setState({ allItems: [...this.state.allItems, finalItem] }) 
           switch(finalItem.location) {
@@ -113,10 +106,14 @@ class Log extends React.Component {
           {this.state.isAdmin && <ToggleButton
             className={this.state.isCloset ? 'selected':'o1'} value={4}>closet</ToggleButton>}
         </ToggleButtonGroup>
-        <div style={{height: '70vh', overflowY:'auto'}}>
-        {!this.state.isLoading && <LogTable items={this.state.currentItems} headerColumns={['name', 'type', 'size', 'stock']}></LogTable>}
+        <table><thead><tr><td width="10%"/><td>Name</td><td>Staff</td></tr></thead></table>
+        <div style={{height: '65vh', overflowY:'auto'}}>
+        {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
+          <table  bordercollapse='collapse'><tbody>
+            {!this.state.isLoading && 
+              <LogTable items={this.state.currentItems} headerColumns={['name', 'type', 'size', 'stock']}></LogTable>}
+          </tbody></table>
         </div>
-
         <div className="Footer"><NavigationBar/></div>
       </div>
     );

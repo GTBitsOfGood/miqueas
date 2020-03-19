@@ -11,20 +11,20 @@
 .Location{
     text-align: center;
 }
-.o1{
+table{
+    width: 100%;
+}
+.o1, .selected{
     border-radius: 3px;
     background-color:white;
     border-style:solid;
     border-width: 1px;
+    width: 10vw;
     border-color: #51ADA9;
     color: #51ADA9;
 }
 .selected{
     background-color:#51ADA9;
-    border-radius: 3px;
-    border-style:solid;
-    border-width: 1px;
-    border-color: #51ADA9;
     color:white;
 }
 input[type="radio"] {
@@ -37,4 +37,7 @@ input[type="radio"] {
 .btn-primary:not(:disabled):not(.disabled).active{
     background-color: #51ADA9;
 }
-
+.spinner{
+    margin-top: 20vh;
+    color: grey;
+}
