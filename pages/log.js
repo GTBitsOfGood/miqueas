@@ -1,12 +1,12 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
-import Router from 'next/router'
+import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
-import '../public/log.css';
 import translate from '../frontend/components/translate.js';
-import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js'
-import { getItemName } from '../frontend/actions/items.js'
-import LogTable from '../frontend/components/LogTable.js'
+import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js';
+import { getItemName } from '../frontend/actions/items.js';
+import LogTable from '../frontend/components/LogTable.js';
+import '../public/log.css';
 
 const getItem = (id, staff, date) => {
   return new Promise((resolve, reject) => {
@@ -106,12 +106,13 @@ class Log extends React.Component {
           {this.state.isAdmin && <ToggleButton
             className={this.state.isCloset ? 'selected':'o1'} value={4}>closet</ToggleButton>}
         </ToggleButtonGroup>
-        <table><thead><tr><td width="10%"/><td>Name</td><td>Staff</td></tr></thead></table>
-        <div style={{height: '65vh', overflowY:'auto'}}>
+        <table><thead><tr fontWeight='bold'>
+          <td className="h3"/><td className='h1'>Name</td><td className='h1'>Staff</td><td className='h1'>Child</td><td className='h1'>Quantity Changed</td><td className='h2'></td>
+        </tr></thead></table>
+        <div style={{height: '63vh', overflowY:'auto'}}>
         {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
-          <table  bordercollapse='collapse'><tbody>
-            {!this.state.isLoading && 
-              <LogTable items={this.state.currentItems} headerColumns={['name', 'type', 'size', 'stock']}></LogTable>}
+          <table bordercollapse='collapse'><tbody>
+            {!this.state.isLoading && <LogTable items={this.state.currentItems}></LogTable>}
           </tbody></table>
         </div>
         <div className="Footer"><NavigationBar/></div>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -6,7 +5,7 @@ import '../../public/logtable.css';
 
 const createSection = (itemGroup, date) => {
     var section = []
-    section.push(<tr key={date} className='section'><th colSpan={7}>{date}</th></tr>)
+    section.push(<tr key={date}><th colSpan={7}>{date}</th></tr>)
     for (let item of itemGroup) {
         section.push(
             <tr key={item.transactionId}>
@@ -25,6 +24,7 @@ const createSection = (itemGroup, date) => {
 const LogTable = (props) => {
     let dataTable = {};
     let finalTable = [];
+    let sortTable = [];
     for (let item of props.items) {
         let year = item.date.substring(0,4);
         let month = item.date.substring(5,7);
@@ -32,11 +32,14 @@ const LogTable = (props) => {
         item.visibleDate = month + "/" + day + "/" + year;
         if (dataTable[item.visibleDate] == null) {
             dataTable[item.visibleDate] = [];
+            sortTable.push(year + month + date);
         }
         dataTable[item.visibleDate].push(item);
     }
-    for (let dateSet in dataTable) {
-        finalTable = finalTable.concat(createSection(dataTable[dateSet], dateSet))
+    sortTable.sort();
+    for (let i = sortTable.length-1; i>=0; i--) {
+        let date = sortTable[i].substring(4,6) + "/" + sortTable[i].substring(6,8) + "/" + sortTable[i].substring(0,4);
+        finalTable = finalTable.concat(createSection(dataTable[date], date))
     }
     return(finalTable);
 }
