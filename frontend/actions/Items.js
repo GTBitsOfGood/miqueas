@@ -93,3 +93,27 @@ export const getItemVariation = async (name) => fetch(
     }
     return json.payload;
   });
+
+export const updateItemStock = async (item) => fetch(
+    config.baseUrl + config.apis.updateStock, {
+        method: 'post',
+        mode: 'same-origin',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            item,
+        }),
+    },
+)
+    .then((response) => response.json())
+    .then((json) => {
+        if (json == null) {
+            throw new Error('Could not connect to API!');
+        } else if (!json.success) {
+            throw new Error(json.message);
+        }
+
+        return json.payload;
+    });
