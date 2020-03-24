@@ -33,7 +33,7 @@ class SignUp extends React.Component {
   submitForm = async (event) => {
     event.preventDefault();
 
-    const { name, email, password, confirmpass, validated } = this.state;
+    const { name, email, password } = this.state;
 
     const form = event.currentTarget;
     if (form.checkValidity() === false || !this.doPasswordsMatch()
@@ -141,7 +141,7 @@ class SignUp extends React.Component {
             </Row>
             <Row className={'justify-content-center'}>
               <p style={{'marginTop':'20px', 'fontSize': '13px', 'color':'#51ADA9'}}>
-                Already have an account? <a href={"/"}>Sign in</a>
+                Already have an account? <a href={"/signin"}>Sign in</a>
               </p>
             </Row>
           </Container>
