@@ -1,5 +1,5 @@
 export default {
-  baseUrl:'http://localhost:3000',
+  baseUrl: 'http://localhost:3000',
   dbUrl: 'mongodb+srv://miqueas-dev:' + process.env.DB_PASS + '@cluster0-9lk2k.mongodb.net/test?retryWrites=true&w=majority',
   dbName: 'miqueas',
   apis: {
@@ -13,7 +13,8 @@ export default {
     addItemVariation: '/api/addItemVariation',
     updateItemVariation: '/api/updateItemVariation',
     getItemVariation: '/api/getItemVariation',
-    addTransaction: '/api/addTransaction'
+    addTransaction: '/api/addTransaction',
+    signUp: '/api/signUp',
   },
   pages: {
     Index: '/',
