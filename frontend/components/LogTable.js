@@ -32,7 +32,7 @@ const LogTable = (props) => {
         item.visibleDate = month + "/" + day + "/" + year;
         if (dataTable[item.visibleDate] == null) {
             dataTable[item.visibleDate] = [];
-            sortTable.push(year + month + date);
+            sortTable.push(year + month + day);
         }
         dataTable[item.visibleDate].push(item);
     }
