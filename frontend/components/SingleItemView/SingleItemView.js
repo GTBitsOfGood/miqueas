@@ -5,6 +5,7 @@ import SingleItemStock from './SingleItemStock';
 import SingleItemInfoLine from './SingleItemInfo';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import { updateItemStock } from '../../actions/Items.js'
 
 class SingleItemView extends React.Component {
 
@@ -38,6 +39,7 @@ class SingleItemView extends React.Component {
       stock: this.state.tempStock,
       editMode: false,
     });
+    updateItemStock(this.state) //not sure if this is correct
   }
 
   render() {
