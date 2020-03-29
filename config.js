@@ -5,6 +5,7 @@ export default {
   dbUrl: 'mongodb+srv://miqueas-dev:' + process.env.DB_PASS + '@cluster0-9lk2k.mongodb.net/test?retryWrites=true&w=majority',
   dbName: 'miqueas',
   apis: {
+    getCategories: '/api/getItems',
     getItems: '/api/getItems',
     get1000Items: '/api/get1000Items',
     addItem: '/api/addItem',
