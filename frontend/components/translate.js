@@ -2,7 +2,8 @@ import React from 'react';
 
 let englishToSpanish = {
   "Profile": "Perfil",
-  "Inventory": "Inventario"
+  "Inventory": "Inventario",
+  "Category": "Categoría"
 }
 
 /**
@@ -12,8 +13,7 @@ let englishToSpanish = {
  * @return the phrase in the desired language
  */
 function translate(phrase, language) {
-  console.log(language.language)
-  if (language.language == "English") {
+  if (language == "English") {
     return phrase;
   } else {
     console.log(englishToSpanish)

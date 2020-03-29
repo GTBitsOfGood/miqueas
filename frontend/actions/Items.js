@@ -18,13 +18,13 @@ export const getItems = async () => fetch(
     return json.payload;
   });
 
-  export const get1000Items = async () => fetch(
+export const get1000Items = async () => fetch(
     config.baseUrl + config.apis.get1000Items, {
       method: 'get',
       mode: 'same-origin',
       credentials: 'include',
     },
-  )
+)
     .then((response) => response.json())
     .then((json) => {
       if (json == null) {
@@ -100,3 +100,19 @@ export const getItem = async (urlString) => fetch(
   
       return json.payload;
     });
+export const getItemVariation = async (name) => fetch(
+  config.baseUrl + config.apis.getItemVariation + '?name=' + name, {
+    method: 'get',
+    mode: 'same-origin',
+    credentials: 'include',
+  },
+)
+  .then((response) => response.json())
+  .then((json) => {
+    if (json == null) {
+      throw new Error('Could not connect to API!');
+    } else if (!json.success) {
+      throw new Error(json.message);
+    }
+    return json.payload;
+  });

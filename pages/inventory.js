@@ -1,10 +1,10 @@
-import InventoryHeader from '../frontend/components/InventoryHeader'
 import NavigationBar from '../frontend/components/NavigationBar';
+import InventoryHeader from '../frontend/components/InventoryHeader';
 import LocationToggle from '../frontend/components/LocationToggle.js';
 import '../public/school_inventory.css';
 import translate from '../frontend/components/translate.js';
 import React from 'react';
-import {get1000Items} from '../frontend/actions/items.js';
+import {get1000Items} from '../frontend/actions/Items.js';
 
 const sortItems = items => {
   items = items.sort(function(a, b) {
@@ -37,7 +37,7 @@ class Inventory extends React.Component {
     return (
       <div className="Clean">
         <InventoryHeader items={this.state.allItems} />
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={4}/></div>
       </div>
     );
   }

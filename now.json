@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "env" : {
+    "DB_PASS": "@miqueas_db_pass",
+    "BASE_URL": "@miqueas_base_url"
+  },
   "routes": [
     {
       "src": "^/service-worker.js$",

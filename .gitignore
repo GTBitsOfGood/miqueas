@@ -27,3 +27,4 @@ dist
 #VSCode
 .vscode
 .vscode/*
+.now

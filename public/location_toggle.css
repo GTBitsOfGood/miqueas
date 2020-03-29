@@ -1,0 +1,24 @@
+.btn-not {
+  color: teal !important;
+  margin: -4px;
+  background-color: #fff !important;
+  border-color: teal !important;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 0px;
+}
+.btn-not:hover {
+  color: #fff !important;
+  background-color: teal !important;
+}
+.btn-select {
+  color: #fff !important;
+  margin: -4px;
+  background-color: teal !important;
+  border-color: teal !important;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 0px;
+}

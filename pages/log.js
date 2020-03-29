@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js';
-import { getItemName } from '../frontend/actions/items.js';
+import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import '../public/log.css';
 
@@ -115,9 +115,10 @@ class Log extends React.Component {
             {!this.state.isLoading && <LogTable items={this.state.currentItems}></LogTable>}
           </tbody></table>
         </div>
-        <div className="Footer"><NavigationBar/></div>
+        <div className="Footer"><NavigationBar selector={3} /></div>
       </div>
     );
   }
 }
+
 export default Log;

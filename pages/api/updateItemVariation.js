@@ -1,11 +1,10 @@
-import { addTransaction } from '../../server/actions/transactions';
+import { updateItemVariation } from '../../server/actions/itemVariation';
 
-// @route   POST api/addItem
-// @desc    Create A Transaction
-// @access  Public
 export default async function (req, res) {
-  const { transaction } = req.body;
-  return addTransaction(transaction)
+  console.log("body:",req.body);
+  const { itemVariation } = req.body;
+  console.log("itemVar", itemVariation);
+  return updateItemVariation(itemVariation)
     .then((result) => res.status(200).json({
       success: true,
       payload: result,

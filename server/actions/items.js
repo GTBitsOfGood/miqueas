@@ -1,5 +1,6 @@
 import mongoDB from '../index';
 import Item from '../../models/Item';
+import ItemVariation from '../../models/ItemVariation.js';
 
 export async function getItems() {
   await mongoDB();
@@ -51,4 +52,27 @@ export async function updateItemState(id, state) {
       }
       return result;
     });
+}
+
+export async function getItemVariation(name) {
+  await mongoDB();
+
+  return ItemVariation.findOne({name: name});
+}
+
+export async function getItemUpdateStock(name, category, gender, typeColor, size, location, quantityChanged) {
+  await mongoDB();
+
+  let filter = {name: name, category: category, gender:gender, typeColor: typeColor, size: size, location: location}
+  let item = await Item.findOne(filter);
+  if (item) {
+    item.stock = item.stock + quantityChanged;
+    await item.save();
+    return item;
+  } else {
+    //Change this feature later so non-admins can't create items
+    let newItem = Item.create({ name: name, category: category, gender: gender, 
+      typeColor: typeColor, size: size, location: location, stock: quantityChanged, reorder_level: 0});
+    return newItem;
+  }
 }
