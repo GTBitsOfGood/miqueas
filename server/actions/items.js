@@ -30,6 +30,12 @@ export async function deleteItem(id) {
     .then((item) => item.remove());
 }
 
+export async function getName(id) {
+  await mongoDB();
+
+  return Item.findById(id);
+}
+
 export async function updateItemState(id, state) {
   await mongoDB();
 

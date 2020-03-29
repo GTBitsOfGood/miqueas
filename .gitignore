@@ -23,4 +23,8 @@ Desktop.ini
 .idea
 dist
 .next
+
+#VSCode
+.vscode
+.vscode/*
 .now

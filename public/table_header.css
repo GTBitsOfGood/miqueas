@@ -1,9 +1,10 @@
 .rows {
     display: inline-block;
+    width: 100%;
 }
 
 .row {
-    width: 80px;
+    width: 100px;
     height: 16px;
     left: 29px;
     right: 29px;
