@@ -1,5 +1,5 @@
 import React from 'react';
-import { signUp, verifyToken } from '../frontend/actions/users';
+import { signUp, verifyToken } from '../frontend/actions/Users';
 import '../public/signup.css';
 
 class SignUp extends React.Component {

@@ -12,11 +12,19 @@ const TransactionItemSchema = new Schema({
     },
     quantityChanged: {
       type: Number,
-      required: true
+      required: true,
+      validate : {
+        validator : Number.isInteger,
+        message   : '{VALUE} is not an integer value'
+      }
     },
     expiration_date: {
       type: Number,
-      required: false
+      required: false,
+      validate : {
+        validator : Number.isInteger,
+        message   : '{VALUE} is not an integer value'
+      }
     }
 });
 
