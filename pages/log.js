@@ -3,7 +3,7 @@ import React from 'react';
 import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import translate from '../frontend/components/translate.js';
-import { getTransactions, getTransactionItem } from '../frontend/actions/transaction.js';
+import { getTransactions, getTransactionItem } from '../frontend/actions/Transaction.js';
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import '../public/log.css';
