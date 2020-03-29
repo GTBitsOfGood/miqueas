@@ -3,7 +3,7 @@ import React from 'react';
 import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import translate from '../frontend/components/translate.js';
-import { getCategories } from '../frontend/actions/items.js';
+import { getCategories } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import '../public/category.css';
 
