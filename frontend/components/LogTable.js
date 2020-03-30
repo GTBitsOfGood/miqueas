@@ -1,14 +1,19 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import Router from 'next/router';
 import '../../public/logtable.css';
+
+
 
 const createSection = (itemGroup, date) => {
     var section = []
+    console.log("itemGroup: ", itemGroup);
     section.push(<tr key={date}><th colSpan={7}>{date}</th></tr>)
     for (let item of itemGroup) {
         section.push(
-            <tr key={item.transactionId}>
+            <tr onClick={() => Router.push('/post/[tid]/[tItemId]', '/post/' + item.transactionId + '/' + item.transactionItemId)} 
+            key={item.transactionId}>
                 {item.gender=='male' && <td className='icon'><FontAwesomeIcon className='male' icon={faMale} /></td>}
                 {item.gender=='female' && <td className='icon'><FontAwesomeIcon className='female' icon={faFemale} /></td>}
                 <td width='20%'>{item.name}</td>

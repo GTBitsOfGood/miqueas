@@ -8,12 +8,13 @@ import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import '../public/log.css';
 
-const getItem = (id, staff, date) => {
+const getItem = (id, transId, staff, date) => {
   return new Promise((resolve, reject) => {
     getTransactionItem(id).then(function (response) {
       response.staff = staff;
       response.date = date;
-      response.transactionId = id;
+      response.transactionItemId = id;
+      response.transactionId = transId;
       resolve(response);
     }, function (error) {
       reject(error);
@@ -46,7 +47,7 @@ class Log extends React.Component {
       let transactions = await getTransactions();
       for (let transaction of transactions) {
         transaction.transactionItems.map((id) => {
-          transactionArray.push(getItem(id, transaction.staff_name, transaction.transaction_date))
+          transactionArray.push(getItem(id, transaction._id, transaction.staff_name, transaction.transaction_date))
         })
       }
     } catch (e) {

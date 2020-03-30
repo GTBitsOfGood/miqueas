@@ -20,8 +20,12 @@ export async function addTransaction(transaction) {
     let newTransItem = await TransactionItem.create(transItems[i]);
     transItems[i] = newTransItem._id;
   }
-  // console.log(transaction);
   return Transaction.create(transaction);
+}
+export async function getTransaction(id) {
+  await mongoDB();
+
+  return Transaction.findById(id);
 }
 
 export async function deleteTransaction(id) {
