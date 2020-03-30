@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 import config from '../../config';
+import apiRoute from './util';
 
-export const getTransactions = async () => fetch(
-  config.baseUrl + config.apis.getTransactions, {
+export const getTransactions = async (res) => fetch(
+  apiRoute(res, config.apis.getTransactions), {
     method: 'get',
     mode: 'same-origin',
     credentials: 'include',
@@ -18,8 +19,8 @@ export const getTransactions = async () => fetch(
     return json.payload;
   });
 
-export const getTransactionItem = async (id) => fetch(
-  config.baseUrl + config.apis.getTransactionItem, {
+export const getTransactionItem = async (id, res) => fetch(
+  apiRoute(res, config.apis.getTransactionItem), {
     method: 'post',
     mode: 'same-origin',
     credentials: 'include',
