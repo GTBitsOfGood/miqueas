@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 import config from '../../config';
+import apiRoute from './util';
 
-export const addItemVariation = async (itemVariation) => fetch(
-    config.baseUrl + config.apis.addItemVariation, {
+export const addItemVariation = async (itemVariation, res) => fetch(
+  apiRoute(res, config.apis.addItemVariation), {
       method: 'post',
       mode: 'same-origin',
       credentials: 'include',
@@ -25,8 +26,8 @@ export const addItemVariation = async (itemVariation) => fetch(
       return json.payload;
     });
 
-export const updateItemVariation = async (itemVariation) => fetch(
-    config.baseUrl + config.apis.updateItemVariation, {
+export const updateItemVariation = async (itemVariation, res) => fetch(
+  apiRoute(res, config.apis.updateItemVariation), {
       method: 'post',
       mode: 'same-origin',
       credentials: 'include',
@@ -49,8 +50,8 @@ export const updateItemVariation = async (itemVariation) => fetch(
       return json.payload;
     });
 
-export const getItemVariation = async (name) => fetch(
-  `${config.baseUrl}${config.apis.getItemVariation}?url=${name}`, {
+export const getItemVariation = async (name, res) => fetch(
+  apiRoute(res, config.apis.getItemVariation) + `?url=${name}`, {
     method: 'get',
     mode: 'same-origin',
     credentials: 'include',
