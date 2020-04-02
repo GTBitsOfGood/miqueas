@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {login} from '../frontend/actions/users';
 import Col from 'react-bootstrap/Col';
+import Router from 'next/router';
 
 class SignIn extends React.Component {
 
@@ -30,13 +31,8 @@ class SignIn extends React.Component {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      await login(email, password)
-        .then(async () => {
-          this.setState({
-            email: '',
-            password: '',
-          });
-        });
+      await login(email, password).then(() => Router.push('/'))
+        .catch(e => { console.log(e) });
     }
 
     this.setState({
@@ -63,7 +59,7 @@ class SignIn extends React.Component {
             }}/>
           </Row>
         </Container>
-        <Form noValidate validated={validated} onSubmit={this.submitForm}>
+        <Form noValidate validated={validated} onSubmit={(evt) => this.submitForm(evt)}>
           <Form.Label>Sign In</Form.Label>
           <Form.Group>
             <Form.Control type="email" placeholder="Email"
@@ -108,7 +104,7 @@ class SignIn extends React.Component {
               <Row className={'justify-content-center'}>
                 <p style={{'marginTop':'20px', 'fontSize': '13px', 'color':'#51ADA9'}}>
                   <a href={"/signup"} style={{'color':'#51ADA9',
-                    'text-decoration-line':'underline'}}>Sign up</a>
+                    'textDecorationLine':'underline'}}>Sign up</a>
                 </p>
               </Row>
             </Col>
@@ -116,7 +112,7 @@ class SignIn extends React.Component {
               <Row className={'justify-content-center'}>
                 <p style={{'marginTop':'20px', 'fontSize': '13px', 'color':'#51ADA9'}}>
                   <a href={"/"} style={{'color':'#51ADA9',
-                  'text-decoration-line':'underline'}}>Forgot Password?</a>
+                  'textDecorationLine':'underline'}}>Forgot Password?</a>
                 </p>
               </Row>
             </Col>

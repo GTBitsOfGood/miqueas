@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row'
+import Router from 'next/router';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -41,15 +42,8 @@ class SignUp extends React.Component {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      await signUp(name, email, password)
-        .then(async () => {
-          this.setState({
-            name: '',
-            email: '',
-            password: '',
-            confirmpass: '',
-          });
-        });
+      await signUp(name, email, password) .then(() => Router.push('/signin'))
+        .catch(e => { console.log(e) })
     }
 
     this.setState({
@@ -151,5 +145,5 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp
+export default SignUp;
 
