@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-unfetch';
-
+import apiRoute from './util';
 import config from '../../config';
 
 
-export const login = async (email, password) => fetch(
-  config.baseUrl + config.apis.login, {
+export const login = async (email, password, res) => fetch(
+  apiRoute(res, config.apis.login), {
     method: 'post',
     mode: 'same-origin',
     credentials: 'same-origin',
@@ -30,8 +30,8 @@ export const login = async (email, password) => fetch(
     return json.payload;
   });
 
-export const signUp = async (name, email, password) => fetch(
-  config.baseUrl + config.apis.signUp, {
+export const signUp = async (name, email, password, res) => fetch(
+  apiRoute(res, config.apis.signUp), {
     method: 'post',
     mode: 'same-origin',
     credentials: 'include',
@@ -58,8 +58,8 @@ export const signUp = async (name, email, password) => fetch(
     return json.payload;
   });
 
-export const verifyToken = async (token) => fetch(
-  config.baseUrl + config.apis.verifyToken, {
+export const verifyToken = async (token, res) => fetch(
+  apiRoute(res, config.apis.verifyToken), {
     method: 'post',
     mode: 'same-origin',
     credentials: 'include',

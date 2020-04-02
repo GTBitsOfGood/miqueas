@@ -1,11 +1,10 @@
-import { addItem } from '../../server/actions/items';
+import { getTransactions } from '../../server/actions/transactions';
 
-// @route   POST api/addItem
-// @desc    Create An Item
+// @route   POST api/getTransaction
+// @desc    Gets All Transactions
 // @access  Public
 export default async function (req, res) {
-  const { item } = req.body;
-  return addItem(item)
+  return getTransactions()
     .then((result) => res.status(201).json({
       success: true,
       payload: result,

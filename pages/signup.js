@@ -1,5 +1,5 @@
 import React from 'react';
-import { signUp, verifyToken } from '../frontend/actions/users';
+import { signUp, verifyToken } from '../frontend/actions/Users';
 import '../public/signup.css';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';

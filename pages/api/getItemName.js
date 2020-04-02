@@ -1,11 +1,11 @@
-import { addItem } from '../../server/actions/items';
+import { getName } from '../../server/actions/items';
 
-// @route   POST api/addItem
-// @desc    Create An Item
+// @route   POST api/getItemName
+// @desc    Gets An Item's Name based on id
 // @access  Public
 export default async function (req, res) {
-  const { item } = req.body;
-  return addItem(item)
+    const {id} = req.body;
+  return getName(id)
     .then((result) => res.status(201).json({
       success: true,
       payload: result,
