@@ -1,45 +1,111 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import InventoryHeader from '../frontend/components/InventoryHeader';
-import LocationToggle from '../frontend/components/LocationToggle.js';
-import '../public/school_inventory.css';
-import translate from '../frontend/components/translate.js';
 import React from 'react';
-import {get1000Items} from '../frontend/actions/Items.js';
+import Router from 'next/router';
+import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import translate from '../frontend/components/translate.js';
+import { getCategories } from '../frontend/actions/Items.js';
+import CategoryList from '../frontend/components/CategoryList.js';
+import CategoryItems from '../frontend/components/CategoryItems.js';
+import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
+import '../public/category.css';
 
-const sortItems = items => {
-  items = items.sort(function(a, b) {
-    return a.title <= b.title ? -1 : 1;
-  });
-
-  return items;
-};
-
-class Inventory extends React.Component {
+class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allItems: [],
-      isLoading: true,
-    };
+      selectedValue: '1', isLoading: true, isSchool: true, isOther: false, data: [], categories: [],
+      isLogTable: true, isCategorySelected: false, isItemSelected: false, selectedCategory: null, backButton: false
+    }
+    this.handleChange = this.handleChange.bind(this);
   }
   async componentDidMount() {
-    const allItems = await get1000Items();
-    this.setState({
-      allItems: sortItems(allItems),
-      isLoading: false
-    });
-
+    let dataTable = {}
+    let categories = []
+    try {
+      let items = await getCategories();
+      for (let item of items) {
+        if (dataTable[item.category] == null) {
+          dataTable[item.category] = [];
+          categories.push(item.category);
+        }
+        dataTable[item.category].push(item);
+      }
+      this.setState({ isLoading: false, data: dataTable, categories: categories });
+    } catch (e) {
+      console.error(e);
+    }
   }
+
+  handleChange(value) {
+    this.setState({ selectedValue: value });
+    switch (value) {
+      case 1:
+        this.setState({ isSchool: true, isOther: false }); break;
+      case 2:
+        this.setState({ isSchool: false, isOther: true }); break;
+    }
+  }
+  selectCategory = (category) => {
+    this.setState({ isLogTable: false, isCategorySelected: true, selectedCategory: category, backButton: true });
+  }
+
+  selectItem = (item) => {
+    this.setState({ isCategorySelected: false, isItemSelected: true, selectedItem: item })
+  }
+  goBack() {
+    if (this.state.isItemSelected) {
+      this.setState({ isCategorySelected: true, isItemSelected: false });
+    } else if (this.state.isCategorySelected) {
+      this.setState({ isLogTable: true, isCategorySelected: false, backButton: false });
+    } else {
+      //It should never reach this else condition but if it does, re-render the component
+      this.forceUpdate();
+    }
+  }
+
   render() {
-    ///This can eventually be some loading icon but for now its just an empty div
-    if (this.state.isLoading) return <div />;
     return (
-      <div className="Clean">
-        <InventoryHeader items={this.state.allItems} />
-        <div className="Footer"><NavigationBar selector={4}/></div>
+      <div>
+        {this.state.backButton && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
+        <div className="clean">
+          {this.state.isLogTable && <div>
+            <h1>Log</h1>
+            <ToggleButtonGroup className="location" name="Radio" value={this.state.value} onChange={this.handleChange}>
+              <ToggleButton
+                className={this.state.isSchool ? 'selected' : 'o1'} value={1}>school</ToggleButton>
+              <ToggleButton
+                className={this.state.isOther ? 'selected' : 'o1'} value={2}>other</ToggleButton>
+            </ToggleButtonGroup>
+
+            <div style={{ height: '63vh', overflowY: 'auto' }}>
+              {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
+              <table bordercollapse='collapse'><tbody>
+                <tr><th colSpan={3}>Category</th></tr>
+                {!this.state.isLoading && <CategoryList items={this.state.data} categories={this.state.categories} callback={this.selectCategory} />}
+              </tbody></table>
+            </div>
+          </div>}
+          {this.state.isCategorySelected && <div>
+              <h3>{this.state.selectedCategory}</h3>
+              <div style={{ height: '63vh', overflowY: 'auto' }}>
+             <CategoryItems items={this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
+            </div>
+            </div>}
+            {this.state.isItemSelected && <div>
+              <InventoryItem item={this.state.selectedItem}/>
+                <link
+                  rel="stylesheet"
+                  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                  crossOrigin="anonymous"
+                />
+            </div>}
+          <div className="Footer"><NavigationBar /></div>
+        </div>
       </div>
     );
   }
 }
-
-export default Inventory 
+export default Category;
