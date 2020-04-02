@@ -28,7 +28,6 @@ class Inventory extends React.Component {
       allItems: sortItems(allItems),
       isLoading: false
     });
-    console.log(allItems);
 
   }
   render() {

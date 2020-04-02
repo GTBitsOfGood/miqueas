@@ -8,6 +8,7 @@ import translate from '../frontend/components/translate.js';
 import { getCategories } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import CategoryItems from '../frontend/components/CategoryItems.js';
+import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
 import '../public/category.css';
 
 class Category extends React.Component {
@@ -32,7 +33,6 @@ class Category extends React.Component {
         dataTable[item.category].push(item);
       }
       this.setState({ isLoading: false, data: dataTable, categories: categories });
-      console.log(dataTable);
     } catch (e) {
       console.error(e);
     }
@@ -92,6 +92,15 @@ class Category extends React.Component {
               <div style={{ height: '63vh', overflowY: 'auto' }}>
              <CategoryItems items={this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
             </div>
+            </div>}
+            {this.state.isItemSelected && <div>
+              <InventoryItem item={this.state.selectedItem}/>
+                <link
+                  rel="stylesheet"
+                  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                  crossOrigin="anonymous"
+                />
             </div>}
           <div className="Footer"><NavigationBar /></div>
         </div>

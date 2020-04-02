@@ -6,8 +6,7 @@ import '../../public/categoryitems.css';
 const addNameGroup = (props, items, name) => {
     var femaleCount = 0; var maleCount = 0; 
     var femaleGroup = []; var maleGroup = []; var otherGroup = [];
-    var section = []
-    console.log(items);
+    var section = [];
     for (let item of items) {
         if (item.gender == 'female') {
             femaleCount++;
@@ -31,7 +30,7 @@ const addNameGroup = (props, items, name) => {
 
     for (let item of itemGroup) {
         section.push(
-        <tr onClick={()=> props.callback(item.name)} key={item._id}>
+        <tr onClick={()=> props.callback(item)} key={item._id}>
             {item.gender=='male' && item.isFirst && <td rowSpan={maleCount} className='icon'><FontAwesomeIcon className='male' icon={faMale} /></td>}
             {item.gender=='female' && item.isFirst && <td rowSpan={femaleCount} className='icon'><FontAwesomeIcon className='female' icon={faFemale} /></td>}
             {item.gender==null && <td></td>}
