@@ -11,7 +11,7 @@ import CategoryItems from '../frontend/components/CategoryItems.js';
 import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
 import '../public/category.css';
 
-class Category extends React.Component {
+class Inventory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,4 +108,4 @@ class Category extends React.Component {
     );
   }
 }
-export default Category;
+export default Inventory;
