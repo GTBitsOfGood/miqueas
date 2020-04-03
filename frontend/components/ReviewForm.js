@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ActiveLink from './ActiveLink';
-import { addTransaction } from '../actions/Transactions.js';
+import {addTransaction} from '../actions/Transactions.js';
 
 class ReviewItemModel {
   constructor(name, gender, quantity, attributes) {
@@ -21,58 +21,78 @@ class ReviewItemModel {
 
 
 class ReviewForm extends React.Component {
-
   constructor(props) {
     super(props);
-    let items = [];
+    const items = [];
 
-    let transItems = this.props.transactionState.transactionItems;
-    for(var i = 0; i < transItems.length; i++) {
+    const transItems = this.props.transactionState.transactionItems;
+    for (let i = 0; i < transItems.length; i++) {
       items.push(new ReviewItemModel(transItems[i].item.name, transItems[i].item.gender,
-        transItems[i].quantityChanged, [transItems[i].item.size, transItems[i].item.typeColor]));
+          transItems[i].quantityChanged, [transItems[i].item.size, transItems[i].item.typeColor]));
     }
 
     this.state = {
       showPopup: false,
-      items: items
+      items: items,
+      deleteQueued: -1,
+      transactionState: this.props.transactionState,
     };
-    
   }
 
   hidePopup() {
     this.setState({
       showPopup: false,
+      deleteQueued: -1,
     });
   }
 
   deleteItem(i) {
     this.setState({
       showPopup: true,
+      deleteQueued: i,
+    });
+  }
+
+  hardDelete() {
+    let items = this.state.items;
+    let transState = this.state.transactionState;
+    if (this.state.deleteQueued != -1) {
+      items.splice(this.state.deleteQueued, 1);
+      transState.transactionItems.splice(this.state.deleteQueued, 1);
+    }
+    this.setState({
+      items: items,
+      transactionState: transState,
+      deleteQueued: -1,
+      showPopup: false,
     });
   }
 
   handleSubmit() {
     // console.log(this.props.transactionState);
-    addTransaction(this.props.transactionState);
+    addTransaction(this.state.transactionState);
     this.props.setTransactionState({
       transactionItems: [],
       transaction_date: new Date(),
-      staff_name: "Staff 1"
-    })
+      staff_name: 'Staff 1',
+    });
   }
 
   render() {
-    let reviewItems = []
+    const reviewItems = [];
 
     for (let i = 0; i < this.state.items.length; i++) {
       reviewItems.push(<ReviewItem item={this.state.items[i]} onDelete={() => {
-        this.deleteItem(0);
-      }} />)
+        this.deleteItem(i);
+      }} key={i} />);
     }
     return (
       <>
         <Popup show={this.state.showPopup} onHide={() => {
           this.hidePopup();
+        }}
+        onConfirm={() => {
+          this.hardDelete();
         }}/>
         <Navbar bg={'light'} >
           <Navbar.Collapse className={'justify-content-center'}>
@@ -133,13 +153,13 @@ class ReviewItem extends React.Component {
         <Card.Body style={{
           'lineHeight': '100%',
           'verticalAlign': 'middle',
-          'padding': '0.5rem'
+          'padding': '0.5rem',
           // 'paddingRight': '0.5rem',
           // 'paddingBottom': '0.5rem',
           // 'paddingTop': '0.8rem'
         }}>
           <Container width={'100%'} style={{'paddingLeft': '15px',
-                                            'paddingRight': '0px'}}>
+            'paddingRight': '0px'}}>
             <Row>
               <Col xs = {1} sm={1} md={1} lg={1} xl={1}
                 style={{'paddingLeft': '0.5rem', 'paddingRight': '0.5rem',
@@ -198,16 +218,15 @@ class Trash extends React.Component {
 }
 
 class Popup extends React.Component {
-
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}
-        className={'popup'}>
-        <Modal.Body closeButton>
+      <Modal show={this.props.show} onHide={this.props.onHide}>
+        <Modal.Header closeButton/>
+        <Modal.Body>
           <p>Are you sure you want to delete this item?</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="link" href={'/'}>
+          <Button variant="link" onClick={this.props.onConfirm}>
             Yes
           </Button>
           <Button variant="link" onClick={this.props.onHide}>
@@ -223,34 +242,34 @@ class NavButtons extends React.Component {
   render() {
     return (
       <Navbar sticky={'bottom'} style={{'paddingTop': '50px',
-                                        'paddingLeft': '0px',
-                                        'paddingRight': '0px'}}>
+        'paddingLeft': '0px',
+        'paddingRight': '0px'}}>
         <Container>
           <Row style={{'width': '100%', 'marginLeft': '0px'}}>
             <Col style={{'marginRight': '10px'}}>
-                <Row className = 'justify-content-center'>
-                  <Button
-                    variant={'outline-secondary'} block
-                    style={{'height': '54px'}}
-                    className={'btn-outline-secondary-miqueas'}>
+              <Row className = 'justify-content-center'>
+                <Button
+                  variant={'outline-secondary'} block
+                  style={{'height': '54px'}}
+                  className={'btn-outline-secondary-miqueas'}>
                     add new item
-                  </Button>
-                </Row>
+                </Button>
+              </Row>
             </Col>
             <Col style={{'marginLeft': '10px'}}>
-                <Row className = 'justify-content-center'>
-                  <ActiveLink href='/log'>
-                    <Button
-                      onClick={this.props.handleSubmit} 
-                      variant={'secondary'} block
-                      style={{'height': '54px',
-                        'fontWeight': 'bold',
-                        'background': '#51ADA9',
-                        'borderColor': '#51ADA9'}}>
+              <Row className = 'justify-content-center'>
+                <ActiveLink href='/log'>
+                  <Button
+                    onClick={this.props.handleSubmit}
+                    variant={'secondary'} block
+                    style={{'height': '54px',
+                      'fontWeight': 'bold',
+                      'background': '#51ADA9',
+                      'borderColor': '#51ADA9'}}>
                       submit
-                    </Button>
-                  </ActiveLink>                  
-                </Row>
+                  </Button>
+                </ActiveLink>
+              </Row>
             </Col>
           </Row>
         </Container>
