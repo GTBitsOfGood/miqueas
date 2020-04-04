@@ -5,7 +5,7 @@ import SingleItemInfoLine from './SingleItemInfo';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-class SingleItemView extends React.Component {
+class LogItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +13,14 @@ class SingleItemView extends React.Component {
       stock: 0,
       tempStock: 0,
       editMode: false,
+      item: {}
     };
+  }
+
+  componentDidMount() {
+    let currentItem = this.props.item;
+    console.log("currentItem: ", currentItem);
+    this.setState({item: currentItem});
   }
 
   updateStock(i) {
@@ -42,24 +49,24 @@ class SingleItemView extends React.Component {
   render() {
     return (
       <div>
-        <ItemHeader name={'White Undershirt'} category={'Girl\'s Shirts'}/>
+        <ItemHeader name={this.state.item.name} category={this.state.item.category}/>
         <hr style={{'marginTop': 0}}/>
-        <SingleItemStock stock={this.state.tempStock}
+        <SingleItemStock stock={this.state.item.stock}
           editMode={this.state.editMode}
           onUpdate={(i) => (this.updateStock(i))}
           onEdit={() => this.triggerEdit()}
         />
         <hr style={{'marginTop': 0}}/>
         <Container>
-          <SingleItemInfoLine title={'Type/Color'} data={'individual'}/>
-          <SingleItemInfoLine title={'Size'} data={'S (4-6)'}/>
-          <SingleItemInfoLine title={'Gender'} data={'girl'}/>
+          <SingleItemInfoLine title={'Type/Color'} data={this.state.item.typeColor}/>
+          <SingleItemInfoLine title={'Size'} data={this.state.item.size}/>
+          <SingleItemInfoLine title={'Gender'} data={this.state.item.gender}/>
         </Container>
         <hr style={{'marginTop': 0}}/>
         <Container>
-          <SingleItemInfoLine title={'Location'} data={'bodega'}/>
-          <SingleItemInfoLine title={'Date Checked'} data={'02/10/20'}/>
-          <SingleItemInfoLine title={'Time Checked'} data={'10:10am'}/>
+          <SingleItemInfoLine title={'Location'} data={this.state.item.location}/>
+          <SingleItemInfoLine title={'Date Checked'} data={this.state.item.visibleDate}/>
+          <SingleItemInfoLine title={'Time Checked'} data={this.state.item.time}/>
         </Container>
         <hr style={{'marginTop': 0}}/>
         <Container>
@@ -80,4 +87,4 @@ class SingleItemView extends React.Component {
 
 }
 
-export default SingleItemView;
+export default LogItem;

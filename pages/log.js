@@ -2,10 +2,13 @@ import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
 import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/Transaction.js';
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
+import LogItem from '../frontend/components/LogItem/LogItem';
 import '../public/log.css';
 
 const getItem = (id, transId, staff, date) => {
@@ -13,6 +16,7 @@ const getItem = (id, transId, staff, date) => {
     getTransactionItem(id).then(function (response) {
       response.staff = staff;
       response.date = date;
+      response.time = date.substring(11,16);
       response.transactionItemId = id;
       response.transactionId = transId;
       resolve(response);
@@ -37,7 +41,8 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], currentItems: [], closetItems: [],
+      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -93,10 +98,20 @@ class Log extends React.Component {
         this.setState({isAll: false, isBodega: false, isDownstairs: false, isCloset: true}); break;
     }
   }
+  goBack() {
+    this.setState({isItemSelected: false});
+  }
+
+  selectItem = (item) => {
+    this.setState({ isItemSelected: true, selectedItem: item });
+  }
+
   render() {
     return (
+      <div>
+        {this.state.isItemSelected && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
       <div className="Clean">
-        <h1>Log</h1>
+        {!this.state.isItemSelected && <div>
         <ToggleButtonGroup className="Location" name="Radio" value={this.state.value} onChange={this.handleChange}>
           <ToggleButton
             className={this.state.isAll ? 'selected': 'o1'} value={1}>all</ToggleButton>
@@ -107,16 +122,24 @@ class Log extends React.Component {
           {this.state.isAdmin && <ToggleButton
             className={this.state.isCloset ? 'selected':'o1'} value={4}>closet</ToggleButton>}
         </ToggleButtonGroup>
-        <table><thead><tr fontWeight='bold'>
+         <table><thead><tr fontWeight='bold'>
           <td className="h3"/><td className='h1'>Name</td><td className='h1'>Staff</td><td className='h1'>Child</td><td className='h1'>Quantity Changed</td><td className='h2'></td>
-        </tr></thead></table>
+        </tr></thead></table></div>}
         <div style={{height: '63vh', overflowY:'auto'}}>
         {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
           <table bordercollapse='collapse'><tbody>
-            {!this.state.isLoading && <LogTable items={this.state.currentItems}></LogTable>}
+            {!this.state.isLoading && !this.state.isItemSelected && <LogTable items={this.state.currentItems} callback={this.selectItem}></LogTable>}
           </tbody></table>
+          {this.state.isItemSelected && <div><LogItem item={this.state.selectedItem}/>
+                <link
+                  rel="stylesheet"
+                  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                  crossOrigin="anonymous"
+                /></div>}
         </div>
         <div className="Footer"><NavigationBar selector={3} /></div>
+      </div>
       </div>
     );
   }
