@@ -19,9 +19,8 @@ class InventoryItem extends React.Component {
     };
   }
   componentDidMount() {
-    let testItem = this.props.item;
-    console.log(testItem);
-    this.setState({item: testItem});
+    let currentItem = this.props.item;
+    this.setState({item: currentItem});
   }
 
   updateStock(i) {
