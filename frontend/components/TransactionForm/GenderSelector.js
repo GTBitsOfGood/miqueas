@@ -5,25 +5,14 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
 export default class GenderSelector extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: -1,
-    };
-  }
-
-  changeGender(i) {
-    this.setState({
-      selected: i,
-    });
-    this.props.onClick(i);
-  }
 
   render() {
-    const maleSrc = (this.state.selected == 0) ?
+    const selected = ['male', 'female'].indexOf(this.props.gender);
+
+    const maleSrc = (selected == 0) ?
       '../resources/male-selected.png' : '../resources/male.png';
     const maleStyle = {'height': '64px'};
-    if (this.state.selected == 0) {
+    if (selected == 0) {
       maleStyle['backgroundColor'] = '#4690FF';
     }
     const maleBtn = (
@@ -31,8 +20,8 @@ export default class GenderSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button variant={'outline-secondary'} size={'lg'} block
-              active = {this.state.selected == 0}
-              onClick={() => this.changeGender(0)}
+              active = {selected == 0}
+              onClick={() => this.props.onClick(0)}
               style={maleStyle}>
               <img alt={'Male'}
                 src={maleSrc}
@@ -42,10 +31,10 @@ export default class GenderSelector extends React.Component {
         </Container>
       </Col>);
 
-    const femaleSrc = (this.state.selected == 1) ?
+    const femaleSrc = (selected == 1) ?
       '../resources/female-selected.png' : '../resources/female.png';
     const femaleStyle = {'height': '64px'};
-    if (this.state.selected == 1) {
+    if (selected == 1) {
       femaleStyle['backgroundColor'] = '#E93CAC';
     }
     const femaleBtn = (
@@ -53,8 +42,8 @@ export default class GenderSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button variant={'outline-secondary'} size={'lg'} block
-              active = {this.state.selected == 1}
-              onClick={() => this.changeGender(1)}
+              active = {selected == 1}
+              onClick={() => this.props.onClick(1)}
               style={femaleStyle}>
               <img alt={'Female'}
                 src={femaleSrc}

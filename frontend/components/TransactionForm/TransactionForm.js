@@ -148,10 +148,10 @@ export default class TransactionForm extends React.Component {
     this.validateForm('location');
   }
 
-  //This updates the overall transactionState with form properties
+  // This updates the overall transactionState with form properties
   handleAddItem() {
-    let transactionState = this.props.transactionState;
-    let items = transactionState.transactionItems;
+    const transactionState = this.props.transactionState;
+    const items = transactionState.transactionItems;
     items[items.length - 1].item = {
       name: this.state.name,
       category: this.state.category,
@@ -159,7 +159,7 @@ export default class TransactionForm extends React.Component {
       typeColor: this.state.typeColor,
       size: this.state.size,
       location: this.state.location,
-    }
+    };
     items[items.length - 1].quantityChanged = this.state.quantity;
     items[items.length - 1].recipient = this.state.recipient;
     this.props.setTransactionState(transactionState);
@@ -167,7 +167,29 @@ export default class TransactionForm extends React.Component {
 
   handleSameItem() {
     this.handleAddItem();
-    //Todo: Do something to clear the form
+    let transaction = this.props.transactionState;
+    transaction.transactionItems.push({
+      item: {
+        name: this.state.name,
+        category: this.state.category,
+        gender: "",
+        typeColor: "",
+        size: "",
+        location: "",
+      },
+      recipient: "",
+      quantityChanged: 0,
+      expiration_date: 0
+    });
+    this.props.setTransactionState(transaction);
+    this.setState({
+      gender: this.checkOneOption(this.state.itemVariation.gender),
+      size: this.checkOneOption(this.state.itemVariation.size),
+      typeColor: this.checkOneOption(this.state.itemVariation.typeColor),
+      quantity: 0,
+      location: 'none',
+      formCompleted: false,
+    });
   }
 
   render() {
@@ -193,8 +215,10 @@ export default class TransactionForm extends React.Component {
 
     const genderSelector = (this.state.itemVariation.gender == null ||
       this.state.itemVariation.gender.length < 2) ? <div/> :
-      <div><GenderSelector onClick={(i) => this.handleGenderSwap(i)}/>
-        <hr/></div>;
+      <div><GenderSelector gender={this.state.gender} onClick= {
+        (i) => this.handleGenderSwap(i)
+      }/>
+      <hr/></div>;
 
     const typeColorSelector = (this.state.itemVariation.typeColor == null ||
       this.state.itemVariation.typeColor.length < 2) ? <div/> :
@@ -202,7 +226,10 @@ export default class TransactionForm extends React.Component {
         options = {this.state.itemVariation.typeColor}
         onUpdate={(i) => {
           this.changeTypeColor(i);
-        }}/><hr/></div>;
+        }}
+        selected={
+          this.state.itemVariation.typeColor.indexOf(this.state.typeColor)
+        }/><hr/></div>;
 
     const sizeSelector = (this.state.itemVariation.size == null ||
       this.state.itemVariation.size.length < 2) ? <div/> :
@@ -210,7 +237,10 @@ export default class TransactionForm extends React.Component {
         options = {this.state.itemVariation.size}
         onUpdate = {(i) => {
           this.changeSize(i);
-        }}/><hr/></div>;
+        }}
+        selected={
+          this.state.itemVariation.size.indexOf(this.state.size)
+        }/><hr/></div>;
 
     return (
       <div>
@@ -223,9 +253,10 @@ export default class TransactionForm extends React.Component {
         {sizeSelector}
         <LocationSelector onUpdate={(name) => {
           this.changeLocation(name);
-        }}/>
+        }}
+        location = {this.state.location}/>
         <hr/>
-        <NavButtons 
+        <NavButtons
           handleSameItem = {() => this.handleSameItem()}
           handleAddItem = {() => this.handleAddItem()}
           disabled = {!this.state.formCompleted}

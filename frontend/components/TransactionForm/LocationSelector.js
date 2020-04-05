@@ -5,25 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
 export default class LocationSelector extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: -1,
-    };
-  }
-
-  changeLocation(i, name) {
-    this.setState({
-      selected: i,
-    });
-    this.props.onUpdate(name);
-  }
 
   render() {
+    const selected = ['bodega', 'downstairs'].indexOf(this.props.location);
     const bodegaBtnStyle = {'height': '64px',
       'fontSize': '14px',
       'textAlign': 'center'};
-    if (this.state.selected == 0) {
+    if (selected == 0) {
       bodegaBtnStyle['backgroundColor'] = '#51ADA9';
       bodegaBtnStyle['color'] = 'white';
     }
@@ -32,8 +20,8 @@ export default class LocationSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button id="bodegaBtn" variant={'outline-secondary'} size={'sm'} block
-              active = {this.state.selected == 0}
-              onClick={() => this.changeLocation(0, 'bodega')}
+              active = {selected == 0}
+              onClick={() => this.props.onUpdate('bodega')}
               style={bodegaBtnStyle}>bodega
             </Button>
           </Row>
@@ -43,7 +31,7 @@ export default class LocationSelector extends React.Component {
     const downBtnStyle = {'height': '64px',
       'fontSize': '14px',
       'textAlign': 'center'}
-    if (this.state.selected == 1) {
+    if (selected == 1) {
       downBtnStyle['backgroundColor'] = '#51ADA9';
       downBtnStyle['color'] = 'white';
     }
@@ -52,8 +40,8 @@ export default class LocationSelector extends React.Component {
         <Container>
           <Row className="justify-content-center">
             <Button id="downBtn" variant={'outline-secondary'} size={'sm'} block
-              active = {this.state.selected == 1}
-              onClick={() => this.changeLocation(1, 'downstairs')}
+              active = {selected == 1}
+              onClick={() => this.props.onUpdate('downstairs')}
               style={downBtnStyle}>
                 down<br />stairs
             </Button>
