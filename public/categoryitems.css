@@ -3,14 +3,14 @@ body {
     padding: 2rem;
   }
 
-table {
-    text-align: left;
+  .items {
+    text-align: center;
     position: relative;
     border-collapse: collapse; 
     text-size-adjust:auto;
     font-size: 2.5vh;
   }
-  td {
+  th, td {
     padding: 0.25rem;
   }
   tr{

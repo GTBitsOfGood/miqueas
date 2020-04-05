@@ -1,9 +1,9 @@
 import { addItemVariation } from '../../server/actions/itemVariation';
 
 export default async function (req, res) {
-  console.log("body:",req.body);
+  ("body:",req.body);
   const { itemVariation } = req.body;
-  console.log("itemVar", itemVariation);
+  ("itemVar", itemVariation);
   return addItemVariation(itemVariation)
     .then((result) => res.status(201).json({
       success: true,

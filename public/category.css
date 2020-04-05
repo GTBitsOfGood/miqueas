@@ -1,4 +1,4 @@
-.Clean {
+.clean {
     text-align: center;
 }
 .Footer {
@@ -8,8 +8,11 @@
     width: 100%;
     text-align: center;
 }
-.Location{
+.location{
     text-align: center;
+}
+.back{
+    margin-bottom: -5vh;
 }
 table{
     width: 100%;
