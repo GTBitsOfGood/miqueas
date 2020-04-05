@@ -7,8 +7,7 @@ import Col from 'react-bootstrap/Col';
 export default class VerticalRadio extends React.Component {
   render() {
     const options = [];
-    let i = 0;
-    this.props.options.forEach((option) => {
+    this.props.options.forEach((option, i) => {
       options.push(
           <Form.Check
             custom
@@ -18,6 +17,8 @@ export default class VerticalRadio extends React.Component {
             id = {option + i.toString()}
             key = {option + i.toString()}
             onClick = {() => {this.props.onUpdate(option)}}
+            onChange = {() => {}}
+            checked = {this.props.selected == i}
           />);
       i++;
     });

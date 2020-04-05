@@ -20,7 +20,8 @@ export default {
     addItemVariation: '/api/addItemVariation',
     updateItemVariation: '/api/updateItemVariation',
     getItemVariation: '/api/getItemVariation',
-    addTransaction: '/api/addTransaction'
+    addTransaction: '/api/addTransaction',
+    signUp: '/api/signUp',
   },
   pages: {
     Index: '/',
