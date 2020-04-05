@@ -13,6 +13,10 @@
 }
 table{
     width: 100%;
+    
+}
+.back{
+    margin-bottom: -5vh;
 }
 .o1, .selected{
     border-radius: 3px;

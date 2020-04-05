@@ -1,14 +1,19 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import Router from 'next/router';
 import '../../public/logtable.css';
 
-const createSection = (itemGroup, date) => {
+
+
+const createSection = (props, itemGroup, date) => {
     var section = []
+    console.log("itemGroup: ", itemGroup);
     section.push(<tr key={date}><th colSpan={7}>{date}</th></tr>)
     for (let item of itemGroup) {
         section.push(
-            <tr key={item.transactionId}>
+            <tr onClick={() => props.callback(item)} 
+            key={item.transactionItemId}>
                 {item.gender=='male' && <td className='icon'><FontAwesomeIcon className='male' icon={faMale} /></td>}
                 {item.gender=='female' && <td className='icon'><FontAwesomeIcon className='female' icon={faFemale} /></td>}
                 <td width='20%'>{item.name}</td>
@@ -39,7 +44,7 @@ const LogTable = (props) => {
     sortTable.sort();
     for (let i = sortTable.length-1; i>=0; i--) {
         let date = sortTable[i].substring(4,6) + "/" + sortTable[i].substring(6,8) + "/" + sortTable[i].substring(0,4);
-        finalTable = finalTable.concat(createSection(dataTable[date], date))
+        finalTable = finalTable.concat(createSection(props, dataTable[date], date))
     }
     return(finalTable);
 }

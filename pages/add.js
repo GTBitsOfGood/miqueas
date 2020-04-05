@@ -1,7 +1,5 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import '../public/add.css';
-import {addItem} from '../frontend/actions/Items.js';
-import {Button} from 'react-bootstrap';
 import QrCode from '../frontend/components/qrcode.js';
 import translate from '../frontend/components/translate.js';
 import 'bootstrap/dist/css/bootstrap.min.css';

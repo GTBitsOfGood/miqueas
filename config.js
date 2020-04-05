@@ -12,6 +12,7 @@ export default {
     getItem: '/api/getItem',
     getItemName: '/api/getItemName',
     getTransactions: '/api/getTransactions',
+    getTransaction: '/api/getTransaction',
     getTransactionItem: '/api/getTransactionItem',
     login: '/api/login',
     verifyToken: '/api/verifyToken',
