@@ -1,5 +1,4 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import '../public/add.css';
 import {searchQuery} from '../frontend/actions/searchQuery';
 import {Button} from 'react-bootstrap';
 

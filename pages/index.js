@@ -1,6 +1,5 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import '../public/index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function Index({language}) {
 

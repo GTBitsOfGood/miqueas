@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import '../../public/categoryitems.css';
+
 
 const addNameGroup = (props, items, name) => {
     var femaleCount = 0; var maleCount = 0; 

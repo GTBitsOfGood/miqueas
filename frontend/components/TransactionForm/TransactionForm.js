@@ -7,7 +7,6 @@ import VerticalRadio from './VerticalRadio';
 import QuantitySelector from './QuantitySelector';
 import LocationSelector from './LocationSelector';
 import NavButtons from './NavButtons';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class TransactionForm extends React.Component {
   constructor(props) {

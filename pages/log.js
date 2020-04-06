@@ -9,7 +9,7 @@ import { getTransactions, getTransactionItem } from '../frontend/actions/Transac
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import LogItem from '../frontend/components/LogItem/LogItem';
-import '../public/log.css';
+
 
 const getItem = (id, transId, staff, date) => {
   return new Promise((resolve, reject) => {

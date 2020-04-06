@@ -9,7 +9,7 @@ import { getCategories } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import CategoryItems from '../frontend/components/CategoryItems.js';
 import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
-import '../public/category.css';
+
 
 class Inventory extends React.Component {
   constructor(props) {
@@ -95,12 +95,6 @@ class Inventory extends React.Component {
             </div>}
             {this.state.isItemSelected && <div>
               <InventoryItem item={this.state.selectedItem}/>
-                <link
-                  rel="stylesheet"
-                  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                  crossOrigin="anonymous"
-                />
             </div>}
           <div className="Footer"><NavigationBar /></div>
         </div>
