@@ -5,7 +5,6 @@ import { useMediaQuery } from 'react-responsive';
 import Button from 'react-bootstrap/Button';
 import translate from './translate.js';
 import {searchQuery} from '../actions/searchQuery';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import ActiveLink from './ActiveLink.js';
 
 

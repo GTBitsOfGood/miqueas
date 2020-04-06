@@ -1,7 +1,6 @@
 import React from 'react';
 import TransactionForm
   from '../frontend/components/TransactionForm/TransactionForm';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Transaction({language, transactionState, setTransactionState}) {
   let items = transactionState.transactionItems;

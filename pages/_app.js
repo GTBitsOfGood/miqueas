@@ -1,4 +1,17 @@
 import React, { useState } from 'react';
+
+//Global style
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../public/navbar.css';
+import '../public/main.css';
+import '../public/category.css';
+import '../public/log.css';
+import '../public/review-form.css';
+import '../public/signup.css';
+import '../public/logtable.css';
+import '../public/categoryitems.css';
+import '../public/categorylist.css';
+
 function MyApp({ Component, pageProps }) {
   const [language, setLanguage] = useState("English");
   const [transactionState, setTransactionState] = useState({

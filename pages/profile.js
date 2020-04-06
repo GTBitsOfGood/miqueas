@@ -1,5 +1,4 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import '../public/profile.css';
 import translate from '../frontend/components/translate.js';
 export default function Profile({language, setLanguage}) {
   return (

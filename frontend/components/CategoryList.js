@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import '../../public/categorylist.css';
+
 
 const addCategory = (props, categoryName, items) => {
     return(

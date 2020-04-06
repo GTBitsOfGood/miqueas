@@ -1,13 +1,11 @@
 import React from 'react';
 import { signUp, verifyToken } from '../frontend/actions/Users';
-import '../public/signup.css';
+
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row'
 import Router from 'next/router';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignUp extends React.Component {
 

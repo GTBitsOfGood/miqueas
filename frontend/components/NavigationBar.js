@@ -4,7 +4,6 @@ import {ShoppingCart, Person} from 'styled-icons/material'
 import {Plus} from 'styled-icons/boxicons-regular'
 import {Clipboard} from 'styled-icons/boxicons-regular'
 import {Menu} from 'styled-icons/boxicons-regular/Menu'
-import '../../public/navbar.css';
 
 function NavigationBar(props) {
   let isProfile = false; let isShopping = false; let isAdd = false; let isLog = false; let isInventory = false;

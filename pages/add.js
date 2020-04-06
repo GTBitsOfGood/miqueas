@@ -1,8 +1,6 @@
 import NavigationBar from '../frontend/components/NavigationBar';
-import '../public/add.css';
 import QrCode from '../frontend/components/qrcode.js';
 import translate from '../frontend/components/translate.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Add({language, transactionState, setTransactionState}) {
 

@@ -1,5 +1,4 @@
 // next.config.js
-const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
 const dotEnv = require("dotenv");
 dotEnv.config();
@@ -44,4 +43,4 @@ const nextConfig = {
   }
 };
 
-module.exports = withStyledIcons(withCSS(withOffline({nextConfig})))
+module.exports = withStyledIcons(withOffline({nextConfig}));
