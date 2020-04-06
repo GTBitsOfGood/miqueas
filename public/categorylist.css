@@ -3,10 +3,10 @@ table {
     position: relative;
     border-collapse: collapse; 
     text-size-adjust:auto;
-    font-size: 2.5vh;
+    font-size: 2vh;
   }
   td {
-    padding: 0.25rem;
+    padding: 0.4rem;
   }
   tr{
     border-bottom: 1px solid;
@@ -15,7 +15,8 @@ table {
  
   th {
     background: white;
-    color: black;
+    color: #51ADA9;
+    font-size: 2vh;
     position: sticky;
     top: 0;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
