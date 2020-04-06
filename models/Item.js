@@ -40,5 +40,16 @@ const ItemSchema = new Schema({
   },
 });
 
+const indexing = () => {
+  if (mongoose.models && mongoose.models.Item) {
+    mongoose.models.Item.index({'$**': 'text'});
+  } else {
+    ItemSchema.index({'$**': 'text'});
+  }
+}
+
+//indexing();
+ItemSchema.index({'$**': 'text'});
+
 export default (mongoose.models && mongoose.models.Item) ?
   mongoose.models.Item : mongoose.model('Item', ItemSchema);

@@ -2,7 +2,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 export default {
   baseUrl: prod ? process.env.BASE_URL : 'http://localhost:3000',
-  dbUrl: 'mongodb+srv://miqueas-dev:' + process.env.DB_PASS + '@cluster0-9lk2k.mongodb.net/test?retryWrites=true&w=majority',
+  dbUrl: 'mongodb://localhost:27017',
   dbName: 'miqueas',
   apis: {
     getCategories: '/api/getItems',
@@ -20,6 +20,7 @@ export default {
     updateItemVariation: '/api/updateItemVariation',
     getItemVariation: '/api/getItemVariation',
     addTransaction: '/api/addTransaction',
+    updateTransaction: '/api/updateTransaction',
     signUp: '/api/signUp',
   },
   pages: {

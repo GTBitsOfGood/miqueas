@@ -5,11 +5,12 @@ import Container from 'react-bootstrap/Container';
 import SingleItemInfoLine from './SingleItemInfo';
 
 class SingleItemLogView extends React.Component {
-
+  // somehow should read from database and update the page content
   render() {
     return (
       <>
         <SingleItemLogHeader name={'Details'} onEdit={() => {
+          window.open('/singleview')
           console.log('THIS SHOULD TAKE US TO AN EDIT PAGE');
         }}/>
         <ItemHeader name={'Regular notebook'} category={'School'}/>

@@ -6,6 +6,8 @@ import SingleItemInfoLine from './SingleItemInfo';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
+import { updateTransaction } from '../../actions/Transactions.js' 
+
 class SingleItemView extends React.Component {
 
   constructor(props) {
@@ -33,7 +35,10 @@ class SingleItemView extends React.Component {
 
   // This will need to update on the backend as well!!!
   saveStock() {
+    
     // We might not need to have a separate stock attribute
+    // result = await updateTransaction()
+
     this.setState({
       stock: this.state.tempStock,
       editMode: false,
