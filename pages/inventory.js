@@ -71,7 +71,6 @@ class Inventory extends React.Component {
         {this.state.backButton && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
         <div className="clean">
           {this.state.isLogTable && <div>
-            <h1>Log</h1>
             <ToggleButtonGroup className="location" name="Radio" value={this.state.value} onChange={this.handleChange}>
               <ToggleButton
                 className={this.state.isSchool ? 'selected' : 'o1'} value={1}>school</ToggleButton>
