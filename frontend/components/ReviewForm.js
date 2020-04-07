@@ -11,11 +11,12 @@ import ActiveLink from './ActiveLink';
 import {addTransaction} from '../actions/Transactions.js';
 
 class ReviewItemModel {
-  constructor(name, gender, quantity, attributes) {
+  constructor(name, gender, quantity, attributes, remIndex) {
     this.name = name;
     this.gender = gender;
     this.quantity = quantity;
     this.attributes = attributes;
+    this.remIndex = remIndex;
   }
 }
 
@@ -23,18 +24,31 @@ class ReviewItemModel {
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
-    const items = [];
+    const add_items = [];
+    const rem_items = [];
 
     const transItems = this.props.transactionState.transactionItems;
     for (let i = 0; i < transItems.length; i++) {
-      items.push(new ReviewItemModel(transItems[i].item.name, transItems[i].item.gender,
-          transItems[i].quantityChanged, [transItems[i].item.size, transItems[i].item.typeColor]));
+      const item = new ReviewItemModel(transItems[i].item.name,
+          transItems[i].item.gender,
+          transItems[i].quantityChanged,
+          [transItems[i].item.size,
+            transItems[i].item.typeColor],
+          i);
+      if (item.quantity > 0) {
+        add_items.push(item);
+      } else {
+        rem_items.push(item);
+      }
     }
 
     this.state = {
       showPopup: false,
-      items: items,
+      add_items: add_items,
+      rem_items: rem_items,
       deleteQueued: -1,
+      deleteAdd: false,
+      deleteSplitArrIndex: -1,
       transactionState: this.props.transactionState,
     };
   }
@@ -43,27 +57,55 @@ class ReviewForm extends React.Component {
     this.setState({
       showPopup: false,
       deleteQueued: -1,
+      deleteAdd: false,
+      deleteSplitArrIndex: -1,
     });
   }
 
-  deleteItem(i) {
+  deleteItem(i, deleteAdd, splitArrIndex) {
     this.setState({
       showPopup: true,
       deleteQueued: i,
+      deleteAdd: deleteAdd,
+      deleteSplitArrIndex: splitArrIndex,
     });
   }
 
   hardDelete() {
-    let items = this.state.items;
-    let transState = this.state.transactionState;
-    if (this.state.deleteQueued != -1) {
-      items.splice(this.state.deleteQueued, 1);
+    const add_items = this.state.add_items;
+    const rem_items = this.state.rem_items;
+    const transState = this.state.transactionState;
+    if (this.state.deleteQueued != -1 && this.state.deleteSplitArrIndex != -1) {
+      if(this.state.deleteAdd) {
+        add_items.splice(this.state.deleteSplitArrIndex, 1);
+        for (let i = this.state.deleteSplitArrIndex; i < add_items.length; i ++) {
+          add_items[i].remIndex--;
+        }
+        for (let i = 0; i < rem_items.length; i ++) {
+          if (rem_items[i].remIndex > this.state.deleteQueued) {
+            rem_items[i].remIndex--;
+          }
+        }
+      } else {
+        rem_items.splice(this.state.deleteSplitArrIndex, 1);
+        for (let i = this.state.deleteSplitArrIndex; i < rem_items.length; i ++) {
+          rem_items[i].remIndex--;
+        }
+        for (let i = 0; i < add_items.length; i ++) {
+          if (add_items[i].remIndex > this.state.deleteQueued) {
+            add_items[i].remIndex--;
+          }
+        }
+      }
       transState.transactionItems.splice(this.state.deleteQueued, 1);
     }
     this.setState({
-      items: items,
+      add_items: add_items,
+      rem_items: rem_items,
       transactionState: transState,
       deleteQueued: -1,
+      deleteAdd: false,
+      deleteSplitArrIndex: -1,
       showPopup: false,
     });
   }
@@ -79,13 +121,30 @@ class ReviewForm extends React.Component {
   }
 
   render() {
-    const reviewItems = [];
+    const addItems = [];
+    const remItems = [];
 
-    for (let i = 0; i < this.state.items.length; i++) {
-      reviewItems.push(<ReviewItem item={this.state.items[i]} onDelete={() => {
-        this.deleteItem(i);
-      }} key={i} />);
+    if (this.state.add_items.length > 0) {
+      addItems.push(<h3 className = {'mini-header'}>Added Items</h3>);
     }
+
+    if (this.state.rem_items.length > 0) {
+      remItems.push(<h3 className = {'mini-header'}>Removed Items</h3>);
+    }
+
+    for (let i = 0; i < this.state.add_items.length; i++) {
+      addItems.push(<ReviewItem item={this.state.add_items[i]} onDelete={
+        () => {
+          this.deleteItem(this.state.add_items[i].remIndex, true, i);
+        }} key={this.state.add_items[i].remIndex} />);
+    }
+    for (let i = 0; i < this.state.rem_items.length; i++) {
+      remItems.push(<ReviewItem item={this.state.rem_items[i]} onDelete={
+        () => {
+          this.deleteItem(this.state.rem_items[i].remIndex, false, i);
+        }} key={this.state.rem_items[i].remIndex} />);
+    }
+
     return (
       <>
         <Popup show={this.state.showPopup} onHide={() => {
@@ -104,8 +163,8 @@ class ReviewForm extends React.Component {
         <hr style={{'marginTop': '0px', 'marginBottom': '0px'}}/>
         <Container className={'item-block'}>
           <br/>
-          <h3 className = {'mini-header'}>Added Items</h3>
-          {reviewItems}
+          {addItems}
+          {remItems}
           <NavButtons
             handleSubmit = {() => this.handleSubmit()}
           />
