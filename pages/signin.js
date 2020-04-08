@@ -30,13 +30,15 @@ class SignIn extends React.Component {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      await login(email, password).then(() => Router.push('/'))
-        .catch(e => { console.log(e) });
+      try{
+        await login(email, password);
+        Router.push('/');
+      } catch(e) {
+        console.error(e);
+        this.setState({validated: false, password: ""});
+      }
     }
 
-    this.setState({
-      validated: true,
-    });
   };
 
   onChange = (event, type) => {
