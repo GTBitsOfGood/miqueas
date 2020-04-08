@@ -79,11 +79,11 @@ class Inventory extends React.Component {
             </ToggleButtonGroup>
 
             <div style={{ height: '63vh', overflowY: 'auto' }}>
-              {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
               <table bordercollapse='collapse'><tbody>
                 <tr><th colSpan={3}>Category</th></tr>
                 {!this.state.isLoading && <CategoryList items={this.state.data} categories={this.state.categories} callback={this.selectCategory} />}
               </tbody></table>
+              {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
             </div>
           </div>}
           {this.state.isCategorySelected && <div>
@@ -95,7 +95,7 @@ class Inventory extends React.Component {
             {this.state.isItemSelected && <div>
               <InventoryItem item={this.state.selectedItem}/>
             </div>}
-          <div className="Footer"><NavigationBar /></div>
+          <div className="Footer"><NavigationBar selector={4} /></div>
         </div>
       </div>
     );
