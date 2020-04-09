@@ -14,7 +14,7 @@ const Test = ({language, transactionState, setTransactionState}) => {
     const isMobile = useMediaQuery({ maxWidth: 767 })
 
     const [category, setCategory] = useState(translate("Category", language));
-    const [name, setName] = useState(translate("pants", language));
+    const [name, setName] = useState(translate("uniform pants", language));
 
     const handleScan = async (data) => {
       if (data) {
