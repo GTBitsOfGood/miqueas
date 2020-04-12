@@ -307,12 +307,14 @@ class NavButtons extends React.Component {
           <Row style={{'width': '100%', 'marginLeft': '0px'}}>
             <Col style={{'marginRight': '10px'}}>
               <Row className = 'justify-content-center'>
-                <Button
-                  variant={'outline-secondary'} block
-                  style={{'height': '54px'}}
-                  className={'btn-outline-secondary-miqueas'}>
-                    add new item
-                </Button>
+                <ActiveLink href={'/add'}>
+                  <Button
+                    variant={'outline-secondary'} block
+                    style={{'height': '54px'}}
+                    className={'btn-outline-secondary-miqueas'}>
+                      add new item
+                  </Button>
+                </ActiveLink>
               </Row>
             </Col>
             <Col style={{'marginLeft': '10px'}}>
