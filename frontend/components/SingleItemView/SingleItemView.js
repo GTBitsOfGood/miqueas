@@ -11,18 +11,16 @@ class SingleItemView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stock: 0,
-      tempStock: 0,
+      stock: this.props.item.stock,
+      tempStock: this.props.item.stock,
       editMode: false,
     };
   }
 
   updateStock(i) {
-    if (i >= 0) {
-      this.setState({
-        tempStock: i,
-      });
-    }
+    this.setState({
+      tempStock: (i>=0) ? i : 0,
+    });
   }
 
   triggerEdit() {
@@ -40,11 +38,26 @@ class SingleItemView extends React.Component {
     });
   }
 
+  convertToLocalTime(dateString) {
+    const date = new Date(dateString);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let end = 'am';
+    if (hours > 12) {
+      hours -= 12;
+      end = 'pm';
+    }
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    return (hours + ':' + minutes + ' ' + end);
+  }
+
   render() {
     return (
       <div>
-        <SingleViewHeader name={'Details'}/>
-        <ItemHeader name={'White Undershirt'} category={'Girl\'s Shirts'}/>
+        <SingleViewHeader onBack={this.props.onBack} name={'Details'}/>
+        <ItemHeader name={this.props.item.name} category={this.props.item.category}/>
         <hr style={{'marginTop': 0}}/>
         <SingleItemStock stock={this.state.tempStock}
           editMode={this.state.editMode}
@@ -53,15 +66,15 @@ class SingleItemView extends React.Component {
         />
         <hr style={{'marginTop': 0}}/>
         <Container>
-          <SingleItemInfoLine title={'Type/Color'} data={'individual'}/>
-          <SingleItemInfoLine title={'Size'} data={'S (4-6)'}/>
-          <SingleItemInfoLine title={'Gender'} data={'girl'}/>
+          <SingleItemInfoLine title={'Type/Color'} data={this.props.item.typeColor}/>
+          <SingleItemInfoLine title={'Size'} data={this.props.item.size}/>
+          <SingleItemInfoLine title={'Gender'} data={this.props.item.gender}/>
         </Container>
         <hr style={{'marginTop': 0}}/>
         <Container>
-          <SingleItemInfoLine title={'Location'} data={'bodega'}/>
-          <SingleItemInfoLine title={'Date Checked'} data={'02/10/20'}/>
-          <SingleItemInfoLine title={'Time Checked'} data={'10:10am'}/>
+          <SingleItemInfoLine title={'Location'} data={this.props.item.location}/>
+          <SingleItemInfoLine title={'Date Checked'} data={'Data unavailable'}/>
+          <SingleItemInfoLine title={'Time Checked'} data={'Data unavailable'}/>
         </Container>
         <hr style={{'marginTop': 0}}/>
         <Container>
