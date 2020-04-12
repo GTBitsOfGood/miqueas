@@ -9,6 +9,7 @@ import { getTransactions, getTransactionItem } from '../frontend/actions/Transac
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import LogItem from '../frontend/components/LogItem/LogItem';
+import Search from '../frontend/components/Search.js';
 
 
 const getItem = (id, transId, staff, date) => {
@@ -41,8 +42,8 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
-      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null
+      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchNames: [], searchCategories: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -106,11 +107,19 @@ class Log extends React.Component {
     this.setState({ isItemSelected: true, selectedItem: item });
   }
 
+  searchResults = (categoryResults, nameResults) => {
+    this.setState({searchCategories: categoryResults, searchNames: nameResults, isSearch: true})
+  }
+  clearResults() {
+    this.setState({isSearch: false})
+  }
+
   render() {
     return (
       <div>
         {this.state.isItemSelected && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
       <div className="Clean">
+      <Search data={this.state.currentItems} createSearchResults={this.searchResults} clear={this.clearResults()}></Search>
         {!this.state.isItemSelected && <div>
         <ToggleButtonGroup className="Location" name="Radio" value={this.state.value} onChange={this.handleChange}>
           <ToggleButton
