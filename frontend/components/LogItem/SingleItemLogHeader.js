@@ -1,17 +1,21 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
+import ActiveLink from '../ActiveLink';
 
 function SingleItemLogHeader(props) {
   return (
     <>
       <Navbar bg={'light'}>
-        <Navbar.Brand href={'/review'}>
-          <img
-            alt={'Back'}
-            src={'../resources/arrow-back.png'}
-            width={30}
-            height={30}>
-          </img>
+        <Navbar.Brand>
+          <ActiveLink href={'/log'}>
+            <img
+              onClick={props.onBack}
+              alt={'Back'}
+              src={'../resources/arrow-back.png'}
+              width={30}
+              height={30}>
+            </img>
+          </ActiveLink>
         </Navbar.Brand>
         <Navbar.Collapse className={'justify-content-center'}
           style={{'marginLeft': '0px'}}>

@@ -9,6 +9,7 @@ import { getTransactions, getTransactionItem } from '../frontend/actions/Transac
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import LogItem from '../frontend/components/LogItem/LogItem';
+import SingleItemLogView from '../frontend/components/LogItem/SingleItemLogView';
 
 
 const getItem = (id, transId, staff, date) => {
@@ -41,7 +42,7 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [],
       currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null
     };
     this.handleChange = this.handleChange.bind(this);
@@ -65,7 +66,7 @@ class Log extends React.Component {
       }
       Promise.all(promiseArray).then(results => {
         for (let finalItem of results) {
-          this.setState({ allItems: [...this.state.allItems, finalItem] }) 
+          this.setState({ allItems: [...this.state.allItems, finalItem] })
           switch(finalItem.location) {
             case "downstairs":
               this.setState({ downstairsItems: [...this.state.downstairsItems, finalItem] }); break;
@@ -86,7 +87,7 @@ class Log extends React.Component {
     this.setState({selectedValue: value});
     switch (value) {
       case 1:
-        this.setState({isAll: true, isBodega: false, isDownstairs: false, 
+        this.setState({isAll: true, isBodega: false, isDownstairs: false,
           isCloset: false, currentItems: this.state.allItems}); break;
       case 2:
         this.setState({isAll: false, isBodega: true, isDownstairs: false,
@@ -109,37 +110,76 @@ class Log extends React.Component {
   render() {
     return (
       <div>
-        {this.state.isItemSelected && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
-      <div className="Clean">
-        {!this.state.isItemSelected && <div>
-        <ToggleButtonGroup className="Location" name="Radio" value={this.state.value} onChange={this.handleChange}>
-          <ToggleButton
-            className={this.state.isAll ? 'selected': 'o1'} value={1}>all</ToggleButton>
-          <ToggleButton
-            className={this.state.isBodega ? 'selected':'o1'} value={2}>bodega</ToggleButton>
-          <ToggleButton
-            className={this.state.isDownstairs?'selected':'o1'} value={3}>downstairs</ToggleButton>
-          {this.state.isAdmin && <ToggleButton
-            className={this.state.isCloset ? 'selected':'o1'} value={4}>closet</ToggleButton>}
-        </ToggleButtonGroup>
-         <table><thead><tr fontWeight='bold'>
-          <td className="h3"/><td className='h1'>Name</td><td className='h1'>Staff</td><td className='h1'>Child</td><td className='h1'>Quantity Changed</td><td className='h2'></td>
-        </tr></thead></table></div>}
-        <div style={{height: '63vh', overflowY:'auto'}}>
-        {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
-          <table bordercollapse='collapse'><tbody>
-            {!this.state.isLoading && !this.state.isItemSelected && <LogTable items={this.state.currentItems} callback={this.selectItem}></LogTable>}
-          </tbody></table>
-          {this.state.isItemSelected && <div><LogItem item={this.state.selectedItem}/>
-                <link
-                  rel="stylesheet"
-                  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                  crossOrigin="anonymous"
-                /></div>}
-        </div>
-        <div className="Footer"><NavigationBar selector={3} /></div>
-      </div>
+        {!this.state.isItemSelected &&
+          <div>
+            {this.state.isItemSelected &&
+            <FontAwesomeIcon onClick={() => this.goBack()} className='back'
+                             icon={faArrowLeft}/>}
+            <div className="Clean">
+              {!this.state.isItemSelected && <div>
+                <div style={{'padding': '2rem', 'padding-bottom': '0'}}>
+                  <ToggleButtonGroup className="Location" name="Radio"
+                                     value={this.state.value}
+                                     onChange={this.handleChange}>
+                    <ToggleButton
+                      className={this.state.isAll ? 'selected' : 'o1'}
+                      value={1}>all</ToggleButton>
+                    <ToggleButton
+                      className={this.state.isBodega ? 'selected' : 'o1'}
+                      value={2}>bodega</ToggleButton>
+                    <ToggleButton
+                      className={this.state.isDownstairs ? 'selected' : 'o1'}
+                      value={3}>downstairs</ToggleButton>
+                    {this.state.isAdmin && <ToggleButton
+                      className={this.state.isCloset ? 'selected' : 'o1'}
+                      value={4}>closet</ToggleButton>}
+                  </ToggleButtonGroup>
+                </div>
+                <table>
+                  <thead>
+                  <tr fontWeight='bold'>
+                    <td className="h3"/>
+                    <td className='h1'>Name</td>
+                    <td className='h1'>Staff</td>
+                    <td className='h1'>Child</td>
+                    <td className='h1'>Quantity Changed</td>
+                    <td className='h2'></td>
+                  </tr>
+                  </thead>
+                </table>
+              </div>}
+              <div style={{height: '63vh', overflowY: 'auto'}}>
+                {this.state.isLoading &&
+                <Spinner className="spinner" animation='border'></Spinner>}
+                <table bordercollapse='collapse'>
+                  <tbody>
+                  {!this.state.isLoading && !this.state.isItemSelected &&
+                  <LogTable items={this.state.currentItems}
+                            callback={this.selectItem}></LogTable>}
+                  </tbody>
+                </table>
+                {this.state.isItemSelected &&
+                <div><LogItem item={this.state.selectedItem}/>
+                  <link
+                    rel="stylesheet"
+                    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                    crossOrigin="anonymous"
+                  />
+                </div>}
+              </div>
+              <div className="Footer"><NavigationBar selector={3}/></div>
+            </div>
+          </div>
+        }
+        {
+          this.state.isItemSelected &&
+            <>
+              <SingleItemLogView onBack = {() => {this.goBack()}}
+                item = {this.state.selectedItem}/>
+              <div className="Footer"><NavigationBar selector={3}/></div>
+            </>
+        }
       </div>
     );
   }
