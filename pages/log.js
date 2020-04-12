@@ -117,7 +117,7 @@ class Log extends React.Component {
                              icon={faArrowLeft}/>}
             <div className="Clean">
               {!this.state.isItemSelected && <div>
-                <div style={{'padding': '2rem', 'padding-bottom': '0'}}>
+                <div style={{'padding': '2rem', 'paddingBottom': '0'}}>
                   <ToggleButtonGroup className="Location" name="Radio"
                                      value={this.state.value}
                                      onChange={this.handleChange}>

@@ -4,8 +4,8 @@ import TransactionForm
 
 export default function Transaction({language, transactionState, setTransactionState}) {
   let items = transactionState.transactionItems;
-  let recentItem = items[items.length - 1];
-  
+  let recentItem = (items && items.length > 0) ? items[items.length - 1] : null;
+
   return (
     <div>
       <TransactionForm
