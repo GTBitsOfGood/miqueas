@@ -50,7 +50,7 @@ class Inventory extends React.Component {
     }
   }
   selectCategory = (category) => {
-    this.setState({ isLogTable: false, isCategorySelected: true, selectedCategory: category, backButton: true });
+    this.setState({ isLogTable: false, isCategorySelected: true, selectedCategory: category, backButton: true, isSearch: false });
   }
 
   selectItem = (item) => {
