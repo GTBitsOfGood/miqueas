@@ -13,7 +13,7 @@ import ActiveLink from './ActiveLink.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { getCategories } from '../actions/Items.js';
-import { getItemVariation } from '../actions/itemVariation.js';
+import { getItemVariation } from '../actions/Items.js';
 
 import VerticalRadio from './TransactionForm/VerticalRadio';
 import Search from './Search';
@@ -48,7 +48,6 @@ const Test = ({language, transactionState, setTransactionState}) => {
           }
         }
         setCategoryList(categories);
-        // console.log(categories);
       } catch (e) {
         console.error(e);
       }
@@ -61,9 +60,11 @@ const Test = ({language, transactionState, setTransactionState}) => {
     const handleScan = async (data) => {
       if (data) {
         let translations = data.split("(");
-        setName(translate(translations[0], language));
-        let item = await getItemVariation(translations[0]);
-        setCategory(translate(item.category, language));
+        let item = translations[0].substring(0, translations[0].length - 1)
+        setName(translate(item, language));
+        await getItemVariation(item).then(itemVar => {
+          setCategory(translate(itemVar.category, language));
+        });
       }
     }
 
