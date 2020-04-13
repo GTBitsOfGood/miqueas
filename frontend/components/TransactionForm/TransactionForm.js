@@ -191,8 +191,14 @@ export default class TransactionForm extends React.Component {
     });
   }
 
+  resetTransaction() {
+    let transaction = this.props.transactionState;
+    transaction.transactionItems = [];
+    this.props.setTransactionState(transaction);
+  }
+
   render() {
-    const header = <div><TransactionHeader name={'Transaction Form'}/>
+    const header = <div><TransactionHeader name={'Transaction Form'} onBack={() => {this.resetTransaction()}}/>
       <hr style={{'marginTop': 0}}/>
       <ItemHeader name={this.props.name} category={this.props.category}/>
       <hr style={{'marginTop': 0}}/></div>;

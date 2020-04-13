@@ -7,7 +7,7 @@ export default function Review({language, transactionState, setTransactionState}
         language={language}
         transactionState={transactionState}
         setTransactionState={setTransactionState}
-      ></ReviewForm>
+      />
     </div>
   );
 }
