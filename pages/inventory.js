@@ -8,7 +8,6 @@ import translate from '../frontend/components/translate.js';
 import { getCategories } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import CategoryItems from '../frontend/components/CategoryItems.js';
-import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
 import Search from '../frontend/components/Search.js';
 import SingleItemView from '../frontend/components/SingleItemView/SingleItemView';
 
@@ -111,9 +110,6 @@ class Inventory extends React.Component {
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
                 <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
               </div>
-              </div>}
-              {this.state.isItemSelected && <div>
-                <InventoryItem item={this.state.selectedItem}/>
               </div>}
             <div className="Footer"><NavigationBar selector={4} /></div>
           </div>

@@ -5,6 +5,7 @@ import SingleItemStock from './SingleItemStock';
 import SingleItemInfoLine from './SingleItemInfo';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import { updateStock } from '../../actions/Items.js';
 
 class SingleItemView extends React.Component {
 
@@ -14,13 +15,21 @@ class SingleItemView extends React.Component {
       stock: this.props.item.stock,
       tempStock: this.props.item.stock,
       editMode: false,
+      item: {}
     };
   }
+  
+  componentDidMount() {
+    let currentItem = this.props.item;
+    console.log(currentItem);
+    this.setState({ item: currentItem });
+  }
 
-  updateStock(i) {
+  updateStockUI(i) {
     this.setState({
       tempStock: (i>=0) ? i : 0,
     });
+    
   }
 
   triggerEdit() {
@@ -36,6 +45,7 @@ class SingleItemView extends React.Component {
       stock: this.state.tempStock,
       editMode: false,
     });
+    updateStock(this.state.item._id, this.state.tempStock);
   }
 
   convertToLocalTime(dateString) {
@@ -61,7 +71,7 @@ class SingleItemView extends React.Component {
         <hr style={{'marginTop': 0}}/>
         <SingleItemStock stock={this.state.tempStock}
           editMode={this.state.editMode}
-          onUpdate={(i) => (this.updateStock(i))}
+          onUpdate={(i) => (this.updateStockUI(i))}
           onEdit={() => this.triggerEdit()}
         />
         <hr style={{'marginTop': 0}}/>

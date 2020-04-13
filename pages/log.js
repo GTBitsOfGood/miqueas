@@ -8,7 +8,6 @@ import translate from '../frontend/components/translate.js';
 import { getTransactions, getTransactionItem } from '../frontend/actions/Transaction.js';
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
-import LogItem from '../frontend/components/LogItem/LogItem';
 import Search from '../frontend/components/Search.js';
 import SingleItemLogView from '../frontend/components/LogItem/SingleItemLogView';
 
@@ -168,15 +167,6 @@ class Log extends React.Component {
                     <LogTable items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem}></LogTable>}
                   </tbody>
                 </table>
-                {this.state.isItemSelected &&
-                <div><LogItem item={this.state.selectedItem}/>
-                  <link
-                    rel="stylesheet"
-                    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                    crossOrigin="anonymous"
-                  />
-                </div>}
               </div>
               <div className="Footer"><NavigationBar selector={3}/></div>
             </div>
