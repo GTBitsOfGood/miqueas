@@ -9,7 +9,7 @@ import { getTransactions, getTransactionItem } from '../frontend/actions/Transac
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import Search from '../frontend/components/Search.js';
-import SingleItemLogView from '../frontend/components/LogItem/SingleItemLogView';
+import SingleItemLogView from '../frontend/components/SingleItemView/SingleItemLogView';
 
 
 const getItem = (id, transId, staff, date) => {

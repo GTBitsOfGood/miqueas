@@ -5,9 +5,10 @@ function SingleItemLogHeader(props) {
   return (
     <>
       <Navbar bg={'light'}>
-        <Navbar.Brand href={'/review'}>
+        <Navbar.Brand>
           <img
             alt={'Back'}
+            onClick={props.onBack}
             src={'../resources/arrow-back.png'}
             width={30}
             height={30}>
