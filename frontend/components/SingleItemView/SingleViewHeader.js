@@ -5,8 +5,9 @@ export default function SingleViewHeader(props) {
   return (
     <>
       <Navbar bg={'light'}>
-        <Navbar.Brand href={'/review'}>
+        <Navbar.Brand>
           <img
+            onClick={()=>{props.onBack()}}
             alt={'Back'}
             src={'../resources/arrow-back.png'}
             width={30}

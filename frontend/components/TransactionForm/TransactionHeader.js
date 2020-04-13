@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import ActiveLink from '../ActiveLink';
 
 export default class TransactionHeader extends React.Component {
   constructor(props) {
@@ -51,8 +52,12 @@ export default class TransactionHeader extends React.Component {
           </Modal.Header>
           <Modal.Body>Any edits will be lost.</Modal.Body>
           <Modal.Footer>
-            <Button variant="link" href={'/'}>
-              Go Back
+            <Button variant="link" onClick={() => {
+              this.props.onBack();
+            }}>
+              <ActiveLink href={'/add'}>
+                  Go Back
+              </ActiveLink>
             </Button>
             <Button variant="link" onClick={() => {
               this.setState({showPopup: false});

@@ -34,7 +34,7 @@ class SingleItemStock extends React.Component {
       dataView = (
         <Row>
           <Col style={{'paddingLeft': '0px', 'marginTop':'-8px',
-            'margin-bottom':'8px', 'margin-left':'-15px'}}>
+            'marginBottom':'8px', 'marginLeft':'-15px'}}>
             <QuantityButtons quantity={this.props.stock}
               onChange={this.props.onUpdate}
               negativeAllowed = {false}/>
