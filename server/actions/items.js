@@ -76,3 +76,10 @@ export async function getItemUpdateStock(name, category, gender, typeColor, size
     return newItem;
   }
 }
+
+export async function updateStock(id, stock) {
+  await mongoDB();
+
+  return Item.findOneAndUpdate({ _id: id }, { stock: stock, lastUpdated: Date.now()},
+    { upsert: false, new: true });
+}

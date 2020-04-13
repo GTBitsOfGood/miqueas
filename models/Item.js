@@ -38,6 +38,7 @@ const ItemSchema = new Schema({
       message: '{VALUE} is not an integer value',
     },
   },
+  lastUpdated: { type: Date, default: Date.now }
 });
 
 export default (mongoose.models && mongoose.models.Item) ?
