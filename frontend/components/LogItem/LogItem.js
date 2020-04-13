@@ -19,6 +19,7 @@ class LogItem extends React.Component {
 
   componentDidMount() {
     let currentItem = this.props.item;
+    console.log(currentItem);
     this.setState({item: currentItem});
   }
 

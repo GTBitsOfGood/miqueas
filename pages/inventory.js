@@ -3,13 +3,13 @@ import React from 'react';
 import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faExpand, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import translate from '../frontend/components/translate.js';
 import { getCategories } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import CategoryItems from '../frontend/components/CategoryItems.js';
 import InventoryItem from '../frontend/components/InventoryItem/InventoryItem';
-
+import Search from '../frontend/components/Search.js';
 
 class Inventory extends React.Component {
   constructor(props) {
@@ -65,11 +65,21 @@ class Inventory extends React.Component {
     }
   }
 
+  searchResults = (results) => {
+    console.log("you searched!");
+    console.log(results);
+    this.setState({searchCategories: results, isSearch: true})
+  }
+  clearResults = () => {
+    this.setState({isSearch: false})
+  }
+
   render() {
     return (
       <div>
         {this.state.backButton && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
-        <div className="clean">
+        <div className="clean"> {!this.state.isLoading && 
+        <Search data={this.state.categories} searchType="category" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
           {this.state.isLogTable && <div>
             <ToggleButtonGroup className="location" name="Radio" value={this.state.value} onChange={this.handleChange}>
               <ToggleButton
@@ -81,7 +91,7 @@ class Inventory extends React.Component {
             <div style={{ height: '63vh', overflowY: 'auto' }}>
               <table bordercollapse='collapse'><tbody>
                 <tr><th colSpan={3}>Category</th></tr>
-                {!this.state.isLoading && <CategoryList items={this.state.data} categories={this.state.categories} callback={this.selectCategory} />}
+                {!this.state.isLoading && <CategoryList items={this.state.data} categories={this.state.isSearch ? this.state.searchCategories : this.state.categories} callback={this.selectCategory} />}
               </tbody></table>
               {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
             </div>
