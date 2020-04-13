@@ -5,7 +5,7 @@ import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faExpand, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import translate from '../frontend/components/translate.js';
-import { getCategories } from '../frontend/actions/Items.js';
+import { getItems } from '../frontend/actions/Items.js';
 import CategoryList from '../frontend/components/CategoryList.js';
 import CategoryItems from '../frontend/components/CategoryItems.js';
 import Search from '../frontend/components/Search.js';
@@ -26,7 +26,7 @@ class Inventory extends React.Component {
     let dataTable = {}
     let categories = []
     try {
-      let items = await getCategories();
+      let items = await getItems();
       for (let item of items) {
         if (dataTable[item.category] == null) {
           dataTable[item.category] = [];

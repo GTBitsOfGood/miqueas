@@ -10,6 +10,7 @@ import '../public/review-form.css';
 import '../public/signup.css';
 import '../public/categorylist.css';
 import '../public/components.css';
+import '../public/add.css';
 
 function MyApp({ Component, pageProps }) {
   const [language, setLanguage] = useState("English");

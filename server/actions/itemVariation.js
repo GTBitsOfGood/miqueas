@@ -23,6 +23,13 @@ export async function updateItemVariation(item) {
   return ItemVariation.updateOne(condition, updates);
 }
 
+
+export async function getCategories() {
+  await mongoDB();
+
+  return ItemVariation.find().sort({ submitted: -1 });
+}
+
 // export async function getItem(id) {
 //   await mongoDB();
 

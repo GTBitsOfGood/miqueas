@@ -25,9 +25,9 @@ export default class VerticalRadio extends React.Component {
     return (
       <Container>
         <Row>
-          <Col>
+          {!this.props.noLeftCol && <Col>
             <p className = {'text-muted'}>{this.props.name}</p>
-          </Col>
+          </Col>}
           <Col>
             <Form>
               <Container>

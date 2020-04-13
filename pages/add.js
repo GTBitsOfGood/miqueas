@@ -5,8 +5,7 @@ import translate from '../frontend/components/translate.js';
 export default function Add({language, transactionState, setTransactionState}) {
 
   return (
-    <div className="Clean">
-      <center>
+    <div>
         <div className="qrBox">
           <QrCode 
             language={language}
@@ -15,7 +14,6 @@ export default function Add({language, transactionState, setTransactionState}) {
           > 
           </QrCode>
         </div>
-      </center>
         <div className="Footer"><NavigationBar selector={2}/></div>
     </div>
   );

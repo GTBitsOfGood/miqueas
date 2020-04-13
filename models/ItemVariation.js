@@ -6,6 +6,10 @@ const ItemVariationSchema = new Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true
+  },
   gender: {
     type: [String],
   },
