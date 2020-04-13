@@ -4,10 +4,6 @@
 .back{
     margin-bottom: -5vh;
 }
-table{
-    width: 100%;
-    margin-top: 10px;
-}
 .o1, .selected{
     border-radius: 3px;
     background-color:white;
@@ -47,4 +43,11 @@ input[type="radio"] {
 }
 .h3{
     width: 5%;
+}
+.items {
+  text-align: center;
+  position: relative;
+  border-collapse: collapse; 
+  text-size-adjust:auto;
+  font-size: 2vh;
 }
