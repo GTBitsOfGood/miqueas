@@ -11,6 +11,7 @@ import '../public/signup.css';
 import '../public/logtable.css';
 import '../public/categoryitems.css';
 import '../public/categorylist.css';
+import '../public/components.css';
 
 function MyApp({ Component, pageProps }) {
   const [language, setLanguage] = useState("English");

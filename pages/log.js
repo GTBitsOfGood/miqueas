@@ -9,6 +9,7 @@ import { getTransactions, getTransactionItem } from '../frontend/actions/Transac
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import LogItem from '../frontend/components/LogItem/LogItem';
+import Search from '../frontend/components/Search.js';
 import SingleItemLogView from '../frontend/components/LogItem/SingleItemLogView';
 
 
@@ -42,8 +43,8 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [],
-      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null
+      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchItems: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -107,6 +108,15 @@ class Log extends React.Component {
     this.setState({ isItemSelected: true, selectedItem: item });
   }
 
+  searchResults = (results) => {
+      this.setState({searchItems: results, isSearch: true})
+  }
+
+  clearResults = () => {
+    this.setState({isSearch: false})
+  }
+
+
   render() {
     return (
       <div>
@@ -116,6 +126,7 @@ class Log extends React.Component {
             <FontAwesomeIcon onClick={() => this.goBack()} className='back'
                              icon={faArrowLeft}/>}
             <div className="Clean">
+            {!this.state.isLoading && !this.state.isItemSelected && <Search data={this.state.currentItems} searchType="all" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
               {!this.state.isItemSelected && <div>
                 <div style={{'padding': '2rem', 'paddingBottom': '0'}}>
                   <ToggleButtonGroup className="Location" name="Radio"
@@ -153,9 +164,8 @@ class Log extends React.Component {
                 <Spinner className="spinner" animation='border'></Spinner>}
                 <table bordercollapse='collapse'>
                   <tbody>
-                  {!this.state.isLoading && !this.state.isItemSelected &&
-                  <LogTable items={this.state.currentItems}
-                            callback={this.selectItem}></LogTable>}
+                  {!this.state.isLoading && !this.state.isItemSelected && 
+                    <LogTable items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem}></LogTable>}
                   </tbody>
                 </table>
                 {this.state.isItemSelected &&
