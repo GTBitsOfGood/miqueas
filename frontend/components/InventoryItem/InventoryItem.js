@@ -6,6 +6,7 @@ import SingleItemInfoLine from './SingleItemInfo';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { SignalCellularNull } from 'styled-icons/material';
+import { updateStock } from '../../actions/Items.js';
 
 class InventoryItem extends React.Component {
 
@@ -20,6 +21,7 @@ class InventoryItem extends React.Component {
   }
   componentDidMount() {
     let currentItem = this.props.item;
+    console.log(currentItem);
     this.setState({item: currentItem});
   }
 
@@ -44,6 +46,7 @@ class InventoryItem extends React.Component {
       stock: this.state.tempStock,
       editMode: false,
     });
+    updateStock(this.state.item._id, this.state.tempStock)
   }
 
   render() {

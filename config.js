@@ -22,6 +22,7 @@ export default {
     getItemVariation: '/api/getItemVariation',
     addTransaction: '/api/addTransaction',
     signUp: '/api/signUp',
+    updateStock: '/api/updateStock'
   },
   pages: {
     Index: '/',
