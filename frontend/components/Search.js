@@ -15,7 +15,6 @@ class Search extends Component {
 
   createSearch = () => {
     let foundMatches = []
-    console.log("data: ", this.state.data);
     if (this.state.searchType == "name") {
       this.state.data.map(item => {
         if (item.name.includes(this.state.query)) {
@@ -30,15 +29,15 @@ class Search extends Component {
       })
     } else if (this.state.searchType == "all") {
       this.state.data.map(item => {
-        for (const property in item) {
-          if (property.includes(this.state.query)){
+        for (var property in item) { 
+          var val = item[property];
+          if (typeof val == "string" && val.includes(this.state.query)){
             foundMatches.push(item);
             break;
           }
         }
       })
     }
-    console.log("foundMatches in Search: ", foundMatches)
     this.props.createSearchResults(foundMatches)
   }
 

@@ -43,7 +43,7 @@ class Log extends React.Component {
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
       isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
-      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchNames: [], searchCategories: []
+      currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchItems: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -107,19 +107,21 @@ class Log extends React.Component {
     this.setState({ isItemSelected: true, selectedItem: item });
   }
 
-  searchResults = (categoryResults, nameResults) => {
-    this.setState({searchCategories: categoryResults, searchNames: nameResults, isSearch: true})
+  searchResults = (results) => {
+      this.setState({searchItems: results, isSearch: true})
   }
-  clearResults() {
+
+  clearResults = () => {
     this.setState({isSearch: false})
   }
+
 
   render() {
     return (
       <div>
         {this.state.isItemSelected && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
       <div className="Clean">
-      <Search data={this.state.currentItems} createSearchResults={this.searchResults} clear={this.clearResults()}></Search>
+      {!this.state.isLoading && !this.state.isItemSelected && <Search data={this.state.currentItems} searchType="all" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
         {!this.state.isItemSelected && <div>
         <ToggleButtonGroup className="Location" name="Radio" value={this.state.value} onChange={this.handleChange}>
           <ToggleButton
@@ -137,7 +139,7 @@ class Log extends React.Component {
         <div style={{height: '63vh', overflowY:'auto'}}>
         {this.state.isLoading && <Spinner className="spinner" animation='border'></Spinner>}
           <table bordercollapse='collapse'><tbody>
-            {!this.state.isLoading && !this.state.isItemSelected && <LogTable items={this.state.currentItems} callback={this.selectItem}></LogTable>}
+            {!this.state.isLoading && !this.state.isItemSelected && <LogTable items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem}></LogTable>}
           </tbody></table>
           {this.state.isItemSelected && <div><LogItem item={this.state.selectedItem}/>
                 <link

@@ -15,8 +15,9 @@ class Inventory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedValue: '1', isLoading: true, isSchool: true, isOther: false, data: [], categories: [],
-      isLogTable: true, isCategorySelected: false, isItemSelected: false, selectedCategory: null, backButton: false
+      selectedValue: '1', isLoading: true, isSchool: true, isOther: false, data: [], categories: [], searchItems: [], 
+      searchCategories: [], isLogTable: true, isCategorySelected: false, isItemSelected: false, selectedCategory: null, 
+      backButton: false
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -66,9 +67,12 @@ class Inventory extends React.Component {
   }
 
   searchResults = (results) => {
-    console.log("you searched!");
-    console.log(results);
-    this.setState({searchCategories: results, isSearch: true})
+    if (!this.state.isCategorySelected) {
+      this.setState({searchCategories: results, isSearch: true})
+    } else {
+      this.setState({searchItems: results, isSearch: true})
+    }
+
   }
   clearResults = () => {
     this.setState({isSearch: false})
@@ -78,8 +82,10 @@ class Inventory extends React.Component {
     return (
       <div>
         {this.state.backButton && <FontAwesomeIcon onClick={() => this.goBack()} className='back' icon={faArrowLeft} />}
-        <div className="clean"> {!this.state.isLoading && 
+        <div className="clean"> {!this.state.isLoading && !this.state.isCategorySelected &&
         <Search data={this.state.categories} searchType="category" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
+            {!this.state.isLoading && this.state.isCategorySelected && <Search data={this.state.data[this.state.selectedCategory]}
+        searchType="name" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
           {this.state.isLogTable && <div>
             <ToggleButtonGroup className="location" name="Radio" value={this.state.value} onChange={this.handleChange}>
               <ToggleButton
@@ -99,7 +105,7 @@ class Inventory extends React.Component {
           {this.state.isCategorySelected && <div>
               <h3>{this.state.selectedCategory}</h3>
               <div style={{ height: '63vh', overflowY: 'auto' }}>
-             <CategoryItems items={this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
+             <CategoryItems items={this.state.isSearch ?  this.state.searchItems : this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
             </div>
             </div>}
             {this.state.isItemSelected && <div>
