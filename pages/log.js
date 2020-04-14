@@ -127,7 +127,7 @@ class Log extends React.Component {
             <div className="Clean">
             {!this.state.isLoading && !this.state.isItemSelected && <Search data={this.state.currentItems} searchType="all" createSearchResults={this.searchResults} clear={this.clearResults}></Search>}
               {!this.state.isItemSelected && <div>
-                <div style={{'padding': '2rem', 'paddingBottom': '0'}}>
+                <div style={{'padding': '1.2rem', 'paddingBottom': '0'}}>
                   <ToggleButtonGroup className="Location" name="Radio"
                                      value={this.state.value}
                                      onChange={this.handleChange}>
@@ -145,6 +145,7 @@ class Log extends React.Component {
                       value={4}>closet</ToggleButton>}
                   </ToggleButtonGroup>
                 </div>
+                <hr style={{ marginBottom : 0 }}/>
                 <table>
                   <thead>
                   <tr className="logHeader" fontWeight='bold'>
