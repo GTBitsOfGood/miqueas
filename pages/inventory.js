@@ -132,7 +132,7 @@ class Inventory extends React.Component {
               </div>
             </div>}
             {this.state.isCategorySelected && <div>
-                <h3>{this.state.selectedCategory}</h3>
+                <h5 style={{ textAlign: 'center' }}> {this.state.selectedCategory}</h5>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
                 <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
               </div>
