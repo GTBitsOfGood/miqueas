@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 import config from '../../config';
+import apiRoute from './util';
 
-export const searchQuery = async (searchText) => fetch(
-    `${config.baseUrl}${config.apis.searchQuery}?text=${searchText}`, {
+export const searchQuery = async (searchText, res) => fetch(
+  apiRoute(res, config.apis.searchQuery) + `?text=${searchText}`, {
       method: 'get',
       mode: 'same-origin',
       credentials: 'include',

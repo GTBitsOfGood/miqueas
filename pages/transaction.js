@@ -1,16 +1,19 @@
-import TransactionForm from '../frontend/components/TransactionForm.js';
-import translate from '../frontend/components/translate.js';
+import React from 'react';
+import TransactionForm
+  from '../frontend/components/TransactionForm/TransactionForm';
 
-export default function Transaction({language}) {
+export default function Transaction({language, transactionState, setTransactionState}) {
+  let items = transactionState.transactionItems;
+  let recentItem = (items && items.length > 0) ? items[items.length - 1] : null;
+
   return (
     <div>
-
-      <TransactionForm></TransactionForm>
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
+      <TransactionForm
+        language={language}
+        transactionState={transactionState}
+        setTransactionState={setTransactionState}
+        name={recentItem ? recentItem.item.name : ""}
+        category={recentItem ? recentItem.item.category : ""}
       />
     </div>
   );

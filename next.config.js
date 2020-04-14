@@ -1,5 +1,4 @@
 // next.config.js
-const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
 const dotEnv = require("dotenv");
 dotEnv.config();
@@ -34,6 +33,14 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    config.plugins.push(
+      new FilterWarningsPlugin({ 
+        exclude: /chunk styles [mini-css-extract-plugin][^]*Conflicting order between:/, 
+      })
+    );
+    return config;
+  }
 };
 
-module.exports = withStyledIcons(withCSS(withOffline({nextConfig})))
+module.exports = withStyledIcons(withOffline({nextConfig}));

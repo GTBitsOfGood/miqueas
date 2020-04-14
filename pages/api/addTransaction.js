@@ -6,7 +6,7 @@ import { addTransaction } from '../../server/actions/transactions';
 export default async function (req, res) {
   const { transaction } = req.body;
   return addTransaction(transaction)
-    .then((result) => res.status(201).json({
+    .then((result) => res.status(200).json({
       success: true,
       payload: result,
     }))

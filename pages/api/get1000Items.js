@@ -1,4 +1,3 @@
-
 import { get1000Items } from '../../server/actions/items';
 
 // @route   GET api/getItems

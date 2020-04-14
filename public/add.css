@@ -1,10 +1,28 @@
-.Clean {
-    text-align: center;
+.qrDiv {
+  padding-top : 15%;
+  padding-bottom: 15%;
 }
-.Footer {
-    position: fixed;
-    left: 0;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
+.item-fields {
+  padding-right: 10%;
+  padding-left: 10%;
+  padding-bottom: 5%;
+}
+.addNext {
+  padding-top: 5%;
+}
+.addHeader {
+  padding-top: 5%;
+}
+.addBack {
+  position: absolute;
+  margin-left: 10px;
+}
+.addRadio {
+  padding-top: 5%;
+}
+
+.addCheck {
+  position: absolute;
+  margin-top: 95%;
+  margin-left: 65%;
 }
