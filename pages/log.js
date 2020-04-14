@@ -147,7 +147,7 @@ class Log extends React.Component {
                 </div>
                 <table>
                   <thead>
-                  <tr fontWeight='bold'>
+                  <tr className="logHeader" fontWeight='bold'>
                     <td className="h3"/>
                     <td className='h1'>Name</td>
                     <td className='h1'>Staff</td>

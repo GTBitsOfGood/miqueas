@@ -8,18 +8,19 @@ import Router from 'next/router';
 
 const createSection = (props, itemGroup, date) => {
     var section = []
-    section.push(<tr key={date}><th colSpan={7}>{date}</th></tr>)
+    section.push(<tr key={date}><th style = {{paddingLeft: "10%"}}colSpan={7}>{date}</th></tr>)
     for (let item of itemGroup) {
         section.push(
             <tr onClick={() => props.callback(item)} 
             key={item.transactionItemId}>
                 {item.gender=='male' && <td className='icon'><FontAwesomeIcon className='male' icon={faMale} /></td>}
                 {item.gender=='female' && <td className='icon'><FontAwesomeIcon className='female' icon={faFemale} /></td>}
-                <td width='20%'>{item.name}</td>
-                <td width='20%'>{item.staff}</td>
-                <td width='20%'>{item.recipient}</td>
-                <td className={item.quantityChanged < 0 ? 'red':'green'} width='20%'>{item.quantityChanged}</td>
-                <td width='10%'><FontAwesomeIcon className='chevron' icon={faChevronRight} /></td>
+                {item.gender != 'female' && item.gender != 'male' && <td className='icon'> </td>}
+                <td width="10%">{item.name}</td>
+                <td width="23%">{item.staff}</td>
+                <td width="25%">{item.recipient}</td>
+                <td className={item.quantityChanged < 0 ? 'red':'green'} >{item.quantityChanged}</td>
+                <td ><FontAwesomeIcon className='chevron' icon={faChevronRight} /></td>
             </tr>
     )}
     return section;
