@@ -99,7 +99,6 @@ class Inventory extends React.Component {
                   <Search data={this.state.categories} searchType="category" createSearchResults={this.searchResults} clear={this.clearResults}></Search>
                 </center>
               </div>
-            <hr />
            </div>   
               }
             {!this.state.isLoading && this.state.isCategorySelected &&
@@ -110,7 +109,6 @@ class Inventory extends React.Component {
                     searchType="name" createSearchResults={this.searchResults} clear={this.clearResults}></Search>
                 </center>
               </div>
-            <hr />
            </div> 
             }
             {this.state.isLogTable && <div>
@@ -121,6 +119,7 @@ class Inventory extends React.Component {
                   <ToggleButton
                     className={this.state.isOther ? 'selected' : 'o1'} value={2}>other</ToggleButton>
                 </ToggleButtonGroup>
+                <hr style={{ marginBottom : 0 }}/>
               </center>
 
               <div style={{ height: '63vh', overflowY: 'auto' }}>
@@ -132,7 +131,7 @@ class Inventory extends React.Component {
               </div>
             </div>}
             {this.state.isCategorySelected && <div>
-                <h3>{this.state.selectedCategory}</h3>
+                <h5 style={{ textAlign: 'center' }}> {this.state.selectedCategory}</h5>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
                 <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.data[this.state.selectedCategory]} callback={this.selectItem} />
               </div>

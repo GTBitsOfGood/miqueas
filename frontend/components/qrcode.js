@@ -26,8 +26,8 @@ const Test = ({language, transactionState, setTransactionState}) => {
     const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 })
     const isMobile = useMediaQuery({ maxWidth: 767 })
 
-    const [category, setCategory] = useState(translate("Categories", language));
-    const [name, setName] = useState(translate("Items", language));
+    const [category, setCategory] = useState(translate("Category", language));
+    const [name, setName] = useState(translate("Item", language));
 
     const [findCategory, setFindCategory] = useState(false);
     const [findName, setFindName] = useState(false);

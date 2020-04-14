@@ -67,7 +67,7 @@ class Search extends Component {
       <form>
         <input
           className="search"
-          placeholder="Search..."
+          placeholder="Search"
           ref={input => this.search = input}
           onChange={this.handleInputChange}
         />

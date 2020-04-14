@@ -8,7 +8,7 @@ import Router from 'next/router';
 
 const createSection = (props, itemGroup, date) => {
     var section = []
-    section.push(<tr key={date}><th style = {{paddingLeft: "10%"}}colSpan={7}>{date}</th></tr>)
+    section.push(<tr key={date}><th style = {{paddingLeft: "8%"}}colSpan={7}>{date}</th></tr>)
     for (let item of itemGroup) {
         section.push(
             <tr onClick={() => props.callback(item)} 

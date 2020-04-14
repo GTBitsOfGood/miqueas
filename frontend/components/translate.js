@@ -3,7 +3,15 @@ import React from 'react';
 let englishToSpanish = {
   "Profile": "Perfil",
   "Inventory": "Inventario",
-  "Category": "Categoría"
+  "Category": "Categoría",
+  "Item": "Articulo",
+  "Calculator": "Calculadora",
+  "Basic": "Básica",
+  "Name": "Nombre",
+  "Size": "Tamaño",
+  "Small": "Pequeño",
+  "Location": "Lugar",
+  "Quantity Changed": "Cambio de Cantidad"
 }
 
 /**
