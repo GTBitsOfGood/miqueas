@@ -7,28 +7,26 @@ class Search extends Component {
     super(props);
     this.state = {
       query: '',
-      data: this.props.data,
-      searchType: this.props.searchType,
       needsClearButton: false
     }
   }
 
   createSearch = () => {
     let foundMatches = [];
-    if (this.state.searchType == "name") {
-      this.state.data.map(item => {
+    if (this.props.searchType == "name") {
+      this.props.data.forEach(item => {
         if (item.name.includes(this.state.query)) {
           foundMatches.push(item);
         }
       })
-    } else if (this.state.searchType == "category") {
-      this.state.data.map(category => {
+    } else if (this.props.searchType == "category") {
+      this.props.data.forEach(category => {
         if (category.includes(this.state.query)) {
           foundMatches.push(category);
         }
       })
-    } else if (this.state.searchType == "all") {
-      this.state.data.map(item => {
+    } else if (this.props.searchType == "all") {
+      this.props.data.forEach(item => {
         for (var property in item) { 
           var val = item[property];
           if (typeof val == "string" && val.includes(this.state.query)){
@@ -38,7 +36,7 @@ class Search extends Component {
         }
       })
     }
-    this.props.createSearchResults(foundMatches)
+    this.props.createSearchResults(foundMatches, this.state.query)
     console.log("foundMatches: ", foundMatches);
   }
 

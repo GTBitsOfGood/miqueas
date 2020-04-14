@@ -7,7 +7,7 @@ import { faArrowLeft, faExpand, faTimesCircle } from '@fortawesome/free-solid-sv
 import translate from '../frontend/components/translate.js';
 import { getItems } from '../frontend/actions/Items.js';
 import ShopCategories from '../frontend/components/ShopCategories.js';
-import ShopItems from '../frontend/components/ShopItems.js';
+import CategoryItems from '../frontend/components/CategoryItems.js';
 import Search from '../frontend/components/Search.js';
 import SingleItemView from '../frontend/components/SingleItemView/SingleItemView';
 
@@ -17,7 +17,7 @@ class ShoppingList extends React.Component {
     this.state = {
       selectedValue: '1', isLoading: true, isUrgent: true, urgentOrUpcoming: [], categories: {}, searchItems: [], 
       searchCategories: [], urgentItems: [], upcomingItems: [], currentItems: [], isCategoryList: true, isCategorySelected: false, isItemSelected: false, selectedCategory: null, 
-      backButton: false, shoppingNeeded: true
+      backButton: false, shoppingNeeded: true, query: null
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -47,11 +47,30 @@ class ShoppingList extends React.Component {
   }
   handleChange(value) {
     this.setState({ selectedValue: value });
+    let foundMatches = [];
     switch (value) {
       case 1:
-        this.setState({ isUrgent: true, currentItems: this.state.urgentItems }); break;
+        this.state.urgentItems.forEach(item => {
+          if (item.name.includes(this.state.query)) {
+            foundMatches.push(item);
+          }
+        })
+        if (this.state.isSearch) {
+          this.setState({searchItems: foundMatches})
+        }  
+        this.setState({ isUrgent: true, currentItems: this.state.urgentItems }); 
+        break;
       case 2:
-        this.setState({ isUrgent: false, currentItems: this.state.upcomingItems }); break;
+        this.state.upcomingItems.forEach(item => {
+          if (item.name.includes(this.state.query)) {
+            foundMatches.push(item);
+          }
+        })
+        if (this.state.isSearch) {
+          this.setState({searchItems: foundMatches})
+        }  
+        this.setState({ isUrgent: false, currentItems: this.state.upcomingItems });
+        break; 
     }
   }
   selectCategory = (category) => {
@@ -82,12 +101,12 @@ class ShoppingList extends React.Component {
       this.forceUpdate();
     }
   }
-  searchResults = (results) => {
+  searchResults = (results, query) => {
     console.log("results: ", results);
     if (!this.state.isCategorySelected) {
       this.setState({searchCategories: results, isSearch: true})
     } else {
-      this.setState({searchItems: results, isSearch: true})
+      this.setState({searchItems: results, isSearch: true, query: query})
     }
 
   }
@@ -148,15 +167,15 @@ class ShoppingList extends React.Component {
             {this.state.isCategorySelected && <div>
                 <h3>{this.state.selectedCategory}</h3>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
-                <ShopItems items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem} />
+                <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem} />
               </div>
               </div>}
-            <div className="Footer"><NavigationBar selector={4} /></div>
+            <div className="Footer"><NavigationBar selector={1} /></div>
           </div>
         </div>}
         {this.state.isItemSelected && <>
           <SingleItemView onBack={() => this.goBack()}  item={this.state.selectedItem} />
-          <div className="Footer"><NavigationBar selector={4}/></div>
+          <div className="Footer"><NavigationBar selector={1}/></div>
         </>}
       </div>
     );
