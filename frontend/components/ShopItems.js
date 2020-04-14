@@ -44,7 +44,7 @@ const addNameGroup = (props, items, name) => {
     return section;
 }
 
-const CategoryItems = (props) => {
+const ShopItems = (props) => {
     let finalTable = [];
     let dataTable = {};
     let sortTable = [];
@@ -63,4 +63,4 @@ const CategoryItems = (props) => {
     }
     return(<table className='items'><tbody>{finalTable}</tbody></table>);
 }
-export default CategoryItems;
+export default ShopItems;

@@ -14,7 +14,7 @@ class Search extends Component {
   }
 
   createSearch = () => {
-    let foundMatches = []
+    let foundMatches = [];
     if (this.state.searchType == "name") {
       this.state.data.map(item => {
         if (item.name.includes(this.state.query)) {
@@ -39,6 +39,7 @@ class Search extends Component {
       })
     }
     this.props.createSearchResults(foundMatches)
+    console.log("foundMatches: ", foundMatches);
   }
 
   handleInputChange = () => {
