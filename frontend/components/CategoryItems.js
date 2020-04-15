@@ -34,7 +34,7 @@ const addNameGroup = (props, items, name) => {
             {item.gender=='male' && item.isFirst && <td rowSpan={maleCount} className='icon'><FontAwesomeIcon className='male' icon={faMale} /></td>}
             {item.gender=='female' && item.isFirst && <td rowSpan={femaleCount} className='icon'><FontAwesomeIcon className='female' icon={faFemale} /></td>}
             {item.gender==null && <td></td>}
-            {item.isFirst && <td rowSpan={item.gender == 'female' ? femaleCount : maleCount } style={{"textAlign": 'left'}} width='20%'>{item.name}</td>}
+            {item.isFirst && <td rowSpan={item.gender == 'female' ? femaleCount : maleCount } style={{'textAlign': 'left', 'borderRight': '1px solid rgb(211, 211, 211)'}} width='20%'>{item.name}</td>}
             <td width='20%'>{item.typeColor}</td>
             <td width='20%'>{item.size}</td>
             <td width='20%'>{item.stock}</td>

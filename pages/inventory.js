@@ -123,11 +123,12 @@ class Inventory extends React.Component {
               </center>
 
               <div style={{ height: '63vh', overflowY: 'auto' }}>
-                {this.state.isLoading && <Spinner className="spinner" animation='border'/>}
+
                 <table bordercollapse='collapse'><tbody>
                   <tr><th colSpan={3}>Category</th></tr>
                   {!this.state.isLoading && <CategoryList items={this.state.data} categories={this.state.isSearch ? this.state.searchCategories : this.state.categories} callback={this.selectCategory} />}
                 </tbody></table>
+                {this.state.isLoading && <center><Spinner className="spinner" animation='border'/></center>}
               </div>
             </div>}
             {this.state.isCategorySelected && <div>
