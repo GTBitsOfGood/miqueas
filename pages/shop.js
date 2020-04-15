@@ -50,25 +50,9 @@ class ShoppingList extends React.Component {
     let foundMatches = [];
     switch (value) {
       case 1:
-        this.state.urgentItems.forEach(item => {
-          if (item.name.includes(this.state.query)) {
-            foundMatches.push(item);
-          }
-        })
-        if (this.state.isSearch) {
-          this.setState({searchItems: foundMatches})
-        }  
         this.setState({ isUrgent: true, currentItems: this.state.urgentItems }); 
         break;
       case 2:
-        this.state.upcomingItems.forEach(item => {
-          if (item.name.includes(this.state.query)) {
-            foundMatches.push(item);
-          }
-        })
-        if (this.state.isSearch) {
-          this.setState({searchItems: foundMatches})
-        }  
         this.setState({ isUrgent: false, currentItems: this.state.upcomingItems });
         break; 
     }
@@ -87,7 +71,6 @@ class ShoppingList extends React.Component {
     this.setState({ urgentItems: urgentItems, upcomingItems: upcomingItems, currentItems: urgentItems, isCategoryList: false, 
       isCategorySelected: true, selectedCategory: category, backButton: true, isSearch: false });
   }
-
   selectItem = (item) => {
     this.setState({ isCategorySelected: false, isItemSelected: true, selectedItem: item })
   }
@@ -102,18 +85,15 @@ class ShoppingList extends React.Component {
     }
   }
   searchResults = (results, query) => {
-    console.log("results: ", results);
     if (!this.state.isCategorySelected) {
       this.setState({searchCategories: results, isSearch: true})
     } else {
       this.setState({searchItems: results, isSearch: true, query: query})
     }
-
   }
   clearResults = () => {
     this.setState({isSearch: false})
   }
-
   render() {
     return (
       <div>
@@ -163,7 +143,6 @@ class ShoppingList extends React.Component {
                 </tbody></table>
                 {this.state.isLoading && <center><Spinner className="spinner" animation='border'/></center>}
               </div>}
-
             {this.state.isCategorySelected && <div>
                 <h3>{this.state.selectedCategory}</h3>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
