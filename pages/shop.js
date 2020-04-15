@@ -125,16 +125,17 @@ class ShoppingList extends React.Component {
                     searchType="name" createSearchResults={this.searchResults} clear={this.clearResults}></Search>
                 </center>
               </div>
-            <hr />
            </div> 
             }
             {this.state.isCategorySelected && <center>
+              <div style={{'padding': '1.2rem', 'paddingBottom': '0'}}>
                 <ToggleButtonGroup className="location" name="Radio" value={this.state.value} onChange={this.handleChange}>
                   <ToggleButton
                     className={this.state.isUrgent ? 'selected' : 'o1'} value={1}>urgent</ToggleButton>
                   <ToggleButton
                     className={this.state.isUrgent ? 'o1' : 'selected'} value={2}>upcoming</ToggleButton>
                 </ToggleButtonGroup>
+                </div>
               </center>}
               {this.state.isCategoryList && <div style={{ height: '63vh', overflowY: 'auto' }}>
                   <table bordercollapse='collapse'><tbody>
@@ -144,7 +145,7 @@ class ShoppingList extends React.Component {
                 {this.state.isLoading && <center><Spinner className="spinner" animation='border'/></center>}
               </div>}
             {this.state.isCategorySelected && <div>
-                <hr/>
+                <hr style={{'marginBottom': '0'}}/>
                 <center><h3>{this.state.selectedCategory}</h3></center>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
                 <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem} />
