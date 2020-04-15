@@ -144,7 +144,8 @@ class ShoppingList extends React.Component {
                 {this.state.isLoading && <center><Spinner className="spinner" animation='border'/></center>}
               </div>}
             {this.state.isCategorySelected && <div>
-                <h3>{this.state.selectedCategory}</h3>
+                <hr/>
+                <center><h3>{this.state.selectedCategory}</h3></center>
                 <div style={{ height: '63vh', overflowY: 'auto' }}>
                 <CategoryItems items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem} />
               </div>
