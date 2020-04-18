@@ -30,7 +30,7 @@ function NavigationBar(props) {
       <Button className="footer-btn" style={isProfile ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <Person size="40%"/><span className="caption">profile</span></Button>
       </ActiveLink>
-    <ActiveLink href="/">
+    <ActiveLink href="/shop">
       <Button className="footer-btn" style={isShopping ? {color: 'white', backgroundColor:'#51ADA9'} : {backgroundColor:'white'}}>
         <ShoppingCart size="40%"/><span className="caption">shopping list</span></Button>
       </ActiveLink>
