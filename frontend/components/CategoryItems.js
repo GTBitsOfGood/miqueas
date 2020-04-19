@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 
-const addNameGroup = (props, items, name) => {
+const addNameGroup = (props, items) => {
     var femaleCount = 0; var maleCount = 0; 
     var femaleGroup = []; var maleGroup = []; var otherGroup = [];
     var section = [];
@@ -59,7 +59,7 @@ const CategoryItems = (props) => {
     sortTable.sort();
     for (let i = 0; i<sortTable.length; i++) {
         let name = sortTable[i]
-        finalTable = finalTable.concat(addNameGroup(props, dataTable[name], name))
+        finalTable = finalTable.concat(addNameGroup(props, dataTable[name]))
     }
     return(<table className='items'><tbody>{finalTable}</tbody></table>);
 }
