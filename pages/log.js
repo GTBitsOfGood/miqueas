@@ -48,6 +48,13 @@ class Log extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   async componentDidMount() {
+    /* This code here gets all the transactions. In each transaction there is a transaction item array that
+    contains ids of the items changed in the transaction. Each transaction item has an item id in it which
+    corresponds with the item in inventory it is changing the stock of. 
+    
+    The Figma called for name, staff, date, child, and quantity changed for the log table. The staff and 
+    date come from the transaction, the quantity changed and child come from transaction item, and the name 
+    comes from item. */
     let transactionArray = [];
     try {
       let transactions = await getTransactions();
