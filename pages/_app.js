@@ -34,7 +34,6 @@ MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
   const route = appContext.ctx.asPath;
   const token = appContext.ctx.res ? require('next-cookies')(appContext.ctx).token : cookie.get('token');
-  console.log("token: ", token);
   return verifyToken(token, appContext.ctx.res)
     .then((decoded) => ({
       ...appProps,
