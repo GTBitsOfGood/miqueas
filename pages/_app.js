@@ -3,6 +3,7 @@ import cookie from 'js-cookie';
 import { verifyToken } from '../frontend/actions/Users';
 import App from 'next/app';
 import config from '../config';
+import Router from 'next/router';
 
 //Global style
 import 'bootstrap/dist/css/bootstrap.min.css';
