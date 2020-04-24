@@ -10,6 +10,9 @@ import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import Search from '../frontend/components/Search.js';
 import SingleItemLogView from '../frontend/components/SingleItemView/SingleItemLogView';
+import { verifyToken } from '../frontend/actions/Users';
+import config from '../config';
+import cookie from 'js-cookie';
 
 
 const getItem = (id, transId, staff, date) => {
@@ -47,6 +50,7 @@ class Log extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   async componentDidMount() {
     /* This code here gets all the transactions. In each transaction there is a transaction item array that
     contains ids of the items changed in the transaction. Each transaction item has an item id in it which
