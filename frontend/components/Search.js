@@ -18,6 +18,10 @@ class Search extends Component {
   }
   createSearch = () => {
     let foundMatches = [];
+    /*There are three different options for search type. Name searches through the item's name,
+    category searches through the items category, and all searches through all the properties
+    in the item object for a match.
+    */
     if (this.props.searchType == "name") {
       this.props.data.forEach(item => {
         if (item.name.includes(this.state.query)) {
