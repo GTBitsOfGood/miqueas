@@ -1,6 +1,5 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
-import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -10,9 +9,6 @@ import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import Search from '../frontend/components/Search.js';
 import SingleItemLogView from '../frontend/components/SingleItemView/SingleItemLogView';
-import { verifyToken } from '../frontend/actions/Users';
-import config from '../config';
-import cookie from 'js-cookie';
 
 
 const getItem = (id, transId, staff, date) => {
@@ -78,6 +74,8 @@ class Log extends React.Component {
       Promise.all(promiseArray).then(results => {
         for (let finalItem of results) {
           this.setState({ allItems: [...this.state.allItems, finalItem] })
+          /*Currently closet/closetItems isn't used for anything right now. It was supposed to be
+          implemented for admins so please implement it once administrators are created :) */
           switch(finalItem.location) {
             case "downstairs":
               this.setState({ downstairsItems: [...this.state.downstairsItems, finalItem] }); break;

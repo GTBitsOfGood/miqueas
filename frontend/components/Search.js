@@ -10,6 +10,9 @@ class Search extends Component {
       needsClearButton: false,
     }
   }
+  /*This componentDidUpdate is so that if someone changes the list while search
+  is being performed (eg toggling) the search gets updated automatically (without
+  more typing necessary first)*/
   componentDidUpdate(prevProps) {
     if (prevProps.data != this.props.data && this.state.query
       && this.state.query.length > 1) {
@@ -18,6 +21,10 @@ class Search extends Component {
   }
   createSearch = () => {
     let foundMatches = [];
+    /*There are three different options for search type. Name searches through the item's name,
+    category searches through the items category, and all searches through all the properties
+    in the item object for a match.
+    */
     if (this.props.searchType == "name") {
       this.props.data.forEach(item => {
         if (item.name.includes(this.state.query)) {
@@ -43,6 +50,9 @@ class Search extends Component {
     }
     this.props.createSearchResults(foundMatches, this.state.query);
   }
+  /*I created the search so that it updates the search results every 2 characters
+  so lots of unnecessary searches don't get performed but depending on what the client 
+  wants this can be changed. */
   handleInputChange = () => {
     this.setState({
       query: this.search.value
