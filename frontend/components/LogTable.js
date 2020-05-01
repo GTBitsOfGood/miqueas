@@ -26,7 +26,9 @@ const LogTable = (props) => {
     let dataTable = [];
     let finalTable = [];
     let sortTable = [];
-    for (let item of props.items) {
+    let items = props.items.sort((a,b) => (a.date > b.date) ? 1 : -1);
+    console.log("items: ", items);
+    for (let item of items) {
         let year = item.date.substring(0,4);
         let month = item.date.substring(5,7);
         let day = item.date.substring(8, 10);
