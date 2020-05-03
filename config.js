@@ -16,6 +16,7 @@ export default {
     getTransactionItem: '/api/getTransactionItem',
     deleteTransaction: 'api/deleteTransaction',
     deleteTransactionItem: 'api/deleteTransactionItem',
+    updateTransactionItem: 'api/updateTransactionItem',
     login: '/api/login',
     verifyToken: '/api/verifyToken',
     searchQuery: '/api/searchQuery',

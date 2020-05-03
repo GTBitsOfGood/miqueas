@@ -2,7 +2,10 @@ import React from 'react';
 import SingleViewHeader from '../SingleItemView/SingleViewHeader';
 import ItemHeader from '../TransactionForm/ItemHeader';
 import {getItemVariation} from '../../actions/Items';
-import {deleteTransactionItem} from '../../actions/Transaction';
+import {
+  deleteTransactionItem,
+  updateTransactionItem,
+} from '../../actions/Transaction';
 import {Spinner} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -76,6 +79,22 @@ export default class EditTransactionForm extends React.Component {
 
   async delTransaction() {
     await deleteTransactionItem(this.state.transactionItemId, this.state.transactionId);
+  }
+
+  async updateTransaction() {
+    let transaction =
+      {
+        item: {
+          name: this.state.name,
+          category: this.state.category,
+          gender: this.state.gender,
+          typeColor: this.state.typeColor,
+          size: this.state.size,
+          location: this.state.location,
+        },
+        quantityChanged: this.state.quantity,
+      };
+    await updateTransactionItem(this.state.transactionItemId, transaction);
   }
 
   render() {
@@ -153,7 +172,11 @@ export default class EditTransactionForm extends React.Component {
                 showDeletePopup: true,
               });
             }}
-            handleAddItem = {() => {} }
+            handleAddItem = {() => {
+              this.updateTransaction().then(() => {
+                window.location = '/log'; // Forces refresh of the log page
+              });
+            }}
             disabled = {this.state.quantity === 0}
           />
           <hr style = {{'height': '30px', 'border-top': 'transparent'}}/>
