@@ -2,7 +2,7 @@ import React from 'react';
 import SingleViewHeader from '../SingleItemView/SingleViewHeader';
 import ItemHeader from '../TransactionForm/ItemHeader';
 import {getItemVariation} from '../../actions/Items';
-import {deleteTransaction} from '../../actions/Transaction';
+import {deleteTransactionItem} from '../../actions/Transaction';
 import {Spinner} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -26,6 +26,7 @@ export default class EditTransactionForm extends React.Component {
       location: props.item.location,
       recipient: props.item.recipient,
       transactionId: props.item.transactionId,
+      transactionItemId: props.item.transactionItemId,
       itemVariation: {},
       requirements: {
         gender: false,
@@ -74,7 +75,7 @@ export default class EditTransactionForm extends React.Component {
   }
 
   async delTransaction() {
-    await deleteTransaction(this.state.transactionId);
+    await deleteTransactionItem(this.state.transactionItemId, this.state.transactionId);
   }
 
   render() {

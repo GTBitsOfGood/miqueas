@@ -2,7 +2,8 @@ import mongoDB from '../index';
 import Item from '../../models/Item';
 import TransactionItem from '../../models/TransactionItem';
 import Transaction from '../../models/Transaction';
-import {getItemUpdateStock} from './items.js';
+import {getItemUpdateStock, updateStock} from './items.js';
+import {forEach} from 'react-bootstrap/cjs/ElementChildren';
 
 export async function getTransactions() {
   await mongoDB();
@@ -22,6 +23,7 @@ export async function addTransaction(transaction) {
   }
   return Transaction.create(transaction);
 }
+
 export async function getTransaction(id) {
   await mongoDB();
 
@@ -32,4 +34,27 @@ export async function deleteTransaction(id) {
   await mongoDB();
 
   await Transaction.findById(id).then((item) => item.remove());
+}
+
+export async function deleteTransactionItem(itemId, transactionId) {
+  await mongoDB();
+
+  await TransactionItem.findById(itemId).then((item) => {
+    Item.findById(item.item).then((it) => {
+      it.stock = it.stock - item.quantityChanged;
+      it.save();
+      item.remove();
+    });
+  });
+  let transaction = await Transaction.findById(transactionId);
+  let transItems = transaction.transactionItems;
+  transItems.forEach((id, i) => {
+    if (id == itemId) {
+      transItems.splice(i,1);
+    }
+  });
+  if (transItems.length == 0) {
+    await Transaction.findById(transactionId).then((item) => item.remove());
+  }
+  return Transaction.findOneAndUpdate({_id: transactionId}, transaction);
 }
