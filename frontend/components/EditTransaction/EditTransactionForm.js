@@ -2,6 +2,7 @@ import React from 'react';
 import SingleViewHeader from '../SingleItemView/SingleViewHeader';
 import ItemHeader from '../TransactionForm/ItemHeader';
 import {getItemVariation} from '../../actions/Items';
+import {deleteTransaction} from '../../actions/Transaction';
 import {Spinner} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,7 +11,7 @@ import QuantitySelector from '../TransactionForm/QuantitySelector';
 import VerticalRadio from '../TransactionForm/VerticalRadio';
 import LocationSelector from '../TransactionForm/LocationSelector';
 import EditTransactionFormNavButtons from './EditTransactionFormNavButtons';
-import NavButtons from '../TransactionForm/NavButtons';
+import Popup from '../Popup';
 
 export default class EditTransactionForm extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class EditTransactionForm extends React.Component {
       quantity: props.item.quantityChanged,
       location: props.item.location,
       recipient: props.item.recipient,
+      transactionId: props.item.transactionId,
       itemVariation: {},
       requirements: {
         gender: false,
@@ -32,6 +34,8 @@ export default class EditTransactionForm extends React.Component {
       },
       isLoading: true,
       error: false,
+      showBackPopup: false,
+      showDeletePopup: false,
     };
   }
 
@@ -69,10 +73,18 @@ export default class EditTransactionForm extends React.Component {
     this.setState(state);
   }
 
+  async delTransaction() {
+    await deleteTransaction(this.state.transactionId);
+  }
+
   render() {
     return (
       <>
-        <SingleViewHeader name={'Details'} onBack={() => {this.props.onBack()}}/>
+        <SingleViewHeader name={'Details'} onBack={() => {
+          this.setState({
+            showBackPopup: true,
+          });
+        }}/>
         <ItemHeader name={this.state.name} category={this.state.category}/>
         <hr style={{'marginTop': 0}}/>
         {!this.state.isLoading && !this.state.error && <>
@@ -135,7 +147,11 @@ export default class EditTransactionForm extends React.Component {
 
           {/*Nav Buttons*/}
           <EditTransactionFormNavButtons
-            handleSameItem = {() => {} }
+            handleSameItem = {() => {
+              this.setState({
+                showDeletePopup: true,
+              });
+            }}
             handleAddItem = {() => {} }
             disabled = {this.state.quantity === 0}
           />
@@ -153,6 +169,42 @@ export default class EditTransactionForm extends React.Component {
           <strong>ERROR</strong>
           <p>Problem Loading Item Variation from Database</p>
         </>}
+
+        {/* Go Back Confirmation Popup */}
+        <Popup
+          showPopup = {this.state.showBackPopup}
+          title = {"Are you sure you want to go back?"}
+          text = {"Any edits will be lost."}
+          confirmText = {"Go Back"}
+          cancelText = {"Cancel"}
+          onCancel = {() => {
+            this.setState({
+              showBackPopup: false
+            });
+          }}
+          onConfirm = {() => {
+            this.props.onBack();
+          }}
+        />
+
+        {/* Delete Transaction Confirmation Popup */}
+        <Popup
+          showPopup = {this.state.showDeletePopup}
+          title = {""}
+          text = {"Are you sure you want to delete this transaction?"}
+          confirmText = {"Yes"}
+          cancelText = {"No"}
+          onCancel = {() => {
+            this.setState({
+              showDeletePopup: false
+            });
+          }}
+          onConfirm = {() => {
+            this.delTransaction().then(r => {
+              window.location = "/log"; // This forces a refresh of the log page
+            });
+          }}
+        />
       </>
     );
   }
