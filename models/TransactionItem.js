@@ -29,4 +29,6 @@ const TransactionItemSchema = new Schema({
 });
 
 
-module.exports = mongoose.models.TransactionItem || mongoose.model('TransactionItem', TransactionItemSchema);
+module.exports = (mongoose.models && mongoose.models.TransactionItem) ?
+                  mongoose.models.TransactionItem :
+                  mongoose.model('TransactionItem', TransactionItemSchema);

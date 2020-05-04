@@ -87,6 +87,7 @@ const Test = ({language, transactionState, setTransactionState}) => {
     }
 
     function handleFindCategory() {
+
       setFindCategory(true);
     }
 
@@ -95,6 +96,7 @@ const Test = ({language, transactionState, setTransactionState}) => {
     }
 
     function goBack() {
+      setIsSearch(false)
       if(findCategory) {
         setFindCategory(false);
       } else {
@@ -126,12 +128,10 @@ const Test = ({language, transactionState, setTransactionState}) => {
     const searchResults = (results) => {
       if (findCategory) {
         setSearchCategories(results);
-        setIsSearch(true);
       } else {
         setSearchItems(results);
-        setIsSearch(true);
       }
-
+      setIsSearch(true);
     }
    const clearResults = () => {
       setIsSearch(false);
@@ -217,14 +217,14 @@ const Test = ({language, transactionState, setTransactionState}) => {
                   onClick={() => goBack()}>
                 </img>
                 <center>
-                <Search data={categoryList} searchType="category" createSearchResults={() => searchResults()} clear={() => clearResults()}></Search>
+                <Search data={categoryList} searchType="category" createSearchResults={(results) => searchResults(results)} clear={() => clearResults()}></Search>
                 </center>
             </div>
             <hr />
               <div className="addRadio">
                 <VerticalRadio 
                   noLeftCol = {true}
-                  options = {categoryList} 
+                  options = {isSearch ? searchCategories : categoryList} 
                   onUpdate={(i) => {
                     changeCategory(i);
                   }}
@@ -259,14 +259,14 @@ const Test = ({language, transactionState, setTransactionState}) => {
                 onClick={() => goBack()}>
               </img>
               <center>
-                <Search data={categoryList} searchType="category" createSearchResults={() => searchResults()} clear={() => clearResults()}></Search>
+                <Search data={itemList} searchType="category" createSearchResults={(results) => searchResults(results)} clear={() => clearResults()}></Search>
               </center>
             </div>
             <hr />
             <div className="addRadio">
               <VerticalRadio
                 noLeftCol={true}
-                options={itemList}
+                options={isSearch ? searchItems : itemList}
                 onUpdate={(i) => {
                   changeName(i);
                 }}

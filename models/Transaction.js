@@ -11,4 +11,6 @@ const TransactionSchema = new Schema({
 });
 
 
-module.exports = mongoose.models.Transaction || mongoose.model('Transaction', TransactionSchema);
+module.exports = (mongoose.models && mongoose.models.Transaction)
+                  ? mongoose.models.Transaction
+                  : mongoose.model('Transaction', TransactionSchema);

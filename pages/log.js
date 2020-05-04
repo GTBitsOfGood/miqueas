@@ -1,11 +1,10 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
-import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import translate from '../frontend/components/translate.js';
-import { getTransactions, getTransactionItem } from '../frontend/actions/Transaction.js';
+import { getTransactions, getTransactionItem, deleteTransaction } from '../frontend/actions/Transaction.js';
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import Search from '../frontend/components/Search.js';
@@ -15,9 +14,12 @@ import SingleItemLogView from '../frontend/components/SingleItemView/SingleItemL
 const getItem = (id, transId, staff, date) => {
   return new Promise((resolve, reject) => {
     getTransactionItem(id).then(function (response) {
+      if(response == null) {
+        console.log(transId);
+      }
       response.staff = staff;
       response.date = date;
-      response.time = date.substring(11,16);
+      response.time = date.substring(11, 16);
       response.transactionItemId = id;
       response.transactionId = transId;
       resolve(response);
@@ -42,12 +44,20 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [],
       currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchItems: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   async componentDidMount() {
+    /* This code here gets all the transactions. In each transaction there is a transaction item array that
+    contains ids of the items changed in the transaction. Each transaction item has an item id in it which
+    corresponds with the item in inventory it is changing the stock of. 
+    
+    The Figma called for name, staff, date, child, and quantity changed for the log table. The staff and 
+    date come from the transaction, the quantity changed and child come from transaction item, and the name 
+    comes from item. */
     let transactionArray = [];
     try {
       let transactions = await getTransactions();
@@ -67,6 +77,8 @@ class Log extends React.Component {
       Promise.all(promiseArray).then(results => {
         for (let finalItem of results) {
           this.setState({ allItems: [...this.state.allItems, finalItem] })
+          /*Currently closet/closetItems isn't used for anything right now. It was supposed to be
+          implemented for admins so please implement it once administrators are created :) */
           switch(finalItem.location) {
             case "downstairs":
               this.setState({ downstairsItems: [...this.state.downstairsItems, finalItem] }); break;
@@ -164,7 +176,7 @@ class Log extends React.Component {
                 <Spinner className="spinner" animation='border'></Spinner>}
                 <table bordercollapse='collapse'>
                   <tbody>
-                  {!this.state.isLoading && !this.state.isItemSelected && 
+                  {!this.state.isLoading && !this.state.isItemSelected &&
                     <LogTable items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem}></LogTable>}
                   </tbody>
                 </table>

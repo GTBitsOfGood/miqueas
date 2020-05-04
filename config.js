@@ -14,6 +14,9 @@ export default {
     getTransactions: '/api/getTransactions',
     getTransaction: '/api/getTransaction',
     getTransactionItem: '/api/getTransactionItem',
+    deleteTransaction: 'api/deleteTransaction',
+    deleteTransactionItem: 'api/deleteTransactionItem',
+    updateTransactionItem: 'api/updateTransactionItem',
     login: '/api/login',
     verifyToken: '/api/verifyToken',
     searchQuery: '/api/searchQuery',
@@ -30,5 +33,7 @@ export default {
     Inventory: '/inventory',
     Log: '/log',
     Profile: '/profile',
+    Login: '/signin',
+    Shop: '/shop'
   },
 };
