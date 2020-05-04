@@ -4,7 +4,7 @@ import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import translate from '../frontend/components/translate.js';
-import { getTransactions, getTransactionItem } from '../frontend/actions/Transaction.js';
+import { getTransactions, getTransactionItem, deleteTransaction } from '../frontend/actions/Transaction.js';
 import { getItemName } from '../frontend/actions/Items.js';
 import LogTable from '../frontend/components/LogTable.js';
 import Search from '../frontend/components/Search.js';
@@ -14,9 +14,12 @@ import SingleItemLogView from '../frontend/components/SingleItemView/SingleItemL
 const getItem = (id, transId, staff, date) => {
   return new Promise((resolve, reject) => {
     getTransactionItem(id).then(function (response) {
+      if(response == null) {
+        console.log(transId);
+      }
       response.staff = staff;
       response.date = date;
-      response.time = date.substring(11,16);
+      response.time = date.substring(11, 16);
       response.transactionItemId = id;
       response.transactionId = transId;
       resolve(response);
@@ -41,7 +44,7 @@ class Log extends React.Component {
     super(props);
     this.state = {
       selectedValue: '1', isLoading: true, isAdmin: false, isAll: true, isBodega: false,
-      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [], 
+      isDownstairs: false, isCloset: false, isSearch: false, allItems: [], bodegaItems: [], downstairsItems: [], otherItems: [],
       currentItems: [], closetItems: [], isItemSelected: false, selectedItem: null, searchItems: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -173,7 +176,7 @@ class Log extends React.Component {
                 <Spinner className="spinner" animation='border'></Spinner>}
                 <table bordercollapse='collapse'>
                   <tbody>
-                  {!this.state.isLoading && !this.state.isItemSelected && 
+                  {!this.state.isLoading && !this.state.isItemSelected &&
                     <LogTable items={this.state.isSearch ? this.state.searchItems : this.state.currentItems} callback={this.selectItem}></LogTable>}
                   </tbody>
                 </table>
