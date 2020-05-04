@@ -85,6 +85,7 @@ export async function updateTransactionItem(itemId, newTransaction) {
     Item.findById(item.item).then((it) => {
       it.stock = it.stock - item.quantityChanged;
       it.save();
+      item.quantityChanged = newTransaction.quantityChanged;
       item.item = itemRef;
       item.save();
     });

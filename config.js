@@ -33,5 +33,7 @@ export default {
     Inventory: '/inventory',
     Log: '/log',
     Profile: '/profile',
+    Login: '/signin',
+    Shop: '/shop'
   },
 };

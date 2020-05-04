@@ -1,10 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import Router from 'next/router';
-
-
-
 
 const createSection = (props, itemGroup, date) => {
     var section = []
@@ -27,10 +23,12 @@ const createSection = (props, itemGroup, date) => {
 }
 
 const LogTable = (props) => {
-    let dataTable = {};
+    let dataTable = [];
     let finalTable = [];
     let sortTable = [];
-    for (let item of props.items) {
+    let items = props.items.sort((a,b) => (a.date > b.date) ? 1 : -1);
+    console.log("items: ", items);
+    for (let item of items) {
         let year = item.date.substring(0,4);
         let month = item.date.substring(5,7);
         let day = item.date.substring(8, 10);

@@ -1,6 +1,5 @@
 import NavigationBar from '../frontend/components/NavigationBar';
 import React from 'react';
-import Router from 'next/router';
 import { Spinner, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -50,9 +49,15 @@ class Log extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  async componentDidMount() {
-    // await deleteTransaction('5eae94172ee5010e99c0654f');
 
+  async componentDidMount() {
+    /* This code here gets all the transactions. In each transaction there is a transaction item array that
+    contains ids of the items changed in the transaction. Each transaction item has an item id in it which
+    corresponds with the item in inventory it is changing the stock of. 
+    
+    The Figma called for name, staff, date, child, and quantity changed for the log table. The staff and 
+    date come from the transaction, the quantity changed and child come from transaction item, and the name 
+    comes from item. */
     let transactionArray = [];
     try {
       let transactions = await getTransactions();
@@ -72,6 +77,8 @@ class Log extends React.Component {
       Promise.all(promiseArray).then(results => {
         for (let finalItem of results) {
           this.setState({ allItems: [...this.state.allItems, finalItem] })
+          /*Currently closet/closetItems isn't used for anything right now. It was supposed to be
+          implemented for admins so please implement it once administrators are created :) */
           switch(finalItem.location) {
             case "downstairs":
               this.setState({ downstairsItems: [...this.state.downstairsItems, finalItem] }); break;

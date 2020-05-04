@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFemale, faMale, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-
 const addCategory = (props, categoryName, items) => {
     return(
         <tr onClick={()=>props.callback(categoryName)} key={categoryName}>
