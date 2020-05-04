@@ -1,5 +1,5 @@
 
-import { login } from '../../server/actions/Users';
+import { login } from '../../server/actions/users';
 
 // @route   POST api/login
 // @desc    Get Login a user

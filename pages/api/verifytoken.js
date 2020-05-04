@@ -1,5 +1,5 @@
   
-import { verifyToken } from '../../server/actions/Users';
+import { verifyToken } from '../../server/actions/users';
 
 // @route   POST api/verifyToken
 // @desc    Get Verify a user token

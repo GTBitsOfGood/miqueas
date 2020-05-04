@@ -1,4 +1,4 @@
-import { signUp } from '../../server/actions/Users';
+import { signUp } from '../../server/actions/users';
 
 // @route   POST api/signUp
 // @desc    Get Sign up a user
